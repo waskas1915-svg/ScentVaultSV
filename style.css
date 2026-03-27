@@ -1,0 +1,31 @@
+body {
+  font-family: Arial;
+  text-align: center;
+}
+
+#products div {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  display: inline-block;
+  width: 250px;
+}
+
+.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
+
+.disabled {
+  background: gray;
+  pointer-events: none;
+}
+
+a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px;
+  background: green;
+  color: white;
+  text-decoration: none;
+}
