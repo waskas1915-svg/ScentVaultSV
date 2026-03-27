@@ -9,7 +9,7 @@ fetch('products.json')
 
 function showProducts() {
   const container = document.getElementById('products');
-  container.innerHTML = "";
+  
 
   allProducts.forEach(product => {
     const div = document.createElement('div');
