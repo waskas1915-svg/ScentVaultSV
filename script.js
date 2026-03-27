@@ -33,6 +33,11 @@ function showProducts() {
 }
 
 function viewProduct(productId) {
+  
+  container.innerHTML = `
+  <h2>${product.name}</h2>
+  <img id="variant-image" src="${product.image}" width="200">
+`;
   const product = allProducts.find(p => p.id === productId);
   const container = document.getElementById('products');
 
