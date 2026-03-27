@@ -13,7 +13,7 @@
     "name": "Fahrenheit",
     "size": "5ML",
     "price": 9.25,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -22,7 +22,7 @@
     "name": "Fahrenheit",
     "size": "10ML",
     "price": 18.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -31,7 +31,7 @@
     "name": "Gentleman Reserve Priv\u00e9e",
     "size": "3ML",
     "price": 5.25,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanReservePriv\u00e9e.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -40,7 +40,7 @@
     "name": "Gentleman Reserve Priv\u00e9e",
     "size": "5ML",
     "price": 8.75,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanReservePriv\u00e9e.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -49,7 +49,7 @@
     "name": "Gentleman Reserve Priv\u00e9e",
     "size": "10ML",
     "price": 17.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanReservePriv\u00e9e.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -58,7 +58,7 @@
     "name": "Gentleman Society Ambr\u00e9e",
     "size": "3ML",
     "price": 5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -67,7 +67,7 @@
     "name": "Gentleman Society Ambr\u00e9e",
     "size": "5ML",
     "price": 8.25,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -76,7 +76,7 @@
     "name": "Gentleman Society Ambr\u00e9e",
     "size": "10ML",
     "price": 16.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -85,7 +85,7 @@
     "name": "Spectre Ghost",
     "size": "3ML",
     "price": 3,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -94,7 +94,7 @@
     "name": "Spectre Ghost",
     "size": "5ML",
     "price": 4,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -103,7 +103,7 @@
     "name": "Spectre Ghost",
     "size": "10ML",
     "price": 8,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -112,7 +112,7 @@
     "name": "Aether Extrait",
     "size": "3ML",
     "price": 3,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -121,7 +121,7 @@
     "name": "Aether Extrait",
     "size": "5ML",
     "price": 4,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -130,7 +130,7 @@
     "name": "Aether Extrait",
     "size": "10ML",
     "price": 8,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -139,7 +139,7 @@
     "name": "Club De Nuit Blue Iconic",
     "size": "3ML",
     "price": 3,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -148,7 +148,7 @@
     "name": "Club De Nuit Blue Iconic",
     "size": "5ML",
     "price": 4,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -157,7 +157,7 @@
     "name": "Club De Nuit Blue Iconic",
     "size": "10ML",
     "price": 6.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -166,7 +166,7 @@
     "name": "Club De Nuit Intense Limited Edition Parfum",
     "size": "3ML",
     "price": 3,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -175,7 +175,7 @@
     "name": "Club De Nuit Intense Limited Edition Parfum",
     "size": "5ML",
     "price": 5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -184,7 +184,7 @@
     "name": "Club De Nuit Intense Limited Edition Parfum",
     "size": "10ML",
     "price": 10,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -193,7 +193,7 @@
     "name": "Al Qiam Silver",
     "size": "3ML",
     "price": 2,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -202,7 +202,7 @@
     "name": "Al Qiam Silver",
     "size": "5ML",
     "price": 3,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -211,7 +211,7 @@
     "name": "Al Qiam Silver",
     "size": "10ML",
     "price": 6,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -220,7 +220,7 @@
     "name": "Berry on top",
     "size": "3ML",
     "price": 3.25,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -229,7 +229,7 @@
     "name": "Berry on top",
     "size": "5ML",
     "price": 5.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -238,7 +238,7 @@
     "name": "Berry on top",
     "size": "10ML",
     "price": 10.75,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -247,7 +247,7 @@
     "name": "Kismet Magic",
     "size": "3ML",
     "price": 1.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -256,7 +256,7 @@
     "name": "Kismet Magic",
     "size": "5ML",
     "price": 2.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -265,7 +265,7 @@
     "name": "Kismet Magic",
     "size": "10ML",
     "price": 5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -274,7 +274,7 @@
     "name": "Stronger with you Absolutely",
     "size": "3ML",
     "price": 5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -283,7 +283,7 @@
     "name": "Stronger with you Absolutely",
     "size": "5ML",
     "price": 8.25,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -292,7 +292,7 @@
     "name": "Stronger with you Absolutely",
     "size": "10ML",
     "price": 16.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -301,7 +301,7 @@
     "name": "Ombre Lether",
     "size": "3ML",
     "price": 12,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -310,7 +310,7 @@
     "name": "Ombre Lether",
     "size": "5ML",
     "price": 20,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -319,7 +319,7 @@
     "name": "Ombre Lether",
     "size": "10ML",
     "price": 39,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -328,7 +328,7 @@
     "name": "Coconut lagoon",
     "size": "3ML",
     "price": 2,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
@@ -337,7 +337,7 @@
     "name": "Coconut lagoon",
     "size": "5ML",
     "price": 3.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   },
@@ -346,7 +346,7 @@
     "name": "Coconut lagoon",
     "size": "10ML",
     "price": 6.5,
-    "image": "https://via.placeholder.com/200",
+    "image": "./images/farenheith.png",
     "description": "Relaxing lavender lotion for soft skin",
     "in_stock": true
   }
