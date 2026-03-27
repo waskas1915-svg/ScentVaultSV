@@ -1,37 +1,63 @@
+let allProducts = [];
+
 fetch('products.json')
-  .then(response => response.json())
-  .then(products => {
-    const container = document.getElementById('products');
-
-    products.forEach(product => {
-      const div = document.createElement('div');
-
-      let buttonHTML = "";
-
-      if (product.in_stock) {
-        const message = `Hello! I want to buy ${product.name} for $${product.price}`;
-        const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
-
-        buttonHTML = `
-          <a href="${whatsappLink}" target="_blank">
-            Buy via WhatsApp
-          </a>
-        `;
-      } else {
-        buttonHTML = `
-          <p style="color:red;"><strong>Out of Stock</strong></p>
-        `;
-      }
-
-      div.innerHTML = `
-        <h2>${product.name}</h2>
-        <img src="${product.image}" width="200">
-        <p>${product.size || ""}</p>
-        <p>${product.description}</p>
-        <p><strong>$${product.price}</strong></p>
-        ${buttonHTML}
-      `;
-
-      container.appendChild(div);
-    });
+  .then(res => res.json())
+  .then(data => {
+    allProducts = data;
+    showProducts();
   });
+
+function showProducts() {
+  const container = document.getElementById('products');
+  container.innerHTML = "";
+
+  allProducts.forEach(product => {
+    const div = document.createElement('div');
+
+    div.innerHTML = `
+      <h2>${product.name}</h2>
+      <img src="${product.image}" width="200">
+      <p>${product.description}</p>
+      <button onclick="viewProduct(${product.id})">
+        View Options
+      </button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function viewProduct(productId) {
+  const product = allProducts.find(p => p.id === productId);
+  const container = document.getElementById('products');
+
+  container.innerHTML = `<h2>${product.name}</h2>`;
+
+  product.variants.forEach(variant => {
+    let buttonHTML = "";
+
+    if (variant.in_stock) {
+      const message = `Hello! I want ${variant.size} of ${product.name} for $${variant.price}`;
+      const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
+
+      buttonHTML = `<a href="${link}" target="_blank">Buy ${variant.size}</a>`;
+    } else {
+      buttonHTML = `<p style="color:red;">Out of Stock</p>`;
+    }
+
+    const div = document.createElement('div');
+
+    div.innerHTML = `
+      <p><strong>${variant.size}</strong> - $${variant.price}</p>
+      ${buttonHTML}
+    `;
+
+    container.appendChild(div);
+  });
+
+  // Back button
+  const back = document.createElement('button');
+  back.innerText = "⬅ Back";
+  back.onclick = showProducts;
+  container.appendChild(back);
+}
