@@ -14,10 +14,15 @@ function showProducts() {
   allProducts.forEach(product => {
     const div = document.createElement('div');
 
+    const hasStock = product.variants.some(variant => variant.in_stock);
+
     div.innerHTML = `
       <h2>${product.name}</h2>
       <img src="${product.image}" width="200">
       <p>${product.description}</p>
+      <p style="color:${hasStock ? 'green' : 'red'};">
+        ${hasStock ? 'In Stock' : 'Out of Stock'}
+      </p>
       <button onclick="viewProduct(${product.id})">
         View Options
       </button>
@@ -40,7 +45,7 @@ function viewProduct(productId) {
       const message = `Hello! I want ${variant.size} of ${product.name} for $${variant.price}`;
       const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
 
-      buttonHTML = `<a href="${link}" target="_blank">Buy ${variant.size}</a>`;
+      buttonHTML = `<a href="${whatsappLink}" target="_blank">Buy ${variant.size}</a>`;
     } else {
       buttonHTML = `<p style="color:red;">Out of Stock</p>`;
     }
