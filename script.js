@@ -9,8 +9,8 @@ fetch('products.json')
 
 function showProducts() {
   const container = document.getElementById('products');
+  container.innerHTML = "";
   
-
   allProducts.forEach(product => {
     const div = document.createElement('div');
 
@@ -40,32 +40,43 @@ function viewProduct(productId) {
   let selectedVariant = null;
 
   container.innerHTML = `
-  <h2>${product.name}</h2>
+  <div style="max-width:600px; margin:0 auto; text-align:center;">
+    <h2>${product.name}</h2>
 
-  <img id="variant-image" 
-     src="${product.image}" 
-     onerror="this.src='./images/noimage.png'"
-     style="width:220px; border-radius:10px; display:block; margin:0 auto 15px;">
+    <img id="variant-image" 
+      src="${product.image}" 
+      onerror="this.src='./images/noimage.png'"
+      style="width:220px; border-radius:10px; margin-bottom:15px;">
 
-  <div id="variantGrid" style="
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap:10px;
-    margin:20px 0;
-  "></div>
+    <div id="variantGrid" style="
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+      justify-content:center;
+      gap:15px;
+      margin:20px 0;
+    "></div>
 
-  <div id="purchaseBox" style="margin-top:20px;"></div>
+    <div id="purchaseBox" style="margin-top:20px;"></div>
+  </div>
 `;
 
   const grid = document.getElementById('variantGrid');
   const purchaseBox = document.getElementById('purchaseBox');
 
+  function resetCards() {
+  for (let el of grid.children) {
+    el.style.border = "2px solid #ccc";
+    el.style.background = "white";
+  }
+}
+
   product.variants.forEach((variant, index) => {
     const card = document.createElement('div');
 
     card.style = `
-      transition:0.2s;
+      transition: all 0.2s ease;
       border:2px solid #ccc;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding:10px;
       cursor:${variant.in_stock ? 'pointer' : 'not-allowed'};
       opacity:${variant.in_stock ? '1' : '0.5'};
@@ -93,6 +104,7 @@ function viewProduct(productId) {
     card.onmouseout = () => {
       if (variant.in_stock && selectedVariant !== variant) {
         card.style.border = "2px solid #ccc";
+        card.style.background = "white";
       }
       card.style.transform = "scale(1)";
     };
@@ -102,13 +114,10 @@ function viewProduct(productId) {
         selectedVariant = variant;
 
         
-        document.getElementById("variant-image").src = variant.image;
+        document.getElementById("variant-image").src = variant.image || product.image;
 
         // remove previous selection
-        document.querySelectorAll('#variantGrid div').forEach(el => {
-          el.style.border = "2px solid #ccc";
-          el.style.background = "white";
-        });
+        resetCards();
 
         // highlight selected
         card.style.border = "2px solid green";
@@ -124,15 +133,18 @@ function viewProduct(productId) {
     const firstAvailable = product.variants.find(v => v.in_stock);
 
   if (firstAvailable) {
-    document.getElementById("variant-image").src = firstAvailable.image;
+    document.getElementById("variant-image").src = firstAvailable.image || product.image;
     selectedVariant = firstAvailable;
 
     // highlight the first available card
-    const cards = document.querySelectorAll('#variantGrid div');
+    const cards = grid.children;
+    resetCards();
+
     const index = product.variants.indexOf(firstAvailable);
 
     if (cards[index]) {
       cards[index].style.border = "2px solid green";
+      cards[index].style.background = "#e6ffe6";
     }
 
     updatePurchaseBox();
@@ -169,6 +181,10 @@ function viewProduct(productId) {
   // Back button
   const back = document.createElement('button');
   back.innerText = "⬅ Back";
+    back.onclick = () => {
+    container.innerHTML = ""; // clear current view
+    showProducts();
+    };
 
   back.style.marginTop = "20px";
   back.style.padding = "10px 15px";
@@ -180,5 +196,10 @@ function viewProduct(productId) {
   back.style.fontSize = "14px";
   back.onmouseover = () => back.style.background = "#218838";
   back.onmouseout = () => back.style.background = "#28a745";
-  container.appendChild(back);
+  const backWrapper = document.createElement('div');
+  backWrapper.style.textAlign = "center";
+  backWrapper.style.marginTop = "20px";
+
+  backWrapper.appendChild(back);
+  container.appendChild(backWrapper);
 }
