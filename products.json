@@ -4,7 +4,7 @@
     "name": "Fahrenheit",
     "size": "3ML",
     "price": 5.5,
-    "image": "ScentVaultSV/images/farenheith.png",
+    "image": "./images/farenheith.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "in_stock": true
   },
