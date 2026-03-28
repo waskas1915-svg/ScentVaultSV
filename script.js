@@ -9,6 +9,17 @@ fetch('products.json')
 
 function showProducts() {
   const container = document.getElementById('products');
+
+container.innerHTML = `
+  <div id="productGrid" style="
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+  "></div>
+`;
+
+  const grid = document.getElementById('productGrid');
+
   container.innerHTML = "";
   
   allProducts.forEach(product => {
@@ -16,19 +27,26 @@ function showProducts() {
 
     const hasStock = product.variants.some(variant => variant.in_stock);
 
-    div.innerHTML = `
-      <h2>${product.name}</h2>
-      <img src="${product.image}" width="200">
-      <p>${product.description}</p>
-      <p style="color:${hasStock ? 'green' : 'red'};">
-        ${hasStock ? 'In Stock' : 'Out of Stock'}
-      </p>
-      <button onclick="viewProduct(${product.id})">
-        View Options
-      </button>
+      div.innerHTML = `
+    <img src="${product.image}" width="150" style="border-radius:8px;">
+    <h3>${product.name}</h3>
+    <p style="color:${hasStock ? 'green' : 'red'};">
+      ${hasStock ? 'In Stock' : 'Out of Stock'}
+    </p>
+    <button onclick="viewProduct(${product.id})" style="
+      margin-top:10px;
+      padding:8px 12px;
+      border:none;
+      border-radius:6px;
+      background:#007bff;
+      color:white;
+      cursor:pointer;
+    ">
+      View Options
+    </button>
     `;
 
-    container.appendChild(div);
+    grid.appendChild(div);
   });
 }
 
