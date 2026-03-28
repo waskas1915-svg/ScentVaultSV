@@ -92,28 +92,28 @@
   {
     "id": 311,
     "name": "Spectre Ghost",
-    "image": "./images/farenheith.png",
+    "image": "./images/spectreghost.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 3,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/spectreghost_decant.png",
         "id": 3113
       },
       {
         "size": "5ML",
         "price": 4,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/spectreghost_decant.png",
         "id": 3115
       },
       {
         "size": "10ML",
         "price": 8,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/spectreghost_decant.png",
         "id": 31110
       }
     ],
@@ -122,28 +122,28 @@
   {
     "id": 312,
     "name": "Aether Extrait",
-    "image": "./images/farenheith.png",
+    "image": "./images/aetherextrait.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 3,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/aetherextrait_decant.png",
         "id": 3123
       },
       {
         "size": "5ML",
         "price": 4,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/aetherextrait_decant.png",
         "id": 3125
       },
       {
         "size": "10ML",
         "price": 8,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/aetherextrait_decant.png",
         "id": 31210
       }
     ],
@@ -152,28 +152,28 @@
   {
     "id": 412,
     "name": "Club De Nuit Blue Iconic",
-    "image": "./images/farenheith.png",
+    "image": "./images/Iconicblue.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 3,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/Iconicblue_decant.png",
         "id": 4123
       },
       {
         "size": "5ML",
         "price": 4,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/Iconicblue_decant.png",
         "id": 4125
       },
       {
         "size": "10ML",
         "price": 6.5,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/Iconicblue_decant.png",
         "id": 41210
       }
     ],
