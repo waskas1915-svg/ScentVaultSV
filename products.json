@@ -9,21 +9,21 @@
         "size": "3ML",
         "price": 5.5,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/farenheith_decant.png",
         "id": 1113
       },
       {
         "size": "5ML",
         "price": 9.25,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/farenheith_decant.png",
         "id": 1115
       },
       {
         "size": "10ML",
         "price": 18.5,
         "in_stock": true,
-        "image": "./images/farenheith.png",
+        "image": "./images/farenheith_decant.png",
         "id": 11110
       }
     ],
@@ -32,28 +32,28 @@
   {
     "id": 211,
     "name": "Gentleman Reserve Priv\u00e9e",
-    "image": "./images/GentlemanReservePriv\u00e9e.png",
+    "image": "./images/GentlemanReservePrivee.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 5.25,
         "in_stock": true,
-        "image": "./images/GentlemanReservePriv\u00e9e.png",
+        "image": "./images/GentlemanReservePrivee_decant.png",
         "id": 2113
       },
       {
         "size": "5ML",
         "price": 8.75,
         "in_stock": true,
-        "image": "./images/GentlemanReservePriv\u00e9e.png",
+        "image": "./images/GentlemanReservePrivee_decant.png",
         "id": 2115
       },
       {
         "size": "10ML",
         "price": 17.5,
         "in_stock": true,
-        "image": "./images/GentlemanReservePriv\u00e9e.png",
+        "image": "./images/GentlemanReservePrivee_decant.png",
         "id": 21110
       }
     ],
@@ -62,28 +62,28 @@
   {
     "id": 212,
     "name": "Gentleman Society Ambr\u00e9e",
-    "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
+    "image": "./images/GentlemanSocietyAmbree.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 5,
         "in_stock": true,
-        "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
+        "image": "./images/GentlemanSocietyAmbree_decant.png",
         "id": 2123
       },
       {
         "size": "5ML",
         "price": 8.25,
         "in_stock": true,
-        "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
+        "image": "./images/GentlemanSocietyAmbree_decant.png",
         "id": 2125
       },
       {
         "size": "10ML",
         "price": 16.5,
         "in_stock": true,
-        "image": "./images/GentlemanSocietyAmbr\u00e9e.png",
+        "image": "./images/GentlemanSocietyAmbree_decant.png",
         "id": 21210
       }
     ],

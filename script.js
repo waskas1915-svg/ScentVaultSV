@@ -39,26 +39,43 @@ function viewProduct(productId) {
 
   let selectedVariant = null;
 
+  
   container.innerHTML = `
-  <div style="max-width:600px; margin:0 auto; text-align:center;">
-    <h2>${product.name}</h2>
+  <div style="
+    max-width:900px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:30px;
+    align-items:start;
+  ">
 
-    <img id="variant-image" 
-      src="${product.image}" 
-      onerror="this.src='./images/noimage.png'"
-      style="width:220px; border-radius:10px; margin-bottom:15px;">
+    <!-- LEFT: IMAGE -->
+    <div style="text-align:center;">
+      <h2>${product.name}</h2>
 
-    <div id="variantGrid" style="
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
-      justify-content:center;
-      gap:15px;
-      margin:20px 0;
-    "></div>
+      <img id="variant-image" 
+        src="${product.image}" 
+        onerror="this.src='./images/noimage.png'"
+        style="width:100%; max-width:300px; border-radius:10px; transition:0.3s;">
+    </div>
 
-    <div id="purchaseBox" style="margin-top:20px;"></div>
+    <!-- RIGHT: VARIANTS + BUY -->
+    <div>
+      <div id="variantGrid" style="
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap:15px;
+        margin-bottom:20px;
+      "></div>
+
+      <div id="purchaseBox"></div>
+
+      <div id="backContainer" style="margin-top:20px;"></div>
+    </div>
+
   </div>
-`;
+  `;
 
   const grid = document.getElementById('variantGrid');
   const purchaseBox = document.getElementById('purchaseBox');
@@ -114,7 +131,7 @@ function viewProduct(productId) {
         selectedVariant = variant;
 
         
-        document.getElementById("variant-image").src = variant.image || product.image;
+        document.getElementById("variant-image").src = variant.image || product.image || './images/noimage.png';
 
         // remove previous selection
         resetCards();
@@ -133,7 +150,7 @@ function viewProduct(productId) {
     const firstAvailable = product.variants.find(v => v.in_stock);
 
   if (firstAvailable) {
-    document.getElementById("variant-image").src = firstAvailable.image || product.image;
+    document.getElementById("variant-image").src = firstAvailable.image || product.image || './images/noimage.png';
     selectedVariant = firstAvailable;
 
     // highlight the first available card
@@ -181,25 +198,20 @@ function viewProduct(productId) {
   // Back button
   const back = document.createElement('button');
   back.innerText = "⬅ Back";
-    back.onclick = () => {
-    container.innerHTML = ""; // clear current view
-    showProducts();
-    };
 
-  back.style.marginTop = "20px";
+  back.onclick = () => {
+    container.innerHTML = "";
+    showProducts();
+  };
+
   back.style.padding = "10px 15px";
   back.style.borderRadius = "6px";
   back.style.border = "none";
   back.style.background = "#28a745";
   back.style.color = "white";
   back.style.cursor = "pointer";
-  back.style.fontSize = "14px";
+
   back.onmouseover = () => back.style.background = "#218838";
   back.onmouseout = () => back.style.background = "#28a745";
-  const backWrapper = document.createElement('div');
-  backWrapper.style.textAlign = "center";
-  backWrapper.style.marginTop = "20px";
-
-  backWrapper.appendChild(back);
-  container.appendChild(backWrapper);
+  document.getElementById("backContainer").appendChild(back);
 }
