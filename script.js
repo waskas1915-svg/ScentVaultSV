@@ -10,43 +10,49 @@ fetch('products.json')
 function showProducts() {
   const container = document.getElementById('products');
 
-container.innerHTML = `
-  <div id="productGrid" style="
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap:20px;
-  "></div>
-`;
+  // Create grid container
+  container.innerHTML = `<div id="productGrid"></div>`;
 
   const grid = document.getElementById('productGrid');
 
-  container.innerHTML = "";
-  
   allProducts.forEach(product => {
     const div = document.createElement('div');
+    div.classList.add("product-card");
 
-    const hasStock = product.variants.some(variant => variant.in_stock);
+    const hasStock = product.variants.some(v => v.in_stock);
 
-      div.innerHTML = `
-    <img src="${product.image}" width="150" style="border-radius:8px;">
-    <h3>${product.name}</h3>
-    <p style="color:${hasStock ? 'green' : 'red'};">
-      ${hasStock ? 'In Stock' : 'Out of Stock'}
-    </p>
-    <button onclick="viewProduct(${product.id})" style="
-      margin-top:10px;
-      padding:8px 12px;
-      border:none;
-      border-radius:6px;
-      background:#007bff;
-      color:white;
-      cursor:pointer;
-    ">
-      View Options
-    </button>
+    div.style = `
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:15px;
+      text-align:center;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      transition:0.2s;
     `;
 
-    grid.appendChild(div);
+    div.onmouseover = () => div.style.transform = "scale(1.03)";
+    div.onmouseout = () => div.style.transform = "scale(1)";
+
+    div.innerHTML = `
+      <img src="${product.image}" width="150" style="border-radius:8px;">
+      <h3>${product.name}</h3>
+      <p style="color:${hasStock ? 'green' : 'red'};">
+        ${hasStock ? 'In Stock' : 'Out of Stock'}
+      </p>
+      <button onclick="viewProduct(${product.id})" style="
+        margin-top:10px;
+        padding:8px 12px;
+        border:none;
+        border-radius:6px;
+        background:#28a745;
+        color:white;
+        cursor:pointer;
+      ">
+        View Options
+      </button>
+    `;
+
+    grid.appendChild(div); // ✅ IMPORTANT (not container!)
   });
 }
 
@@ -218,8 +224,7 @@ function viewProduct(productId) {
   back.innerText = "⬅ Back";
 
   back.onclick = () => {
-    container.innerHTML = "";
-    showProducts();
+  showProducts();
   };
 
   back.style.padding = "10px 15px";
