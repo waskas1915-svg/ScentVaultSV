@@ -2,28 +2,28 @@
   {
     "id": 111,
     "name": "Fahrenheit",
-    "image": "./images/farenheith.png",
+    "image": "./images/fahrenheit.png",
     "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
     "variants": [
       {
         "size": "3ML",
         "price": 5.5,
         "in_stock": true,
-        "image": "./images/farenheith_decant.png",
+        "image": "./images/fahrenheit_decant.png",
         "id": 1113
       },
       {
         "size": "5ML",
         "price": 9.25,
         "in_stock": true,
-        "image": "./images/farenheith_decant.png",
+        "image": "./images/fahrenheit_decant.png",
         "id": 1115
       },
       {
         "size": "10ML",
         "price": 18.5,
         "in_stock": true,
-        "image": "./images/farenheith_decant.png",
+        "image": "./images/fahrenheit_decant.png",
         "id": 11110
       }
     ],
