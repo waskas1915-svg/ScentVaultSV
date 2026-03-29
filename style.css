@@ -20,7 +20,7 @@ header {
 
 body {
   font-family: Arial, sans-serif;
-  background: #f8f9fb;
+  background: #f8f5f0;
   margin: 0;
 }
 
@@ -42,6 +42,10 @@ body {
   padding: 20px;
 }
 
+.product-img {
+  border-radius: 8px;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -49,6 +53,7 @@ body {
   background: white;
   padding: 25px;
   border-radius: 16px;
+  border: 1px solid #eee3d3;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   transition: 0.2s ease;
 }
@@ -68,9 +73,24 @@ body {
   text-align: center;
 }
 
+.product-card h3 {
+  color: #3e2f23;
+}
+
+.in-stock {
+  color: #c5a253;
+  font-weight: 500;
+}
+
 .out-of-stock {
-  color: red;
-  font-weight: bold;
+  color: #a94442;
+  font-weight: 500;
+}
+
+.in-stock,
+.out-of-stock {
+  margin: 5px 0;
+  font-size: 14px;
 }
 
 .disabled {
@@ -82,7 +102,7 @@ a {
   display: inline-block;
   margin-top: 10px;
   padding: 10px;
-  background: green;
+  background: #c5a253;
   color: white;
   text-decoration: none;
 }
@@ -114,7 +134,8 @@ a {
 }
 
 .size-option.selected {
-  border: 2px solid #2ecc71;
+  border: 2px solid #c5a253;
+  background: #f9f5ee;
 }
 
 .summary-box {
@@ -127,7 +148,7 @@ a {
 }
 
 button {
-  background: #2ecc71;
+  background: #c5a253;
   color: white;
   border: none;
   padding: 15px 30px;
@@ -138,7 +159,7 @@ button {
 }
 
 button:hover {
-  background: #27ae60;
+  background: #a8893f;
   transform: translateY(-2px);
 }
 

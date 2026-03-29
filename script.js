@@ -34,20 +34,12 @@ function showProducts() {
     div.onmouseout = () => div.style.transform = "scale(1)";
 
     div.innerHTML = `
-      <img src="${product.image}" width="150" style="border-radius:8px;">
+      <img src="${product.image}" class="product-img">
       <h3>${product.name}</h3>
-      <p style="color:${hasStock ? 'green' : 'red'};">
-        ${hasStock ? 'In Stock' : 'Out of Stock'}
+      <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
+      ${hasStock ? 'In Stock' : 'Out of Stock'}
       </p>
-      <button onclick="viewProduct(${product.id})" style="
-        margin-top:10px;
-        padding:8px 12px;
-        border:none;
-        border-radius:6px;
-        background:#28a745;
-        color:white;
-        cursor:pointer;
-      ">
+      <button onclick="viewProduct(${product.id})">
         View Options
       </button>
     `;
