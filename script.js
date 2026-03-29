@@ -56,6 +56,10 @@ function showProducts() {
   });
 }
 
+document.getElementById("logo").onclick = () => {
+  showProducts();
+};
+
 function viewProduct(productId) {
 
   const product = allProducts.find(p => p.id === productId);
