@@ -1,10 +1,12 @@
 let allProducts = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 fetch('products.json')
   .then(res => res.json())
   .then(data => {
     allProducts = data;
     showProducts();
+    updateCartUI();
   });
 
 function showProducts() {
@@ -94,7 +96,7 @@ container.innerHTML = `
       });
     }
 // create thumbnails
-      const images = product.images || [];
+      const images = product.images?.length ? product.images : [product.image];
        images.forEach((img, i) => {
       const thumb = document.createElement('img');
       thumb.src = img;
@@ -167,19 +169,28 @@ container.innerHTML = `
     const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
 
     purchaseBox.innerHTML = `
-    <div class="purchase-box">
+      <div class="purchase-box">
         <h3>Selected: ${selectedVariant.size}</h3>
         <p><strong>Price: $${selectedVariant.price}</strong></p>
-        <a href="${whatsappLink}" target="_blank">
-          <button class="primary-btn">
-            Buy Now
+
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+
+          <button class="primary-btn" onclick="addToCart('${product.name}', '${selectedVariant.size}', ${selectedVariant.price})">
+            Add to Cart
           </button>
-        </a>
+
+          <a href="${whatsappLink}" target="_blank">
+            <button class="primary-btn">
+              Buy Now
+            </button>
+          </a>
+
+        </div>
       </div>
     `;
   }
 
-  // Back button
+    // Back button
   const back = document.createElement('button');
   back.innerText = "⬅ Back";
 
@@ -189,4 +200,120 @@ container.innerHTML = `
 
   back.classList.add("secondary-btn");
   document.getElementById("backContainer").appendChild(back);
+
 }
+// cart preview logic
+
+function toggleCartPreview() {
+  const preview = document.getElementById("cartPreview");
+  if (!preview) return;
+
+  preview.classList.toggle("show");
+
+  if (!preview.classList.contains("show")) return;
+
+  // Populate cart content
+  if (cart.length === 0) {
+    preview.innerHTML = "<p>Your cart is empty</p>";
+    return;
+  }
+
+  let total = 0;
+  let html = "<h4>Cart</h4>";
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    html += `
+      <p>
+        ${item.name} (${item.size}) - $${item.price}
+        <button onclick="removeFromCart(${index})">❌</button>
+      </p>
+    `;
+  });
+
+  html += `<p><strong>Total: $${total}</strong></p>`;
+  html += `<button onclick="buyCart()" class="primary-btn">Checkout</button>`;
+
+  preview.innerHTML = html;
+}
+
+document.addEventListener("click", (e) => {
+  const preview = document.getElementById("cartPreview");
+  const btn = document.getElementById("cartBtn");
+  if (!preview || !btn) return;
+
+  if (!preview.contains(e.target) && !btn.contains(e.target)) {
+    preview.classList.remove("show");
+  }
+});
+
+//update cart
+
+function updateCartUI() {
+  const btn = document.getElementById("cartBtn");
+  btn.innerText = `🛒 (${cart.length})`;
+}
+
+
+// cart function
+
+  function addToCart(name, size, price) {
+  cart.push({ name, size, price });
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  console.log("Cart:", cart);
+  updateCartUI();
+
+  console.log(`${name} (${size}) added to cart`);
+  toggleCartPreview()
+}
+
+// Remove Items from the cart
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateCartUI();
+  toggleCartPreview(); // refresh view
+}
+
+// Buy cart logic
+
+function buyCart() {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+
+  if (!confirm("¿Deseas enviar este pedido por WhatsApp?")) return;
+
+  let message = "Hola, me gustaría ordenar:\n\n";
+  let total = 0;
+
+  cart.forEach(item => {
+    message += `• ${item.name} - ${item.size} ($${item.price})\n`;
+    total += item.price;
+  });
+
+  message += `\nTotal: $${total}`;
+
+  const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
+
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCartUI();
+  window.open(whatsappLink, "_blank");
+}
+
+window.onload = () => {
+  document.getElementById("cartBtn").onclick = toggleCartPreview;
+
+  const preview = document.getElementById("cartPreview");
+
+  if (preview) {
+    preview.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
+};

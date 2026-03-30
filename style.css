@@ -1,6 +1,7 @@
 
 header {
   text-align: center;
+  position: relative;
   padding: 20px;
   background: #3e2f23;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -11,9 +12,8 @@ header {
   max-width: 180px;
   cursor: pointer;
   transition: 0.2s;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  display: block;
+  margin: 0 auto;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
@@ -60,15 +60,7 @@ body {
   border-radius: 16px;
   border: 1px solid #eee3d3;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: 0.2s ease;
-}
-
-.product-card h3 {
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card-bottom {
@@ -216,10 +208,12 @@ img {
 }
 
 .purchase-box a {
-  display: inline-block;
+  text-decoration: none;
   margin-top: 10px;
   padding: 10px;
-  background: #c5a253;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -296,7 +290,7 @@ img {
 }
 
 .secondary-btn {
-  background: #3e2f23; /* matches header */
+  background: #3e2f23; 
   color: white;
   padding: 10px 15px;
   border-radius: 6px;
@@ -342,4 +336,68 @@ h1 {
 
 #backContainer {
   margin-top: 15px;
+}
+
+#cartBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: #c5a253;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#cartBtn:hover {
+  background: #a8893f;
+}
+
+#cartPreview {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+  width: 260px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  padding: 15px;
+  display: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+#cartPreview.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#cartPreview p {
+  margin: 8px 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cartPreview button {
+  margin-left: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#cartPreview h4 {
+  margin-top: 0;
+  text-align: center;
+}
+
+#cartPreview .primary-btn {
+  width: 100%;
+  margin-top: 10px;
 }
