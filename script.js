@@ -23,10 +23,13 @@ function showProducts() {
         div.innerHTML = `
         <img src="${product.image}" class="product-img">
         <h3>${product.name}</h3>
-        <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
-          ${hasStock ? 'In Stock' : 'Out of Stock'}
-        </p>
-        <button class="primary-btn">View Options</button>
+
+        <div class="card-bottom">
+          <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
+            ${hasStock ? 'In Stock' : 'Out of Stock'}
+          </p>
+          <button class="primary-btn">View Options</button>
+        </div>
       `;
         const btn = div.querySelector('button');
         btn.onclick = () => viewProduct(product.id);
