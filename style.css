@@ -75,6 +75,46 @@ body {
 
 .product-card h3 {
   color: #3e2f23;
+  margin: 10px 0 5px;
+}
+
+.product-card p {
+  margin: 0;
+}
+
+.product-view {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+@media (max-width: 600px) {
+  .product-view {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #variant-image {
+    width: 200px;
+  }
+
+  .product-info {
+    width: 100%;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+#variantGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
 }
 
 .in-stock {
@@ -98,13 +138,36 @@ body {
   pointer-events: none;
 }
 
-a {
+.thumbnail {
+  width: 60px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.thumbnail.active {
+  border-color: #c5a253;
+}
+
+.thumbnail-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.thumbnail:hover {
+  border-color: #a8893f;
+}
+
+.purchase-box a {
   display: inline-block;
   margin-top: 10px;
   padding: 10px;
   background: #c5a253;
   color: white;
   text-decoration: none;
+  border-radius: 8px;
 }
 
 .size-option {
@@ -115,8 +178,8 @@ a {
   padding: 20px;
   margin: 10px 0;
   cursor: pointer;
-  transition: all 0.2s ease;
   background: white;
+  transition: all 0.2s ease, transform 0.15s ease;
 }
 
 .size-option img {
@@ -136,6 +199,16 @@ a {
 .size-option.selected {
   border: 2px solid #c5a253;
   background: #f9f5ee;
+  transform: scale(1.02);
+}
+
+.size-option.out {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.size-option:not(.out) {
+  cursor: pointer;
 }
 
 .summary-box {
@@ -147,7 +220,7 @@ a {
   display: inline-block;
 }
 
-button {
+.primary-btn {
   background: #c5a253;
   color: white;
   border: none;
@@ -158,9 +231,26 @@ button {
   transition: 0.2s ease;
 }
 
-button:hover {
+.primary-btn:hover {
   background: #a8893f;
   transform: translateY(-2px);
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.secondary-btn {
+  background: #3e2f23; /* matches header */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #2c1f17;
 }
 
 h1 {
@@ -184,4 +274,16 @@ h1 {
   flex-direction: column;
   align-items: stretch; 
   width: 260px; 
+}
+
+#purchaseBox {
+  margin-top: 20px;
+}
+
+.purchase-box {
+  text-align: center;
+}
+
+#backContainer {
+  margin-top: 15px;
 }

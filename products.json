@@ -27,7 +27,12 @@
         "id": 11110
       }
     ],
-    "brand": "Dior"
+    "brand": "Dior",
+    "images": [
+      "./images/fahrenheit.png",
+      "./images/fahrenheit_notes.png",
+      "./images/fahrenheit_cords.png"
+    ]
   },
   {
     "id": 211,
@@ -57,7 +62,12 @@
         "id": 21110
       }
     ],
-    "brand": "Givenchy"
+    "brand": "Givenchy",
+    "images": [
+      "./images/GentlemanReservePrivee.png",
+      "./images/GentlemanReservePrivee_notes.png",
+      "./images/GentlemanReservePrivee_cords.png"
+    ]
   },
   {
     "id": 212,
@@ -87,7 +97,12 @@
         "id": 21210
       }
     ],
-    "brand": "Givenchy"
+    "brand": "Givenchy",
+    "images": [
+      "./images/GentlemanSocietyAmbree.png",
+      "./images/GentlemanSocietyAmbree_notes.png",
+      "./images/GentlemanSocietyAmbree_cords.png"
+    ]
   },
   {
     "id": 311,
@@ -117,7 +132,12 @@
         "id": 31110
       }
     ],
-    "brand": "French Avenue"
+    "brand": "French Avenue",
+    "images": [
+      "./images/spectreghost.png",
+      "./images/spectreghost_notes.png",
+      "./images/spectreghost_cords.png"
+    ]
   },
   {
     "id": 312,
@@ -147,7 +167,12 @@
         "id": 31210
       }
     ],
-    "brand": "French Avenue"
+    "brand": "French Avenue",
+    "images": [
+      "./images/aetherextrait.png",
+      "./images/aetherextrait_notes.png",
+      "./images/aetherextrait_cords.png"
+    ]
   },
   {
     "id": 412,
@@ -177,7 +202,12 @@
         "id": 41210
       }
     ],
-    "brand": "Armaf"
+    "brand": "Armaf",
+    "images": [
+      "./images/Iconicblue.png",
+      "./images/Iconicblue_notes.png",
+      "./images/Iconicblue_cords.png"
+    ]
   },
   {
     "id": 421,
@@ -207,7 +237,12 @@
         "id": 42110
       }
     ],
-    "brand": "Armaf"
+    "brand": "Armaf",
+    "images": [
+      "./images/Intense_Limited_Edition_Parfum.png",
+      "./images/Intense_Limited_Edition_Parfum_notes.png",
+      "./images/Intense_Limited_Edition_Parfum_cords.png"
+    ]
   },
   {
     "id": 511,
@@ -237,7 +272,12 @@
         "id": 51110
       }
     ],
-    "brand": "Lattafa"
+    "brand": "Lattafa",
+    "images": [
+      "./images/Al_Qiam_Silver.png",
+      "./images/Al_Qiam_Silver_notes.png",
+      "./images/Al_Qiam_Silver_cords.png"
+    ]
   },
   {
     "id": 521,
@@ -267,7 +307,12 @@
         "id": 52110
       }
     ],
-    "brand": "Lattafa"
+    "brand": "Lattafa",
+    "images": [
+      "./images/Berry_on_top.png",
+      "./images/Berry_on_top_notes.png",
+      "./images/Berry_on_top_cords.png"
+    ]
   },
   {
     "id": 611,
@@ -297,7 +342,12 @@
         "id": 61110
       }
     ],
-    "brand": "Maison alhambra"
+    "brand": "Maison alhambra",
+    "images": [
+      "./images/Kismet_Magic.png",
+      "./images/Kismet_Magic_notes.png",
+      "./images/Kismet_Magic_cords.png"
+    ]
   },
   {
     "id": 711,
@@ -327,7 +377,12 @@
         "id": 71110
       }
     ],
-    "brand": "Emporio Armany"
+    "brand": "Emporio Armany",
+    "images": [
+      "./images/Stronger_with_you_Absolutely.png",
+      "./images/Stronger_with_you_Absolutely_notes.png",
+      "./images/Stronger_with_you_Absolutely_cords.png"
+    ]
   },
   {
     "id": 811,
@@ -357,7 +412,12 @@
         "id": 81110
       }
     ],
-    "brand": "Tom Ford "
+    "brand": "Tom Ford ",
+    "images": [
+      "./images/Ombre_Lether.png",
+      "./images/Ombre_Lether_notes.png",
+      "./images/Ombre_Lether_cords.png"
+    ]
   },
   {
     "id": 911,
@@ -387,6 +447,11 @@
         "id": 91110
       }
     ],
-    "brand": "Paris Corner "
+    "brand": "Paris Corner ",
+    "images": [
+      "./images/Coconut_lagoon.png",
+      "./images/Coconut_lagoon_notes.png",
+      "./images/Coconut_lagoon_cords.png"
+    ]
   }
 ]

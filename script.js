@@ -20,29 +20,16 @@ function showProducts() {
     div.classList.add("product-card");
 
     const hasStock = product.variants.some(v => v.in_stock);
-
-    div.style = `
-      border:1px solid #ddd;
-      border-radius:10px;
-      padding:15px;
-      text-align:center;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      transition:0.2s;
-    `;
-
-    div.onmouseover = () => div.style.transform = "scale(1.03)";
-    div.onmouseout = () => div.style.transform = "scale(1)";
-
-    div.innerHTML = `
-      <img src="${product.image}" class="product-img">
-      <h3>${product.name}</h3>
-      <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
-      ${hasStock ? 'In Stock' : 'Out of Stock'}
-      </p>
-      <button onclick="viewProduct(${product.id})">
-        View Options
-      </button>
-    `;
+        div.innerHTML = `
+        <img src="${product.image}" class="product-img">
+        <h3>${product.name}</h3>
+        <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
+          ${hasStock ? 'In Stock' : 'Out of Stock'}
+        </p>
+        <button class="primary-btn">View Options</button>
+      `;
+        const btn = div.querySelector('button');
+        btn.onclick = () => viewProduct(product.id);
 
     grid.appendChild(div); // ✅ IMPORTANT (not container!)
   });
@@ -52,138 +39,117 @@ document.getElementById("logo").onclick = () => {
   showProducts();
 };
 
+function setMainImage(src) {
+  document.getElementById("variant-image").src =
+    src || './images/noimage.png';
+}
+
 function viewProduct(productId) {
 
   const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
   const container = document.getElementById('products');
-
   let selectedVariant = null;
 
-  
-  container.innerHTML = `
-  <div style="
-    max-width:900px;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:30px;
-    align-items:start;
-  ">
+container.innerHTML = `
+  <h2>${product.name}</h2>
 
-    <!-- LEFT: IMAGE -->
-    <div style="text-align:center;">
-      <h2>${product.name}</h2>
+    <div class="product-view">
 
+    <!-- LEFT -->
+    <div>
       <img id="variant-image" 
-        src="${product.image}" 
-        onerror="this.src='./images/noimage.png'"
-        style="width:100%; max-width:300px; border-radius:10px; transition:0.3s;">
+        src="${product.images?.[0] || product.image}"
+        onerror="this.src='./images/noimage.png'">
+
+      <div id="thumbnailRow" class="thumbnail-row"></div>
     </div>
 
-    <!-- RIGHT: VARIANTS + BUY -->
-    <div>
-      <div id="variantGrid" style="
-        display:grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap:15px;
-        margin-bottom:20px;
-      "></div>
-
+    <!-- RIGHT -->
+    <div class="product-info">
+      <div id="variantGrid"></div>
       <div id="purchaseBox"></div>
-
-      <div id="backContainer" style="margin-top:20px;"></div>
+      <div id="backContainer"></div>
     </div>
 
   </div>
-  `;
+`;
 
   const grid = document.getElementById('variantGrid');
   const purchaseBox = document.getElementById('purchaseBox');
+  const thumbnailRow = document.getElementById('thumbnailRow');
+  const thumbnails = thumbnailRow.children;
+  const sizeOptions = grid.children;
+  function clearSelection() {
+    Array.from(sizeOptions).forEach(el => {
+      el.classList.remove('selected');
+        });
+      }
+  function updateActiveThumbnail(image) {
+      Array.from(thumbnails).forEach(t => {
+        t.classList.toggle('active', t.getAttribute('src') === image)
+      });
+    }
+// create thumbnails
+      const images = product.images || [];
+       images.forEach((img, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = img;
+      thumb.classList.add('thumbnail');
+      thumb.onclick = () => {
+        setMainImage(img);
+        updateActiveThumbnail(img);
+      };
+      thumbnailRow.appendChild(thumb);
+      if (i === 0) thumb.classList.add('active');
+    });
 
-  function resetCards() {
-  for (let el of grid.children) {
-    el.style.border = "2px solid #ccc";
-    el.style.background = "white";
-  }
-}
+    
+    //variants
 
-  product.variants.forEach((variant, index) => {
-    const card = document.createElement('div');
+    product.variants.forEach((variant, index) => {
+      const card = document.createElement('div');
+      card.classList.add('size-option');
 
-    card.style = `
-      transition: all 0.2s ease;
-      border:2px solid #ccc;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding:10px;
-      cursor:${variant.in_stock ? 'pointer' : 'not-allowed'};
-      opacity:${variant.in_stock ? '1' : '0.5'};
-      border-radius:8px;
-    `;
+      if (!variant.in_stock) {
+        card.classList.add('out');
+      }
 
-      card.innerHTML = `
-    <img src="${variant.image}" 
-     width="80" 
-     style="margin-bottom:5px;"
-     onerror="this.src='./images/noimage.png'">
+        card.innerHTML = `
+    <img src="${variant.image}" width="80"
+      onerror="this.src='./images/noimage.png'">
     <p><strong>${variant.size}</strong></p>
-    <p>$${variant.price}</p>
-    ${variant.in_stock ? '' : '<p style="color:red;">Out of Stock</p>'}
+    <p class="price">$${variant.price}</p>
+    ${variant.in_stock ? '' : '<p class="out-of-stock">Out of Stock</p>'}
   `;
-
-        card.onmouseover = () => {
-      if (variant.in_stock) {
-        card.style.border = "2px solid #888";
-        card.style.background = "#f0fff0";
-        card.style.transform = "scale(1.03)";
-      }
-    };
-
-    card.onmouseout = () => {
-      if (variant.in_stock && selectedVariant !== variant) {
-        card.style.border = "2px solid #ccc";
-        card.style.background = "white";
-      }
-      card.style.transform = "scale(1)";
-    };
-
-    if (variant.in_stock) {
-        card.onclick = () => {
+  
+        // click logic
+      card.onclick = () => {
+        if (!variant.in_stock) return;
+        clearSelection();
+        updateActiveThumbnail(variant.image || product.image || './images/noimage.png');
         selectedVariant = variant;
-
-        
-        document.getElementById("variant-image").src = variant.image || product.image || './images/noimage.png';
-
-        // remove previous selection
-        resetCards();
-
-        // highlight selected
-        card.style.border = "2px solid green";
-        card.style.background = "#e6ffe6";
+        setMainImage(variant.image || product.image);
+        card.classList.add('selected');
 
         updatePurchaseBox();
       };
-    }
-
-    grid.appendChild(card);
+      grid.appendChild(card);
+           
   });
 
     const firstAvailable = product.variants.find(v => v.in_stock);
 
   if (firstAvailable) {
-    document.getElementById("variant-image").src = firstAvailable.image || product.image || './images/noimage.png';
+    setMainImage( firstAvailable.image || product.image);
     selectedVariant = firstAvailable;
 
     // highlight the first available card
-    const cards = grid.children;
-    resetCards();
-
     const index = product.variants.indexOf(firstAvailable);
-
+    const cards = grid.children;
     if (cards[index]) {
-      cards[index].style.border = "2px solid green";
-      cards[index].style.background = "#e6ffe6";
+      cards[index].classList.add('selected');
     }
-
     updatePurchaseBox();
   }
 
@@ -195,19 +161,11 @@ function viewProduct(productId) {
     const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
 
     purchaseBox.innerHTML = `
-    <div style="text-align:center;">
+    <div class="purchase-box">
         <h3>Selected: ${selectedVariant.size}</h3>
         <p><strong>Price: $${selectedVariant.price}</strong></p>
         <a href="${whatsappLink}" target="_blank">
-          <button style="
-            background:green;
-            color:white;
-            padding:12px 20px;
-            font-size:16px;
-            border:none;
-            border-radius:6px;
-            cursor:pointer;
-          ">
+          <button class="primary-btn">
             Buy Now
           </button>
         </a>
@@ -223,14 +181,6 @@ function viewProduct(productId) {
   showProducts();
   };
 
-  back.style.padding = "10px 15px";
-  back.style.borderRadius = "6px";
-  back.style.border = "none";
-  back.style.background = "#28a745";
-  back.style.color = "white";
-  back.style.cursor = "pointer";
-
-  back.onmouseover = () => back.style.background = "#218838";
-  back.onmouseout = () => back.style.background = "#28a745";
+  back.classList.add("secondary-btn");
   document.getElementById("backContainer").appendChild(back);
 }
