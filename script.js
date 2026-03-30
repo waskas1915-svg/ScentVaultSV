@@ -57,7 +57,9 @@ function viewProduct(productId) {
   let selectedVariant = null;
 
 container.innerHTML = `
-  <h2>${product.name}</h2>
+    <div class="product-title">
+      <h2>${product.name}</h2>
+    </div>
 
     <div class="product-view">
 
