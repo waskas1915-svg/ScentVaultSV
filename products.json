@@ -31,7 +31,7 @@
     "images": [
       "./images/fahrenheit.png",
       "./images/fahrenheit_notes.png",
-      "./images/fahrenheit_cords.png"
+      "./images/fahrenheit_acords.png"
     ]
   },
   {
@@ -66,7 +66,7 @@
     "images": [
       "./images/GentlemanReservePrivee.png",
       "./images/GentlemanReservePrivee_notes.png",
-      "./images/GentlemanReservePrivee_cords.png"
+      "./images/GentlemanReservePrivee_acords.png"
     ]
   },
   {
@@ -101,7 +101,7 @@
     "images": [
       "./images/GentlemanSocietyAmbree.png",
       "./images/GentlemanSocietyAmbree_notes.png",
-      "./images/GentlemanSocietyAmbree_cords.png"
+      "./images/GentlemanSocietyAmbree_acords.png"
     ]
   },
   {
@@ -136,7 +136,7 @@
     "images": [
       "./images/spectreghost.png",
       "./images/spectreghost_notes.png",
-      "./images/spectreghost_cords.png"
+      "./images/spectreghost_acords.png"
     ]
   },
   {
@@ -171,7 +171,7 @@
     "images": [
       "./images/aetherextrait.png",
       "./images/aetherextrait_notes.png",
-      "./images/aetherextrait_cords.png"
+      "./images/aetherextrait_acords.png"
     ]
   },
   {
@@ -206,7 +206,7 @@
     "images": [
       "./images/Iconicblue.png",
       "./images/Iconicblue_notes.png",
-      "./images/Iconicblue_cords.png"
+      "./images/Iconicblue_acords.png"
     ]
   },
   {
@@ -241,7 +241,7 @@
     "images": [
       "./images/Intense_Limited_Edition_Parfum.png",
       "./images/Intense_Limited_Edition_Parfum_notes.png",
-      "./images/Intense_Limited_Edition_Parfum_cords.png"
+      "./images/Intense_Limited_Edition_Parfum_acords.png"
     ]
   },
   {
@@ -276,7 +276,7 @@
     "images": [
       "./images/Al_Qiam_Silver.png",
       "./images/Al_Qiam_Silver_notes.png",
-      "./images/Al_Qiam_Silver_cords.png"
+      "./images/Al_Qiam_Silver_acords.png"
     ]
   },
   {
@@ -311,7 +311,7 @@
     "images": [
       "./images/Berry_on_top.png",
       "./images/Berry_on_top_notes.png",
-      "./images/Berry_on_top_cords.png"
+      "./images/Berry_on_top_acords.png"
     ]
   },
   {
@@ -346,7 +346,7 @@
     "images": [
       "./images/Kismet_Magic.png",
       "./images/Kismet_Magic_notes.png",
-      "./images/Kismet_Magic_cords.png"
+      "./images/Kismet_Magic_acords.png"
     ]
   },
   {
@@ -381,7 +381,7 @@
     "images": [
       "./images/Stronger_with_you_Absolutely.png",
       "./images/Stronger_with_you_Absolutely_notes.png",
-      "./images/Stronger_with_you_Absolutely_cords.png"
+      "./images/Stronger_with_you_Absolutely_acords.png"
     ]
   },
   {
@@ -416,7 +416,7 @@
     "images": [
       "./images/Ombre_Lether.png",
       "./images/Ombre_Lether_notes.png",
-      "./images/Ombre_Lether_cords.png"
+      "./images/Ombre_Lether_acords.png"
     ]
   },
   {
@@ -451,7 +451,7 @@
     "images": [
       "./images/Coconut_lagoon.png",
       "./images/Coconut_lagoon_notes.png",
-      "./images/Coconut_lagoon_cords.png"
+      "./images/Coconut_lagoon_acords.png"
     ]
   }
 ]
