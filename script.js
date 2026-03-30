@@ -175,7 +175,7 @@ container.innerHTML = `
 
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
 
-          <button class="primary-btn" onclick="addToCart('${product.name}', '${selectedVariant.size}', ${selectedVariant.price})">
+          <button class="primary-btn" onclick="addToCart('${product.name}', '${selectedVariant.size}', ${selectedVariant.price}, '${product.image}')">
             Add to Cart
           </button>
 
@@ -224,15 +224,32 @@ function toggleCartPreview() {
   cart.forEach((item, index) => {
     total += item.price;
     html += `
-      <p>
-        ${item.name} (${item.size}) - $${item.price}
-        <button onclick="removeFromCart(${index})">❌</button>
-      </p>
+      <div class="cart-item">
+        <img src="${item.image}" class="cart-item-img">
+
+        <div class="cart-item-info">
+          <p class="cart-name">${item.name}</p>
+          <p class="cart-size">${item.size}</p>
+          <p class="cart-price">$${item.price}</p>
+
+          <div class="qty-controls">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${item.qty || 1}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
+        </div>
+
+        <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+      </div>
     `;
   });
 
   html += `<p><strong>Total: $${total}</strong></p>`;
-  html += `<button onclick="buyCart()" class="primary-btn">Checkout</button>`;
+  html += `
+    <button onclick="buyCart()" class="primary-btn cart-checkout">
+      Checkout via WhatsApp
+    </button>
+  `;
 
   preview.innerHTML = html;
 }
@@ -257,15 +274,25 @@ function updateCartUI() {
 
 // cart function
 
-  function addToCart(name, size, price) {
-  cart.push({ name, size, price });
+function addToCart(name, size, price, image) {
+  const existing = cart.find(item => item.name === name && item.size === size);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ name, size, price, image, qty: 1 });
+  }
+
+  const btn = document.getElementById("cartBtn");
+  btn.classList.add("cart-bounce");
+
+  setTimeout(() => {
+    btn.classList.remove("cart-bounce");
+  }, 300);
+
   localStorage.setItem("cart", JSON.stringify(cart));
-
-  console.log("Cart:", cart);
   updateCartUI();
-
-  console.log(`${name} (${size}) added to cart`);
-  toggleCartPreview()
+  toggleCartPreview();
 }
 
 // Remove Items from the cart
@@ -276,6 +303,22 @@ function removeFromCart(index) {
 
   updateCartUI();
   toggleCartPreview(); // refresh view
+}
+
+// Quantity control
+
+function changeQty(index, amount) {
+  if (!cart[index]) return;
+
+  cart[index].qty = (cart[index].qty || 1) + amount;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartUI();
+  toggleCartPreview();
 }
 
 // Buy cart logic
@@ -293,7 +336,7 @@ function buyCart() {
 
   cart.forEach(item => {
     message += `• ${item.name} - ${item.size} ($${item.price})\n`;
-    total += item.price;
+    total += item.price * (item.qty || 1);
   });
 
   message += `\nTotal: $${total}`;
