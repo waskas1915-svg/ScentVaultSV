@@ -85,9 +85,12 @@ body {
 }
 
 .product-card img {
-  width: 100%;
+  width: 140px;
+  height: 150px;
   max-width: 150px;
-  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  align-items: center;
 }
 
 .product-card h2 {
@@ -116,14 +119,21 @@ body {
   flex-wrap: wrap;
 }
 
+.product-view > div:first-child {
+  flex: 1;              
+  max-width: 600px;     
+}
+
 .product-title {
   text-align: center;
   margin-top: 20px;
 }
 
 #variant-image {
-  width: 45%;       
-  max-width: 500px; 
+  width: 100%;       
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
 .product-info {
@@ -198,6 +208,7 @@ img {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  justify-content: center;
 }
 
 .thumbnail:hover {
