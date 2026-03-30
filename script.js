@@ -144,8 +144,11 @@ container.innerHTML = `
     const firstAvailable = product.variants.find(v => v.in_stock);
 
   if (firstAvailable) {
-    setMainImage( firstAvailable.image || product.image);
     selectedVariant = firstAvailable;
+
+  const defaultImage = product.images?.[0] || product.image;
+  setMainImage(defaultImage);
+  updateActiveThumbnail(defaultImage);
 
     // highlight the first available card
     const index = product.variants.indexOf(firstAvailable);
