@@ -1,3 +1,5 @@
+  //Firebase database load
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -15,23 +17,28 @@
 
   window.db = db; 
 
+  // Function to upload json to the database
+
+async function uploadProducts() {
+  try {
+    const res = await fetch("products.json");
+    const products = await res.json();
+
+    for (const product of products) {
+      await addDoc(collection(db, "products"), product);
+      console.log("Uploaded:", product.name);
+    }
+
+    console.log("✅ All products uploaded!");
+  } catch (err) {
+    console.error("❌ Upload error:", err);
+  }
+}
 
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-async function testFirebase() {
-  try {
-    await addDoc(collection(db, "products"), {
-      name: "Test Perfume",
-      stock_ml: 100
-    });
-    console.log("✅ Data sent!");
-  } catch (e) {
-    console.error("❌ Error:", e);
-  }
-}
 
 testFirebase();
 
@@ -583,3 +590,5 @@ window.onload = () => {
     overlay.onclick = closeCart;
   }
 };
+
+uploadProducts();

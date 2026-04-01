@@ -3,7 +3,7 @@
     "id": 111,
     "name": "Fahrenheit",
     "image": "./images/fahrenheit.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Dior Fahrenheit EDT es una obra maestra de la perfumería que rompe moldes. Es el equilibrio perfecto entre la brutalidad y la elegancia, famoso por su icónico e inconfundible acorde de violeta y gasolina.\nSu apertura es una explosión vibrante de mandarina y lavanda que rápidamente muta hacia un corazón de cuero ahumado y maderas profundas. Es una fragancia que emana rebeldía, madurez y un espíritu libre. Caliente y frío a la vez, Fahrenheit no es solo un perfume; es una declaración de carácter para el hombre que no teme destacar. Legendario, audaz y eterno.",
     "variants": [
       {
         "size": "3ML",
@@ -32,13 +32,14 @@
       "./images/fahrenheit.png",
       "./images/fahrenheit_notes.png",
       "./images/fahrenheit_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   },
   {
     "id": 211,
-    "name": "Gentleman Reserve Priv\u00e9e",
+    "name": "Gentleman Reserve PrivÃ©e",
     "image": "./images/GentlemanReservePrivee.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Gentleman Givenchy Réserve Privée es la cumbre de la elegancia licorosa. Inspirada en el refinado mundo del whisky, esta fragancia fusiona la sofisticación del iris empolvado con una nota absoluta de cebada de destilería.\nSu aroma abre con una calidez embriagadora que evoluciona hacia un corazón amaderado y terroso, sellado por una base de maderas ambarinas y castaña. Es el perfume del caballero moderno: cremoso, oscuro y profundamente distinguido. Una joya olfativa que emana el lujo de un salón privado y la seguridad de quien aprecia la exclusividad. Elegancia líquida en su máxima expresión.",
     "variants": [
       {
         "size": "3ML",
@@ -67,13 +68,14 @@
       "./images/GentlemanReservePrivee.png",
       "./images/GentlemanReservePrivee_notes.png",
       "./images/GentlemanReservePrivee_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   },
   {
     "id": 212,
-    "name": "Gentleman Society Ambr\u00e9e",
+    "name": "Gentleman Society AmbrÃ©e",
     "image": "./images/GentlemanSocietyAmbree.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Gentleman Society Eau de Parfum Ambrée es una reinterpretación solar y audaz de la elegancia contemporánea. Esta fragancia fusiona el ADN de la línea con una calidez envolvente, donde la frescura especiada del cardamomo y la salvia se funden con un nardo silvestre magnético.\nSu fondo destaca por una vainilla de Madagascar cremosa y matices de palo santo, que aportan un toque ahumado y sofisticado. Es el aroma de una masculinidad luminosa y sofisticada, diseñado para quienes buscan una estela adictiva, cálida y llena de contraste. Vibrante, lujoso y profundamente envolvente.",
     "variants": [
       {
         "size": "3ML",
@@ -102,13 +104,14 @@
       "./images/GentlemanSocietyAmbree.png",
       "./images/GentlemanSocietyAmbree_notes.png",
       "./images/GentlemanSocietyAmbree_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   },
   {
     "id": 311,
     "name": "Spectre Ghost",
     "image": "./images/spectreghost.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Spectre Ghost de French Avenue es una interpretación magistral de la sofisticación mística. Esta fragancia captura una elegancia etérea al fusionar la frescura verde del jengibre y la bergamota con un corazón profundo de vainilla especiada.\nSu verdadera magia reside en el secado, donde el cardamomo y las maderas nobles crean una estela cremosa pero vibrante, evocando un lujo discreto y magnético. Es el aroma de la intriga y la presencia silenciosa: un perfume que no grita, pero que domina el espacio con su equilibrio entre dulzura y especias. Exótico, seductor y absolutamente refinado.",
     "variants": [
       {
         "size": "3ML",
@@ -136,14 +139,16 @@
     "images": [
       "./images/spectreghost.png",
       "./images/spectreghost_notes.png",
-      "./images/spectreghost_acords.png"
-    ]
+      "./images/spectreghost_acords.png",
+      "./images/spectreghost_dupe.png"
+    ],
+    "stock_ml": 95
   },
   {
     "id": 312,
     "name": "Aether Extrait",
     "image": "./images/aetherextrait.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Aether Extrait de French Avenue es una oda a la frescura radiante y la opulencia cítrica. Esta fragancia captura la esencia de un lujo vibrante, abriendo con una explosión de mandarina y cítricos dulces que se entrelazan con un corazón de grosellas negras y té verde.\nSu fondo de almizcle cremoso y sándalo aporta una base sólida y sofisticada que proyecta una limpieza impecable y una energía revitalizante. Es el aroma de la distinción moderna: una estela chispeante y metálica que emana frescura cristalina y poder. Luminoso, aireado y extremadamente sofisticado.",
     "variants": [
       {
         "size": "3ML",
@@ -171,14 +176,16 @@
     "images": [
       "./images/aetherextrait.png",
       "./images/aetherextrait_notes.png",
-      "./images/aetherextrait_acords.png"
-    ]
+      "./images/aetherextrait_acords.png",
+      "./images/aetherextrait_dupe.png"
+    ],
+    "stock_ml": 95
   },
   {
     "id": 412,
     "name": "Club De Nuit Blue Iconic",
     "image": "./images/Iconicblue.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Club de Nuit Blue Iconic es una explosión de frescura y poder, diseñada para el hombre que busca una presencia vibrante y duradera. Esta fragancia abre con una descarga cítrica de toronja, limón y menta, intensificada por un toque picante de pimienta rosa.\nEn su evolución, el jengibre y el jazmín aportan una elegancia dinámica que reposa sobre una base sólida de incienso, cedro y ámbar. Es el aroma de la versatilidad absoluta: una estela limpia, sofisticada y profundamente masculina que proyecta confianza en cualquier escenario. Fresco, radiante y magnético.",
     "variants": [
       {
         "size": "3ML",
@@ -206,49 +213,53 @@
     "images": [
       "./images/Iconicblue.png",
       "./images/Iconicblue_notes.png",
-      "./images/Iconicblue_acords.png"
-    ]
+      "./images/Iconicblue_acords.png",
+      "./images/Iconicblue_dupe.png"
+    ],
+    "stock_ml": 195
   },
   {
-    "id": 421,
+    "id": 411,
     "name": "Club De Nuit Intense Limited Edition Parfum",
     "image": "./images/Intense_Limited_Edition_Parfum.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Club de Nuit Intense Man Limited Edition Parfum es la versión más refinada y potente de un ícono de la perfumería. Esta edición eleva la composición original, suavizando la salida cítrica con una piña ahumada más natural y lujosa que cautiva desde el primer segundo.\nSu corazón de abedul y jazmín evoluciona hacia un fondo magistral de ámbar gris y almizcle, creando una estela densa, oscura y profundamente masculina. Es el aroma del éxito y la autoridad: una fragancia con una proyección arrolladora y una fijación eterna. Imponente, sofisticado y un verdadero imán de cumplidos.",
     "variants": [
       {
         "size": "3ML",
         "price": 3,
         "in_stock": true,
         "image": "./images/Intense_Limited_Edition_Parfum_decant.png",
-        "id": 4213
+        "id": 4113
       },
       {
         "size": "5ML",
         "price": 5,
         "in_stock": true,
         "image": "./images/Intense_Limited_Edition_Parfum_decant.png",
-        "id": 4215
+        "id": 4115
       },
       {
         "size": "10ML",
         "price": 10,
         "in_stock": true,
         "image": "./images/Intense_Limited_Edition_Parfum_decant.png",
-        "id": 42110
+        "id": 41110
       }
     ],
     "brand": "Armaf",
     "images": [
       "./images/Intense_Limited_Edition_Parfum.png",
       "./images/Intense_Limited_Edition_Parfum_notes.png",
-      "./images/Intense_Limited_Edition_Parfum_acords.png"
-    ]
+      "./images/Intense_Limited_Edition_Parfum_acords.png",
+      "./images/Intense_Limited_Edition_Parfum_dupe.png"
+    ],
+    "stock_ml": 95
   },
   {
     "id": 511,
     "name": "Al Qiam Silver",
     "image": "./images/Al_Qiam_Silver.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Al Qiam Silver de Lattafa Pride es una oda a la sofisticación fresca y amaderada. Esta fragancia destaca por una apertura cítrica y chispeante de pomelo, que rápidamente se entrelaza con un corazón de jengibre y ambroxan, aportando una vibración limpia, moderna y extremadamente elegante.\nSu fondo de vetiver y sándalo le otorga una base terrosa y masculina que proyecta una seguridad impecable. Es el aroma ideal para quienes buscan distinción y versatilidad: una estela que emana frescura cristalina con un toque de lujo maduro. Refinado, radiante y con una presencia magnética.",
     "variants": [
       {
         "size": "3ML",
@@ -276,14 +287,16 @@
     "images": [
       "./images/Al_Qiam_Silver.png",
       "./images/Al_Qiam_Silver_notes.png",
-      "./images/Al_Qiam_Silver_acords.png"
-    ]
+      "./images/Al_Qiam_Silver_acords.png",
+      "./images/Al_Qiam_Silver_dupe.png"
+    ],
+    "stock_ml": 95
   },
   {
     "id": 521,
     "name": "Berry on top",
     "image": "./images/Berry_on_top.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Berry on Top de Lattafa es una explosión de alegría y dulzura gourmand diseñada para cautivar. Esta fragancia celebra la feminidad moderna con una apertura irresistible de bayas rojas y frutas silvestres, que se siente jugosa, vibrante y llena de luz.\nSu corazón evoluciona hacia una suavidad cremosa donde notas de caramelo y vainilla se entrelazan con un toque floral delicado, creando una estela que recuerda a un postre de alta repostería. Es el aroma del optimismo y la seducción juguetona: una fragancia envolvente que emana una calidez encantadora y magnética. Dulce, radiante y absolutamente delicioso.",
     "variants": [
       {
         "size": "3ML",
@@ -312,13 +325,14 @@
       "./images/Berry_on_top.png",
       "./images/Berry_on_top_notes.png",
       "./images/Berry_on_top_acords.png"
-    ]
+    ],
+    "stock_ml": 70
   },
   {
     "id": 611,
     "name": "Kismet Magic",
     "image": "./images/Kismet_Magic.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Kismet Magic de Maison Alhambra (anteriormente conocido como Kismet Angel) es una obra maestra de la perfumería gourmand. Esta fragancia evoca la calidez de una velada de lujo, abriendo con una nota embriagadora de ron y vainilla que envuelve los sentidos de inmediato.\nSu corazón revela una mezcla magistral de canela y haba tonka, creando un efecto de tarta de manzana especiada recién horneada. El fondo de sándalo y madera de ámbar le otorga una profundidad elegante y duradera. Es el aroma de la opulencia acogedora: dulce, licoroso y profundamente adictivo. Una joya líquida que emana sofisticación y confort.",
     "variants": [
       {
         "size": "3ML",
@@ -346,14 +360,16 @@
     "images": [
       "./images/Kismet_Magic.png",
       "./images/Kismet_Magic_notes.png",
-      "./images/Kismet_Magic_acords.png"
-    ]
+      "./images/Kismet_Magic_acords.png",
+      "./images/Kismet_Magic_dupe.png"
+    ],
+    "stock_ml": 95
   },
   {
     "id": 711,
     "name": "Stronger with you Absolutely",
     "image": "./images/Stronger_with_you_Absolutely.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Stronger With You Absolutely es el epítome de la seducción magnética. Esta fragancia eleva el ADN original a una intensidad superior, fusionando un adictivo acorde de ron licoroso con la calidez distintiva de la castaña glaseada.\n Su corazón de lavanda aporta una elegancia refinada, mientras que la vainilla de Madagascar y las maderas ahumadas crean una estela profunda y duradera. Es el aroma de la seguridad absoluta: un abrazo cálido y sofisticado diseñado para las distancias cortas y las noches inolvidables. Denso, oscuro y puramente irresistible.",
     "variants": [
       {
         "size": "3ML",
@@ -382,13 +398,14 @@
       "./images/Stronger_with_you_Absolutely.png",
       "./images/Stronger_with_you_Absolutely_notes.png",
       "./images/Stronger_with_you_Absolutely_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   },
   {
     "id": 811,
     "name": "Ombre Lether",
     "image": "./images/Ombre_Lether.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Tom Ford Ombré Leather Parfum es la esencia del oeste americano elevada a su máxima sofisticación. Esta versión intensifica el icónico cuero negro original, añadiendo una faceta floral y táctil de absoluto de violeta y cedro que suaviza su carácter rudo con una elegancia aterciopelada.\nSu aroma evoca la libertad de un viaje por el desierto: notas de tabaco y jazmín sambac que reposan sobre un fondo amaderado y terroso. Es una fragancia que emana poder, misterio y sensualidad desinhibida. Un aroma táctil y profundo para quienes buscan una presencia imponente y lujosa. Indómito, refinado y puramente magnético.",
     "variants": [
       {
         "size": "3ML",
@@ -417,13 +434,14 @@
       "./images/Ombre_Lether.png",
       "./images/Ombre_Lether_notes.png",
       "./images/Ombre_Lether_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   },
   {
     "id": 911,
     "name": "Coconut lagoon",
     "image": "./images/Coconut_lagoon.png",
-    "description": "3ML - Las Notas de Salida son flor del moscadero, lavanda, cedro, mandarina, manzanilla, bergamota, flor del espino y lim\u00f3n (lima \u00e1cida); las Notas de Coraz\u00f3n son hojas de violeta, nuez moscada, cedro, s\u00e1ndalo, clavel, madreselva, jazm\u00edn y lirio de los valles (muguete); las Notas de Fondo son cuero, vetiver, almizcle, \u00e1mbar, pachul\u00ed y haba tonka.",
+    "description": "Coconut Lagoon de Paris Corner es un billete directo a un paraíso tropical privado. Esta fragancia captura la esencia del verano eterno con una apertura cremosa de coco fresco y leche de coco, que se siente natural, suave y profundamente relajante.\nSu corazón floral de jazmín y ylang-ylang se entrelaza con una base de vainilla dulce y almizcle blanco, creando una estela que emula la calidez del sol sobre la piel bronceada. Es el aroma de la desconexión y el lujo costero: una fragancia que emana paz, frescura exótica y una sensualidad ligera. Cremoso, solar y absolutamente evocador.",
     "variants": [
       {
         "size": "3ML",
@@ -452,6 +470,7 @@
       "./images/Coconut_lagoon.png",
       "./images/Coconut_lagoon_notes.png",
       "./images/Coconut_lagoon_acords.png"
-    ]
+    ],
+    "stock_ml": 95
   }
 ]
