@@ -240,15 +240,32 @@ function checkout() {
   
 
   container.innerHTML = `
-    <h2>Checkout</h2>
+    <h2 class="checkout-title">Checkout</h2>
 
     <div class="checkout-box">
 
       <h3>Order Summary</h3>
 
-      ${cart.map(item => `
-        <p>• ${item.name} (${item.size}) x${item.qty || 1} - $${(item.price * (item.qty || 1)).toFixed(2)}</p>
-      `).join("")}
+      ${cart.map(item => {
+        const qty = item.qty || 1;
+        const subtotal = item.price * qty;
+
+        return `
+          <div class="checkout-item">
+            <img src="${item.image}" 
+                class="checkout-item-img"
+                onerror="this.src='./images/noimage.png'">
+
+            <div class="checkout-item-info">
+              <p class="checkout-name">${item.name}</p>
+              <p class="checkout-size">${item.size}</p>
+              <p class="checkout-price">
+                $${item.price} × ${qty} = $${subtotal.toFixed(2)}
+              </p>
+            </div>
+          </div>
+        `;
+      }).join("")}
 
       <hr>
 
