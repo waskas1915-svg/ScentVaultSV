@@ -1,7 +1,11 @@
   //Firebase database load
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { 
+  getFirestore, 
+  collection, 
+  addDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAW21g64pQ_sjPtv4BucApThJ3P8S1TqAI",
