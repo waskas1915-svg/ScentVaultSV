@@ -38,10 +38,6 @@ async function uploadProducts() {
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-testFirebase();
-
   function openCart() {
   const preview = document.getElementById("cartPreview");
   const overlay = document.getElementById("cartOverlay");
