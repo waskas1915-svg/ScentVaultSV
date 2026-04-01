@@ -260,9 +260,26 @@ function checkout() {
   
 
   container.innerHTML = `
-    <h2 class="checkout-title">Checkout</h2>
+  <div class="checkout-wrapper">
 
-    <div class="checkout-box">
+    <!-- LEFT: FORM -->
+    <div class="checkout-left">
+      <h2>Shipping Address</h2>
+
+      <div class="checkout-form">
+        <input id="custName" placeholder="Full Name" value="${saved.name || ''}" required>
+        <input id="custPhone" placeholder="Phone Number" value="${saved.phone || ''}" required>
+        <textarea id="custAddress" placeholder="Delivery Address" required>${saved.address || ''}</textarea>
+      </div>
+
+      <button class="primary-btn checkout-btn" 
+        onclick="sendOrderWhatsApp(${subtotal}, ${shipping}, ${total})">
+        Continue
+      </button>
+    </div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="checkout-right">
 
       <h3>Order Summary</h3>
 
@@ -272,16 +289,11 @@ function checkout() {
 
         return `
           <div class="checkout-item">
-            <img src="${item.image}" 
-                class="checkout-item-img"
-                onerror="this.src='./images/noimage.png'">
-
-            <div class="checkout-item-info">
-              <p class="checkout-name">${item.name}</p>
-              <p class="checkout-size">${item.size}</p>
-              <p class="checkout-price">
-                $${item.price} × ${qty} = $${subtotal.toFixed(2)}
-              </p>
+            <img src="${item.image}" class="checkout-item-img">
+            <div>
+              <p><strong>${item.name}</strong></p>
+              <p>${item.size}</p>
+              <p>$${item.price} × ${qty}</p>
             </div>
           </div>
         `;
@@ -290,40 +302,12 @@ function checkout() {
       <hr>
 
       <p>Subtotal: $${subtotal.toFixed(2)}</p>
-      <p>
-        Shipping: 
-        ${shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
-      </p>
-
-      ${shipping !== 0 
-        ? `<p class="shipping-warning">
-            Spend $${remaining.toFixed(2)} more for FREE shipping 🚚
-          </p>` 
-        : ""
-      }
-
+      <p>Shipping: ${shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</p>
       <h3>Total: $${total.toFixed(2)}</h3>
 
-      <div class="checkout-form">
-
-        <input id="custName" placeholder="Full Name" value="${saved.name || ''}" required>
-        <input id="custPhone" placeholder="Phone Number" value="${saved.phone || ''}" required>
-        <textarea id="custAddress" placeholder="Delivery Address" required>${saved.address || ''}</textarea>
-
-      </div>
-
-      <button class="primary-btn" onclick="sendOrderWhatsApp(${subtotal}, ${shipping}, ${total})">
-        Send Order via WhatsApp
-      </button>
-
-      <br><br>
-
-      <button class="secondary-btn" onclick="showProducts()">
-        ⬅ Back to Shop
-      </button>
-
     </div>
-  `;
+  </div>
+`;
 }
 
 // send to whatsapp
