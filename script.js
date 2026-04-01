@@ -208,19 +208,23 @@ container.innerHTML = `
 
 function toggleCartPreview() {
   const preview = document.getElementById("cartPreview");
-  if (!preview) return;
+  const overlay = document.getElementById("cartOverlay");
+
+  if (!preview || !overlay) return;
 
   preview.classList.toggle("show");
+  overlay.classList.toggle("show");
 
   if (preview.classList.contains("show")) {
-    renderCart(); 
+    renderCart();
   }
 }
 
 // checkout page
 
 function checkout() {
-  console.log("checkout clicked");
+  document.getElementById("cartPreview")?.classList.remove("show");
+  document.getElementById("cartOverlay")?.classList.remove("show");
   if (cart.length === 0) {
     alert("Cart is empty");
     return;
@@ -309,6 +313,8 @@ function checkout() {
 // send to whatsapp
 
 function sendOrderWhatsApp(subtotal, shipping, total) {
+  document.getElementById("cartPreview")?.classList.remove("show");
+  document.getElementById("cartOverlay")?.classList.remove("show");
 
   const name = document.getElementById("custName").value.trim();
   const phone = document.getElementById("custPhone").value.trim();
@@ -352,14 +358,38 @@ function renderCart() {
     return;
   }
 
+  let html = `
+    <div class="cart-header">
+      <h3>Cart</h3>
+      <button onclick="toggleCartPreview()">✕</button>
+    </div>
+  `;
+
   let total = 0;
-  let html = "<h4>Cart</h4>";
+
+cart.forEach(item => {
+  total += item.price * (item.qty || 1);
+});
+
+const freeShippingThreshold = 50;
+const remaining = Math.max(0, freeShippingThreshold - total);
+
+html += `
+  <div class="cart-shipping">
+    ${
+      remaining > 0
+        ? `Spend $${remaining.toFixed(2)} more and get FREE shipping!`
+        : `🎉 You unlocked FREE shipping!`
+    }
+    <div class="shipping-bar">
+      <div class="shipping-progress" style="width:${Math.min(100, (total / freeShippingThreshold) * 100)}%"></div>
+    </div>
+  </div>
+`;
 
   cart.forEach((item, index) => {
     const qty = item.qty || 1;
-    const subtotal = item.price * qty;
-    total += subtotal;
-
+    
     html += `
       <div class="cart-item">
         <img src="${item.image}" 
@@ -369,26 +399,28 @@ function renderCart() {
         <div class="cart-item-info">
           <p class="cart-name">${item.name}</p>
           <p class="cart-size">${item.size}</p>
-          <p class="cart-price">
-            $${item.price} × ${qty} = $${subtotal.toFixed(2)}
-          </p>
+          <p class="cart-price">$${item.price}</p>
 
           <div class="qty-controls">
             <button onclick="changeQty(${index}, -1)">−</button>
             <span>${qty}</span>
             <button onclick="changeQty(${index}, 1)">+</button>
           </div>
-        </div>
 
-        <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+          <button class="remove-link" onclick="removeFromCart(${index})">
+            Remove
+          </button>
+        </div>
       </div>
     `;
   });
 
-  html += `
+ html += `
     <div class="cart-footer">
-      <p class="cart-total">Total: $${total.toFixed(2)}</p>
-      <button onclick="checkout()">Checkout</button>
+      <p class="cart-total">Subtotal: $${total.toFixed(2)}</p>
+      <button class="primary-btn" onclick="checkout()">
+        Checkout
+      </button>
     </div>
   `;
 
@@ -397,7 +429,11 @@ function renderCart() {
 
 function renderEmptyCart() {
   return `
-    <h4>Cart</h4>
+    <div class="cart-header">
+      <h3>Cart</h3>
+      <button onclick="toggleCartPreview()">✕</button>
+    </div>
+
     <div class="cart-empty">Your cart is empty</div>
   `;
 }
@@ -491,10 +527,18 @@ window.onload = () => {
   document.getElementById("cartBtn").onclick = toggleCartPreview;
 
   const preview = document.getElementById("cartPreview");
+  const overlay = document.getElementById("cartOverlay");
 
   if (preview) {
     preview.addEventListener("click", (e) => {
-      e.stopPropagation();
+      e.stopPropagation(); 
     });
+  }
+
+  if (overlay) {
+    overlay.onclick = () => {
+      preview.classList.remove("show");
+      overlay.classList.remove("show");
+    };
   }
 };
