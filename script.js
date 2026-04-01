@@ -224,7 +224,7 @@ function toggleCartPreview() {
   let html = "<h4>Cart</h4>";
 
   cart.forEach((item, index) => {
-    total += item.price;
+    total += item.price * (item.qty || 1);
     html += `
       <div class="cart-item">
         <img src="${item.image}" class="cart-item-img">
@@ -232,7 +232,9 @@ function toggleCartPreview() {
         <div class="cart-item-info">
           <p class="cart-name">${item.name}</p>
           <p class="cart-size">${item.size}</p>
-          <p class="cart-price">$${item.price}</p>
+          <p class="cart-price">
+            $${item.price} × ${item.qty || 1} = $${(item.price * (item.qty || 1)).toFixed(2)}
+          </p>
 
           <div class="qty-controls">
             <button onclick="changeQty(${index}, -1)">−</button>
@@ -246,11 +248,65 @@ function toggleCartPreview() {
     `;
   });
 
-  html += `<p><strong>Total: $${total}</strong></p>`;
   html += `
-    <button onclick="buyCart()" class="primary-btn cart-checkout">
-      Checkout via WhatsApp
-    </button>
+    <div class="cart-footer">
+      <p class="cart-total">Total: $${total.toFixed(2)}</p>
+      <button onclick="buyCart()" class="primary-btn cart-checkout">
+        Checkout
+      </button>
+    </div>
+  `;
+
+  preview.innerHTML = html;
+}
+
+function renderCart() {
+  const preview = document.getElementById("cartPreview");
+  if (!preview) return;
+
+  let total = 0;
+  let html = "<h4>Cart</h4>";
+
+  if (cart.length === 0) {
+    preview.innerHTML = "<p>Your cart is empty</p>";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    const qty = item.qty || 1;
+    const subtotal = item.price * qty;
+    total += subtotal;
+
+    html += `
+      <div class="cart-item">
+        <img src="${item.image}" class="cart-item-img">
+
+        <div class="cart-item-info">
+          <p class="cart-name">${item.name}</p>
+          <p class="cart-size">${item.size}</p>
+          <p class="cart-price">
+            $${item.price} × ${qty} = $${subtotal.toFixed(2)}
+          </p>
+
+          <div class="qty-controls">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${qty}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
+        </div>
+
+        <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="cart-footer">
+      <p class="cart-total">Total: $${total.toFixed(2)}</p>
+      <button onclick="buyCart()" class="primary-btn cart-checkout">
+        Checkout
+      </button>
+    </div>
   `;
 
   preview.innerHTML = html;
@@ -270,7 +326,10 @@ document.addEventListener("click", (e) => {
 
 function updateCartUI() {
   const btn = document.getElementById("cartBtn");
-  btn.innerText = `🛒 (${cart.length})`;
+
+  const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+  btn.innerText = `🛒 (${totalItems})`;
 }
 
 
@@ -304,7 +363,7 @@ function removeFromCart(index) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   updateCartUI();
-  toggleCartPreview(); // refresh view
+  toggleCartPreview();
 }
 
 // Quantity control
@@ -320,9 +379,19 @@ function changeQty(index, amount) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartUI();
-  toggleCartPreview();
-}
+  renderCart();
 
+  // Animate quantity
+    setTimeout(() => {
+    const items = document.querySelectorAll(".cart-item");
+    if (items[index]) {
+      items[index].classList.add("updated");
+      setTimeout(() => {
+        items[index].classList.remove("updated");
+      }, 300);
+    }
+  }, 0);
+}
 // Buy cart logic
 
 function buyCart() {
@@ -337,11 +406,11 @@ function buyCart() {
   let total = 0;
 
   cart.forEach(item => {
-    message += `• ${item.name} - ${item.size} ($${item.price})\n`;
+    message += `• ${item.name} - ${item.size} x${item.qty || 1} ($${(item.price * item.qty).toFixed(2)})\n`;
     total += item.price * (item.qty || 1);
   });
 
-  message += `\nTotal: $${total}`;
+  message += `\nTotal: $${total.toFixed(2)}`;
 
   const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
 
