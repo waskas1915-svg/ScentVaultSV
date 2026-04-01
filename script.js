@@ -212,65 +212,106 @@ function toggleCartPreview() {
 
   preview.classList.toggle("show");
 
-  if (!preview.classList.contains("show")) return;
+  if (preview.classList.contains("show")) {
+    renderCart(); 
+  }
+}
 
-  // Populate cart content
+// checkout page
+
+function checkout() {
   if (cart.length === 0) {
-    preview.innerHTML = "<p>Your cart is empty</p>";
+    alert("Cart is empty");
     return;
   }
 
-  let total = 0;
-  let html = "<h4>Cart</h4>";
+  const container = document.getElementById('products');
 
-  cart.forEach((item, index) => {
-    total += item.price * (item.qty || 1);
-    html += `
-      <div class="cart-item">
-        <img src="${item.image}" class="cart-item-img">
+  let subtotal = 0;
+  cart.forEach(item => subtotal += item.price);
 
-        <div class="cart-item-info">
-          <p class="cart-name">${item.name}</p>
-          <p class="cart-size">${item.size}</p>
-          <p class="cart-price">
-            $${item.price} × ${item.qty || 1} = $${(item.price * (item.qty || 1)).toFixed(2)}
-          </p>
+  const shipping = subtotal >= 50 ? 0 : 3.99;
+  const total = subtotal + shipping;
+  const remaining = Math.max(0, 50 - subtotal);
 
-          <div class="qty-controls">
-            <button onclick="changeQty(${index}, -1)">−</button>
-            <span>${item.qty || 1}</span>
-            <button onclick="changeQty(${index}, 1)">+</button>
-          </div>
-        </div>
+  container.innerHTML = `
+    <h2>Checkout</h2>
 
-        <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
-      </div>
-    `;
-  });
+    <div class="checkout-box">
 
-  html += `
-    <div class="cart-footer">
-      <p class="cart-total">Total: $${total.toFixed(2)}</p>
-      <button onclick="buyCart()" class="primary-btn cart-checkout">
-        Checkout
+      <h3>Order Summary</h3>
+
+      ${cart.map(item => `
+        <p>• ${item.name} (${item.size}) x${item.qty || 1} - $${(item.price * (item.qty || 1)).toFixed(2)}</p>
+      `).join("")}
+
+      <hr>
+
+      <p>Subtotal: $${subtotal.toFixed(2)}</p>
+      <p>
+        Shipping: 
+        ${shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+      </p>
+
+      ${shipping !== 0 
+        ? `<p class="shipping-warning">
+            Spend $${remaining.toFixed(2)} more for FREE shipping 🚚
+          </p>` 
+        : ""
+      }
+
+      <h3>Total: $${total.toFixed(2)}</h3>
+
+      <button class="primary-btn" onclick="sendOrderWhatsApp(${subtotal}, ${shipping}, ${total})">
+        Send Order via WhatsApp
       </button>
+
+      <br><br>
+
+      <button class="secondary-btn" onclick="showProducts()">
+        ⬅ Back to Shop
+      </button>
+
     </div>
   `;
+}
 
-  preview.innerHTML = html;
+// send to whatsapp
+
+function sendOrderWhatsApp(subtotal, shipping, total) {
+  let message = "Hola, me gustaría ordenar:\n\n";
+
+  cart.forEach(item => {
+    message += `• ${item.name} - ${item.size} ($${item.price})\n`;
+  });
+
+  message += `\nSubtotal: $${subtotal.toFixed(2)}`;
+  message += `\nEnvío: ${shipping === 0 ? "GRATIS" : `$${shipping.toFixed(2)}`}`;
+  message += `\nTotal: $${total.toFixed(2)}`;
+  message += "\n\nGracias!";
+
+  const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
+
+  // clear cart
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCartUI();
+
+  window.open(whatsappLink, "_blank");
 }
 
 function renderCart() {
   const preview = document.getElementById("cartPreview");
   if (!preview) return;
 
-  let total = 0;
-  let html = "<h4>Cart</h4>";
-
+  // ✅ handle empty cart FIRST
   if (cart.length === 0) {
-    preview.innerHTML = "<p>Your cart is empty</p>";
+    preview.innerHTML = renderEmptyCart();
     return;
   }
+
+  let total = 0;
+  let html = "<h4>Cart</h4>";
 
   cart.forEach((item, index) => {
     const qty = item.qty || 1;
@@ -279,7 +320,9 @@ function renderCart() {
 
     html += `
       <div class="cart-item">
-        <img src="${item.image}" class="cart-item-img">
+        <img src="${item.image}" 
+        class="cart-item-img"
+        onerror="this.src='./images/noimage.png'">
 
         <div class="cart-item-info">
           <p class="cart-name">${item.name}</p>
@@ -301,15 +344,22 @@ function renderCart() {
   });
 
   html += `
-    <div class="cart-footer">
-      <p class="cart-total">Total: $${total.toFixed(2)}</p>
-      <button onclick="buyCart()" class="primary-btn cart-checkout">
-        Checkout
-      </button>
-    </div>
-  `;
+  <div class="cart-footer">
+    <p class="cart-total">Total: $${total.toFixed(2)}</p>
+    <button onclick="checkout()" class="primary-btn">
+      Checkout
+    </button>
+  </div>
+`;
 
   preview.innerHTML = html;
+}
+
+function renderEmptyCart() {
+  return `
+    <h4>Cart</h4>
+    <div class="cart-empty">Your cart is empty</div>
+  `;
 }
 
 document.addEventListener("click", (e) => {
@@ -353,7 +403,9 @@ function addToCart(name, size, price, image) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartUI();
-  toggleCartPreview();
+  const preview = document.getElementById("cartPreview");
+  preview.classList.add("show");
+  renderCart();
 }
 
 // Remove Items from the cart
@@ -363,7 +415,9 @@ function removeFromCart(index) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   updateCartUI();
-  toggleCartPreview();
+  const preview = document.getElementById("cartPreview");
+  preview.classList.add("show");
+  renderCart();
 }
 
 // Quantity control
@@ -392,6 +446,7 @@ function changeQty(index, amount) {
     }
   }, 0);
 }
+
 // Buy cart logic
 
 function buyCart() {
@@ -406,8 +461,9 @@ function buyCart() {
   let total = 0;
 
   cart.forEach(item => {
-    message += `• ${item.name} - ${item.size} x${item.qty || 1} ($${(item.price * item.qty).toFixed(2)})\n`;
-    total += item.price * (item.qty || 1);
+    const qty = item.qty || 1;
+    message += `• ${item.name} - ${item.size} x${qty} ($${(item.price * qty).toFixed(2)})\n`;
+    total += item.price * qty;
   });
 
   message += `\nTotal: $${total.toFixed(2)}`;
