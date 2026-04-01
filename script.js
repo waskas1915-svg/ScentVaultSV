@@ -220,19 +220,24 @@ function toggleCartPreview() {
 // checkout page
 
 function checkout() {
+  console.log("checkout clicked");
   if (cart.length === 0) {
     alert("Cart is empty");
     return;
   }
 
+  const saved = JSON.parse(localStorage.getItem("customer")) || {};
   const container = document.getElementById('products');
 
   let subtotal = 0;
-  cart.forEach(item => subtotal += item.price);
+  cart.forEach(item => {
+    subtotal += item.price * (item.qty || 1);
+  });
 
   const shipping = subtotal >= 50 ? 0 : 3.99;
   const total = subtotal + shipping;
   const remaining = Math.max(0, 50 - subtotal);
+  
 
   container.innerHTML = `
     <h2>Checkout</h2>
@@ -262,6 +267,14 @@ function checkout() {
 
       <h3>Total: $${total.toFixed(2)}</h3>
 
+      <div class="checkout-form">
+
+        <input id="custName" placeholder="Full Name" value="${saved.name || ''}" required>
+        <input id="custPhone" placeholder="Phone Number" value="${saved.phone || ''}" required>
+        <textarea id="custAddress" placeholder="Delivery Address" required>${saved.address || ''}</textarea>
+
+      </div>
+
       <button class="primary-btn" onclick="sendOrderWhatsApp(${subtotal}, ${shipping}, ${total})">
         Send Order via WhatsApp
       </button>
@@ -279,10 +292,22 @@ function checkout() {
 // send to whatsapp
 
 function sendOrderWhatsApp(subtotal, shipping, total) {
+
+  const name = document.getElementById("custName").value.trim();
+  const phone = document.getElementById("custPhone").value.trim();
+  const address = document.getElementById("custAddress").value.trim();
+
+  if (!name || !phone || !address) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  localStorage.setItem("customer", JSON.stringify({ name, phone, address }));
   let message = "Hola, me gustaría ordenar:\n\n";
 
   cart.forEach(item => {
-    message += `• ${item.name} - ${item.size} ($${item.price})\n`;
+    const qty = item.qty || 1;
+    message += `• ${item.name} - ${item.size} x${qty} ($${(item.price * qty).toFixed(2)})\n`;
   });
 
   message += `\nSubtotal: $${subtotal.toFixed(2)}`;
@@ -344,13 +369,11 @@ function renderCart() {
   });
 
   html += `
-  <div class="cart-footer">
-    <p class="cart-total">Total: $${total.toFixed(2)}</p>
-    <button onclick="checkout()" class="primary-btn">
-      Checkout
-    </button>
-  </div>
-`;
+    <div class="cart-footer">
+      <p class="cart-total">Total: $${total.toFixed(2)}</p>
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  `;
 
   preview.innerHTML = html;
 }
@@ -445,35 +468,6 @@ function changeQty(index, amount) {
       }, 300);
     }
   }, 0);
-}
-
-// Buy cart logic
-
-function buyCart() {
-  if (cart.length === 0) {
-    alert("Cart is empty");
-    return;
-  }
-
-  if (!confirm("¿Deseas enviar este pedido por WhatsApp?")) return;
-
-  let message = "Hola, me gustaría ordenar:\n\n";
-  let total = 0;
-
-  cart.forEach(item => {
-    const qty = item.qty || 1;
-    message += `• ${item.name} - ${item.size} x${qty} ($${(item.price * qty).toFixed(2)})\n`;
-    total += item.price * qty;
-  });
-
-  message += `\nTotal: $${total.toFixed(2)}`;
-
-  const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
-
-  cart = [];
-  localStorage.removeItem("cart");
-  updateCartUI();
-  window.open(whatsappLink, "_blank");
 }
 
 window.onload = () => {
