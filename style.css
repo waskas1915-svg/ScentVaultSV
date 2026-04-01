@@ -429,6 +429,7 @@ h1 {
   transform: translateX(100%);
   transition: transform 0.3s ease;
   will-change: transform;
+  pointer-events: none;
 }
 
 #cartPreview strong {
@@ -440,6 +441,7 @@ h1 {
 
 #cartPreview.show {
   transform: translateX(0);
+  pointer-events: auto;
 }
 
 .cart-items {
