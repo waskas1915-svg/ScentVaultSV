@@ -5,6 +5,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const preview = document.getElementById("cartPreview");
   const overlay = document.getElementById("cartOverlay");
   document.body.style.overflow = "hidden";
+  document.body.style.height = "100vh";
 
   preview?.classList.add("show");
   overlay?.classList.add("show");
@@ -16,6 +17,7 @@ function closeCart() {
   const preview = document.getElementById("cartPreview");
   const overlay = document.getElementById("cartOverlay");
   document.body.style.overflow = "auto";
+  document.body.style.height = "auto";
 
   preview?.classList.remove("show");
   overlay?.classList.remove("show");
@@ -241,6 +243,7 @@ function toggleCartPreview() {
 
 function checkout() {
   closeCart();
+  window.scrollTo(0, 0);
   if (cart.length === 0) {
     alert("Cart is empty");
     return;
@@ -264,6 +267,11 @@ function checkout() {
 
     <!-- LEFT: FORM -->
     <div class="checkout-left">
+
+      <button class="back-btn" onclick="showProducts(); window.scrollTo(0,0);"> 
+        ← Continue Shopping
+      </button>
+
       <h2>Shipping Address</h2>
 
       <div class="checkout-form">
@@ -285,11 +293,13 @@ function checkout() {
 
       ${cart.map(item => {
         const qty = item.qty || 1;
-        const subtotal = item.price * qty;
+        const itemTotal = item.price * qty;
 
         return `
           <div class="checkout-item">
-            <img src="${item.image}" class="checkout-item-img">
+            <img src="${item.image}" 
+            class="checkout-item-img"
+            onerror="this.src='./images/noimage.png'">
             <div>
               <p><strong>${item.name}</strong></p>
               <p>${item.size}</p>
@@ -360,7 +370,7 @@ function renderCart() {
   let html = `
     <div class="cart-header">
       <h3>Cart</h3>
-      <button onclick="toggleCartPreview()">✕</button>
+      <button onclick="closeCart()">✕</button>
     </div>
   `;
 
@@ -430,7 +440,7 @@ function renderEmptyCart() {
   return `
     <div class="cart-header">
       <h3>Cart</h3>
-      <button onclick="toggleCartPreview()">✕</button>
+      <button onclick="closeCart()">✕</button>
     </div>
 
     <div class="cart-empty">Your cart is empty</div>

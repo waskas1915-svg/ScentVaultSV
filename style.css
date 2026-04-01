@@ -587,6 +587,7 @@ h1 {
   backdrop-filter: blur(3px);
 
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 
   transition: opacity 0.3s ease;
@@ -595,6 +596,7 @@ h1 {
 
 #cartOverlay.show {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
 }
 
@@ -811,4 +813,20 @@ h1 {
 .shipping-warning {
   color: orange;
   font-weight: 500;
+}
+
+/*Continue shopping button */
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #3e2f23;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }
