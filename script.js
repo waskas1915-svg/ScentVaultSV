@@ -1,6 +1,22 @@
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+async function testFirebase() {
+  try {
+    await addDoc(collection(db, "products"), {
+      name: "Test Perfume",
+      stock_ml: 100
+    });
+    console.log("✅ Data sent!");
+  } catch (e) {
+    console.error("❌ Error:", e);
+  }
+}
+
+testFirebase();
+
   function openCart() {
   const preview = document.getElementById("cartPreview");
   const overlay = document.getElementById("cartOverlay");
