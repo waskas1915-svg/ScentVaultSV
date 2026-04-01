@@ -3,6 +3,7 @@
 <head>
   <title>Lotion Store</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -11,10 +12,17 @@
 </header>
 
 <button id="cartBtn">🛒 (0)</button>
-<div id="cartPreview" class="cart-preview"></div>
-<div id="products"></div>
 
-<div id="products"></div>
+<!-- Cart Drawer -->
+<div id="cartPreview" class="cart-preview"></div>
+
+<!-- Overlay -->
+<div id="cartOverlay"></div>
+
+<!-- Main Content -->
+<main>
+  <div id="products"></div>
+</main>
 
 <script src="script.js"></script>
 </body>

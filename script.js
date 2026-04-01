@@ -1,6 +1,26 @@
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+  function openCart() {
+  const preview = document.getElementById("cartPreview");
+  const overlay = document.getElementById("cartOverlay");
+  document.body.style.overflow = "hidden";
+
+  preview?.classList.add("show");
+  overlay?.classList.add("show");
+
+  renderCart(); // optional but recommended
+}
+
+function closeCart() {
+  const preview = document.getElementById("cartPreview");
+  const overlay = document.getElementById("cartOverlay");
+  document.body.style.overflow = "auto";
+
+  preview?.classList.remove("show");
+  overlay?.classList.remove("show");
+}
+
 fetch('products.json')
   .then(res => res.json())
   .then(data => {
@@ -36,7 +56,7 @@ function showProducts() {
         const btn = div.querySelector('button');
         btn.onclick = () => viewProduct(product.id);
 
-    grid.appendChild(div); // ✅ IMPORTANT (not container!)
+    grid.appendChild(div); 
   });
 }
 
@@ -204,27 +224,23 @@ container.innerHTML = `
   document.getElementById("backContainer").appendChild(back);
 
 }
+
 // cart preview logic
 
 function toggleCartPreview() {
   const preview = document.getElementById("cartPreview");
-  const overlay = document.getElementById("cartOverlay");
-
-  if (!preview || !overlay) return;
-
-  preview.classList.toggle("show");
-  overlay.classList.toggle("show");
 
   if (preview.classList.contains("show")) {
-    renderCart();
+    closeCart();
+  } else {
+    openCart();
   }
 }
 
 // checkout page
 
 function checkout() {
-  document.getElementById("cartPreview")?.classList.remove("show");
-  document.getElementById("cartOverlay")?.classList.remove("show");
+  closeCart();
   if (cart.length === 0) {
     alert("Cart is empty");
     return;
@@ -313,8 +329,7 @@ function checkout() {
 // send to whatsapp
 
 function sendOrderWhatsApp(subtotal, shipping, total) {
-  document.getElementById("cartPreview")?.classList.remove("show");
-  document.getElementById("cartOverlay")?.classList.remove("show");
+  closeCart();
 
   const name = document.getElementById("custName").value.trim();
   const phone = document.getElementById("custPhone").value.trim();
@@ -389,7 +404,7 @@ html += `
 
   cart.forEach((item, index) => {
     const qty = item.qty || 1;
-    
+
     html += `
       <div class="cart-item">
         <img src="${item.image}" 
@@ -443,10 +458,15 @@ document.addEventListener("click", (e) => {
   const btn = document.getElementById("cartBtn");
   if (!preview || !btn) return;
 
-  if (!preview.contains(e.target) && !btn.contains(e.target)) {
-    preview.classList.remove("show");
+  if (
+    preview.classList.contains("show") &&
+    !preview.contains(e.target) &&
+    btn &&
+    !btn.contains(e.target)
+  ) {
+    closeCart();
   }
-});
+})
 
 //update cart
 
@@ -479,9 +499,7 @@ function addToCart(name, size, price, image) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartUI();
-  const preview = document.getElementById("cartPreview");
-  preview.classList.add("show");
-  renderCart();
+  openCart();
 }
 
 // Remove Items from the cart
@@ -491,9 +509,7 @@ function removeFromCart(index) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   updateCartUI();
-  const preview = document.getElementById("cartPreview");
-  preview.classList.add("show");
-  renderCart();
+  openCart();
 }
 
 // Quantity control
@@ -536,9 +552,6 @@ window.onload = () => {
   }
 
   if (overlay) {
-    overlay.onclick = () => {
-      preview.classList.remove("show");
-      overlay.classList.remove("show");
-    };
+    overlay.onclick = closeCart;
   }
 };
