@@ -2,6 +2,7 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { 
+  getDocs,  
   getFirestore, 
   collection, 
   addDoc 
@@ -64,13 +65,26 @@ function closeCart() {
   overlay?.classList.remove("show");
 }
 
-fetch('products.json')
-  .then(res => res.json())
-  .then(data => {
-    allProducts = data;
+async function loadProducts() {
+  try {
+    const snapshot = await getDocs(collection(db, "products"));
+
+    allProducts = snapshot.docs.map(doc => ({
+      id: doc.id, // Firebase ID
+      ...doc.data()
+    }));
+
+    console.log("✅ Products loaded:", allProducts);
+
     showProducts();
     updateCartUI();
-  });
+
+  } catch (err) {
+    console.error("❌ Error loading products:", err);
+  }
+}
+
+loadProducts();
 
 function showProducts() {
   const container = document.getElementById('products');
