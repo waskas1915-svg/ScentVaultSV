@@ -1,14 +1,14 @@
   // Import other js scripts
 
-import { loadProducts } from "./js/products.js";
-import { showProducts } from "./js/ui.js";
+import { loadProducts } from "./products.js";
+import { showProducts } from "./ui.js";
 import { 
   renderCart, 
   updateCartUI, 
   addToCart 
-} from "./js/cart.js";
-import { checkout, sendOrderWhatsApp } from "./js/checkout.js";
-import { showToast } from "./js/toast.js";
+} from "./cart.js";
+import { checkout, sendOrderWhatsApp } from "./checkout.js";
+import { showToast } from "./toast.js";
 
 let allProducts = [];
 

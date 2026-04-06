@@ -1,6 +1,6 @@
 // UI.js
 
-    import { showToast } from "./js/toast.js";
+    import { showToast } from "./toast.js";
 
     //Show products
     export function showProducts(products, addToCart) {

@@ -1,5 +1,5 @@
 // cart.js
-    import { showToast } from "./js/toast.js";
+    import { showToast } from "./toast.js";
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 

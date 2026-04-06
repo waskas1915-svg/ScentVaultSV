@@ -1,8 +1,8 @@
 // checkout page
 
-import { getCart, clearCart } from "./js/cart.js";
-import { showSuccessScreen } from "./js/successpage.js";
-import { showToast } from "./js/toast.js";
+import { getCart, clearCart } from "./cart.js";
+import { showSuccessScreen } from "./successpage.js";
+import { showToast } from "./toast.js";
 
 export function checkout({ closeCart, onSendOrder, onBack }) {
   const cart = getCart();
