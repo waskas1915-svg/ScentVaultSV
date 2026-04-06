@@ -1024,9 +1024,16 @@ h1 {
 }
 
 .empty-icon-img {
-  width: 80px;
+  width: 140px;
+  max-width: 50%;
   opacity: 0.4;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.empty-icon-img:hover {
+  transform: scale(1.05);
+  opacity: 0.6;
 }
 
 .cart-empty-state .primary-btn {
