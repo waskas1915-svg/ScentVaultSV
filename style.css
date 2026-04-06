@@ -999,8 +999,10 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   height: 100%;
-  text-align: center;
+  min-height: 100%;     
+  width: 100%;
   padding: 40px 20px;
 }
 
@@ -1024,10 +1026,13 @@ h1 {
 }
 
 .empty-icon-img {
-  width: 140px;
-  max-width: 50%;
+  width: 200px;    
+  height: auto;
+  max-width: none;  
+  display: block;
   opacity: 0.4;
-  margin-bottom: 25px;
+  margin: 0 auto 25px;
+  margin-bottom: 30px;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
