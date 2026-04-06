@@ -84,6 +84,13 @@ function handleSendOrder({ subtotal, shipping, total }) {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
+  const logo = document.getElementById("logo");
+    if (logo) {
+      logo.onclick = () => {
+        showProducts(allProducts, handleAddToCart);
+        window.scrollTo(0, 0);
+      };
+    }
   const btn = document.getElementById("cartBtn");
   const overlay = document.getElementById("cartOverlay");
 

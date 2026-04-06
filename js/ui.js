@@ -114,7 +114,8 @@
         product.variants.forEach((variant, index) => {
             const card = document.createElement('div');
                 card.classList.add('size-option');
-            const isAvailable = variant.in_stock && product.stock_ml >= variant.ml;
+            const variantML = parseInt(variant.size); // "3ML" → 3
+            const isAvailable = variant.in_stock && product.stock_ml >= variantML
                 if (!isAvailable) {
                     card.classList.add('out');
                 }
