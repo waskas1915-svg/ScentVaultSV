@@ -107,7 +107,8 @@
             if (i === 0) thumb.classList.add('active');
             });
 
-                
+        console.log("FULL PRODUCT:", product);
+        console.log("VARIANTS:", product.variants);       
         //variants
 
         product.variants.forEach((variant, index) => {

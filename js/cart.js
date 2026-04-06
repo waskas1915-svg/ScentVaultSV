@@ -140,6 +140,18 @@
             </div>
         `;
         preview.innerHTML = html;
+        if (cart.length === 0) {
+            preview.innerHTML = renderEmptyCart();
+
+            const btn = document.getElementById("continueShoppingBtn");
+            if (btn) {
+                btn.onclick = () => {
+                    closeCart();
+                };
+            }
+
+            return;
+        }
         document.getElementById("closeCartBtn").onclick = closeCart;
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.onclick = () => {
@@ -172,5 +184,16 @@
     }
 
     function renderEmptyCart() {
-        showToast ("Your cart is empty 🛒", "error")
+    return `
+            <div class="cart-empty-state">
+                <div class="empty-icon"> <img src="./images/emptycart.png" class="empty-icon-img"> </div>
+
+                <h2>Your shopping bag is empty</h2>
+                <p>You have no items in your shopping bag. Let’s go buy something!</p>
+
+                <button id="continueShoppingBtn" class="primary-btn">
+                    Continue Shopping
+                </button>
+            </div>
+        `;
     }

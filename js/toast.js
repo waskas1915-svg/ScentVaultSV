@@ -11,11 +11,12 @@ export function showToast(message, type = "success") {
 
   container.appendChild(toast);
 
+  const duration = type === "error" ? 3000 : 2000;
   setTimeout(() => {
-    toast.classList.add("fade-out");
+      toast.classList.add("fade-out");
 
-    setTimeout(() => {
-      toast.remove();
-    }, 300); // matches CSS animation
-  }, 2700);
+      setTimeout(() => {
+          toast.remove();
+      }, 300);
+  }, duration);
 }
