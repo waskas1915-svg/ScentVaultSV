@@ -123,7 +123,7 @@
                     onerror="this.src='./images/noimage.png'">
                     <p><strong>${variant.size}</strong></p>
                     <p class="price">$${variant.price}</p>
-                    ${variant.in_stock ? '' : '<p class="out-of-stock">Out of Stock</p>'}
+                    ${!isAvailable ? '<p class="out-of-stock-label">Out of Stock</p>' : ''}
                 `;
                 
             // click logic
@@ -148,9 +148,20 @@
         const firstAvailable = product.variants.find(
             v => v.in_stock && product.stock_ml >= v.ml
         );
-            if (firstAvailable) {
-                selectedVariant = firstAvailable;
+            if (!firstAvailable) {
+                // No variants available
+                    grid.innerHTML = `
+                        <div class="out-of-stock-box">
+                            <p class="out-of-stock-message">
+                                All variants are out of stock
+                            </p>
+                        </div>
+                    `;
+                    purchaseBox.innerHTML = ""
+                return; // stop further execution
+            }
 
+                selectedVariant = firstAvailable;
                 const defaultImage = product.images?.[0] || product.image;
                 setMainImage(defaultImage);
                 updateActiveThumbnail(defaultImage);
@@ -162,7 +173,7 @@
                         cards[index].classList.add('selected');
                     }
                 updatePurchaseBox();
-            }
+            
 
 
         function updatePurchaseBox() {
