@@ -81,6 +81,11 @@
     }
 
     //Rendercart
+
+    function bindEmptyCartEvents(closeCart) {
+    const btn = document.getElementById("continueShoppingBtn");
+    if (btn) btn.onclick = closeCart;
+}
     
     export function renderCart({ refreshCart, closeCart, onCheckout }) {
         const preview = document.getElementById("cartPreview");
@@ -89,6 +94,7 @@
         // ✅ handle empty cart FIRST
         if (cart.length === 0) {
             preview.innerHTML = renderEmptyCart();
+            bindEmptyCartEvents(closeCart);   
             return;
         }
 
@@ -134,24 +140,12 @@
          html += `
             <div class="cart-footer">
                 <p class="cart-total">Subtotal: $${total.toFixed(2)}</p>
-                <button id="checkoutBtn" class="primary-btn" ${cart.length === 0 ? "disabled" : ""}>
+                <button id="checkoutBtn" class="primary-btn">
                     Checkout
                 </button>
             </div>
         `;
         preview.innerHTML = html;
-        if (cart.length === 0) {
-            preview.innerHTML = renderEmptyCart();
-
-            const btn = document.getElementById("continueShoppingBtn");
-            if (btn) {
-                btn.onclick = () => {
-                    closeCart();
-                };
-            }
-
-            return;
-        }
         document.getElementById("closeCartBtn").onclick = closeCart;
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.onclick = () => {
