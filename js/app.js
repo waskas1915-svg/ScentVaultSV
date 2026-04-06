@@ -1,6 +1,6 @@
   // Import other js scripts
 
-import { loadProducts } from "./products.js";
+import { loadProducts } from "./product.js";
 import { showProducts } from "./ui.js";
 import { 
   renderCart, 
