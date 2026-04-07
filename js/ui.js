@@ -147,9 +147,10 @@
                     
         });    
 
-        const firstAvailable = product.variants.find(
-            v => v.in_stock && product.stock_ml >= v.ml
-        );
+        const firstAvailable = product.variants.find(v => {
+            const ml = parseInt(v.size) || 0;
+            return v.in_stock === true && product.stock_ml >= ml;
+        });
             if (!firstAvailable) {
                 // No variants available
                     grid.innerHTML = `
