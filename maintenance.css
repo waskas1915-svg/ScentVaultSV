@@ -21,19 +21,6 @@ body {
     transition: opacity 1.5s ease-in-out;
 }
 
-header {
-    margin-bottom: 20px;
-}
-
-
-.logo {
-    font-size: 1.8rem;
-    letter-spacing: 4px;
-    color: #433428; 
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
 .divider {
     height: 2px;
     width: 40px;
@@ -67,4 +54,33 @@ footer {
     margin-top: 20px;
     font-size: 0.8rem;
     color: #aaa;
+}
+
+/* Logo ticks */
+
+header {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.main-logo {
+    width: 100px; 
+    height: auto;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+}
+
+.logo-text {
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+    color: #433428; 
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.logo-text span {
+    color: #c5a059; 
 }
