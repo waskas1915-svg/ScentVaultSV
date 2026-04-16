@@ -180,7 +180,7 @@
     function renderEmptyCart() {
     return `
             <div class="cart-empty-state">
-                <div class="empty-icon"> <img src="./images/emptycart.png" class="empty-icon-img"> </div>
+                <div class="empty-icon"> <img src="./images/emptycart2.png" class="empty-icon-img"> </div>
 
                 <h2>Your shopping bag is empty</h2>
                 <p>You have no items in your shopping bag. Let’s go buy something!</p>

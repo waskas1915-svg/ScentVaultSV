@@ -47,28 +47,28 @@
             let selectedVariant = null;
 
             container.innerHTML = `
-                <div class="product-title">
-                    <h2>${product.name}</h2>
-                </div>
-
+                <!-- LEFT --> 
                 <div class="product-view">
+                    <div class="product-view-left">
+                        <div class="product-title">
+                            <h2 class="product-title-main">${product.name}</h2>
+                        </div>
 
-                    <!-- LEFT -->
-                    <div>
-                        <img id="variant-image" 
-                            src="${product.images?.[0] || product.image}"
-                            onerror="this.src='./images/noimage.png'">
-
+                        <div class="product-image-container">
+                            <img id="variant-image" 
+                                src="${product.images?.[0] || product.image}"
+                                onerror="this.src='./images/noimage.png'">
+                        </div>
+                        
                         <div id="thumbnailRow" class="thumbnail-row"></div>
                     </div>
-
-                    <!-- RIGHT -->
+                    
+                    <!-- RIGHT --> 
                     <div class="product-info">
                         <div id="variantGrid"></div>
                         <div id="purchaseBox"></div>
                         <div id="backContainer"></div>
                     </div>
-
                 </div>
             `;
 
@@ -102,17 +102,22 @@
             thumb.onclick = () => {
                 setMainImage(img);
                 updateActiveThumbnail(img);
+                clearSelection();
+                selectedVariant = null;
+                updatePurchaseBox()
             };
             thumbnailRow.appendChild(thumb);
             if (i === 0) thumb.classList.add('active');
             });
 
         console.log("FULL PRODUCT:", product);
-        console.log("VARIANTS:", product.variants);       
-        //variants
-
+        console.log("VARIANTS:", product.variants);   
+        selectedVariant = null;    
+        grid.innerHTML = ''
+        //variants  
         product.variants.forEach((variant, index) => {
             const card = document.createElement('div');
+                card.classList.remove('selected');
                 card.classList.add('size-option');
             const variantML = parseInt(variant.size); // "3ML" → 3
             const isAvailable = variant.in_stock && product.stock_ml >= variantML
@@ -139,7 +144,6 @@
                 const img = variant.image || product.image || './images/noimage.png';
                 setMainImage(img);
                 updateActiveThumbnail(img);
-
                 card.classList.add('selected');
                 updatePurchaseBox();
             };
@@ -168,29 +172,27 @@
                 const defaultImage = product.images?.[0] || product.image;
                 setMainImage(defaultImage);
                 updateActiveThumbnail(defaultImage);
-
-                // highlight the first available card
-                const index = product.variants.indexOf(firstAvailable);
-                const cards = grid.children;
-                    if (cards[index]) {
-                        cards[index].classList.add('selected');
-                    }
-                updatePurchaseBox();
+                updatePurchaseBox(); 
             
 
 
         function updatePurchaseBox() {
-            if (!selectedVariant) return;
+            if (!selectedVariant) {
+                // En lugar de 'return', mostramos el botón deshabilitado
+                purchaseBox.innerHTML = `
+                    <div class="purchase-box">
+                        <button class="primary-btn" style="opacity: 0.5; cursor: not-allowed;" disabled>
+                            Seleccione un tamaño
+                        </button>
+                    </div>`;
+                return;
+            }
 
             purchaseBox.innerHTML = `
                 <div class="purchase-box">
-                    <h3>Selected: ${selectedVariant.size}</h3>
-                    <p><strong>Price: $${selectedVariant.price}</strong></p>
-                        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                            <button id="addCartBtn" class="primary-btn">Add to Cart</button>
-                        </div>    
-                </div>
-            `;
+                    <button id="addCartBtn" class="primary-btn">Add to Cart</button>
+                </div>`;
+                    
             const addBtn = document.getElementById("addCartBtn");
                 if (addBtn) {
                     addBtn.onclick = () => {
