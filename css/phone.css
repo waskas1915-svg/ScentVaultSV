@@ -1,0 +1,26 @@
+/* ==========================================
+            MEDIA QUERIES (RESPONSIVE)
+   ========================================== */
+@media (max-width: 768px) {
+    .checkout-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+  .product-view {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #variant-image {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .product-info {
+    width: 100%;
+  }
+
+}
+
+

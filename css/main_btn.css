@@ -1,0 +1,61 @@
+/* ==========================================
+             BOTONES PRINCIPALES
+   ========================================== */
+
+.primary-btn {
+    background: var(--dorado);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: var(--dorado-oscuro);
+    transform: translateY(-2px);
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.primary-btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.primary-btn.loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: spin 0.6s linear infinite;
+}
+
+.primary-btn.added {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.secondary-btn {
+    background: var(--cafe-oscuro);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #2c1f17;
+}
