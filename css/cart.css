@@ -223,7 +223,8 @@
 }
 
 .cart-footer {
-    padding: 20px 25px 35px; 
+    flex-shrink: 0; 
+    padding: 20px 25px;
     border-top: 1px solid #f4f1ea;
     background: white;
     box-shadow: 0 -10px 20px rgba(0,0,0,0.02); 
