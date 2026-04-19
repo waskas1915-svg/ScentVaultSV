@@ -21,6 +21,18 @@
     width: 100%;
   }
 
+  .notes-grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-legal-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .footer-divider {
+     display: none;
+  }  
+
 }
 
 

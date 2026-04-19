@@ -41,36 +41,79 @@
     //View products
 
     export function viewProduct(productId, products, addToCart) {
-            const product = products.find(p => p.id === productId);
-                if (!product) return;
-            const container = document.getElementById('products');
-            let selectedVariant = null;
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    const container = document.getElementById('products');
+    let selectedVariant = null;
 
-            container.innerHTML = `
-                <!-- LEFT --> 
-                <div class="product-view">
-                    <div class="product-view-left">
-                        <div class="product-title">
-                            <h2 class="product-title-main">${product.name}</h2>
-                        </div>
+    container.innerHTML = `
+        <div class="product-view">
+            <div class="product-view-left">
+                <div class="product-title">
+                    <h2 class="product-title-main">${product.name}</h2>
+                </div>
+                <div class="product-image-container">
+                    <img id="variant-image" 
+                        src="${product.images?.[0] || product.image}"
+                        onerror="this.src='./images/noimage.png'">
+                </div>
+                <div id="thumbnailRow" class="thumbnail-row"></div>
+            </div>
+            
+            <div class="product-info">
+                <div id="variantGrid"></div>
+                <div id="purchaseBox"></div>
+                <div id="backContainer"></div>
+            </div>
+        </div>
 
-                        <div class="product-image-container">
-                            <img id="variant-image" 
-                                src="${product.images?.[0] || product.image}"
-                                onerror="this.src='./images/noimage.png'">
-                        </div>
-                        
-                        <div id="thumbnailRow" class="thumbnail-row"></div>
+        <div class="pdp-marketing-fullwide">
+            <header class="marketing-header">
+                <h3>L'Essence de la Fragrance</h3>
+                <p class="tagline">"${product.marketing?.tagline || ''}"</p>
+                <p class="description-text">${product.description || ''}</p>
+            </header>
+
+            <div class="specs-bar">
+                <span>FAMILIA: ${product.marketing?.family || 'N/A'}</span>
+                <span class="separator">|</span>
+                <span>TIPO: ${product.marketing?.scent_type || 'N/A'}</span>
+            </div>
+
+            <section class="composition-section">
+                <h3>Notas de la Fragancia</h3>
+                <div class="notes-grid">
+                    <div class="note-card">
+                        <strong>Salida</strong>
+                        <span>${product.marketing?.notes?.opening || 'N/A'}</span>
                     </div>
-                    
-                    <!-- RIGHT --> 
-                    <div class="product-info">
-                        <div id="variantGrid"></div>
-                        <div id="purchaseBox"></div>
-                        <div id="backContainer"></div>
+                    <div class="note-card">
+                        <strong>Corazón</strong>
+                        <span>${product.marketing?.notes?.heart || 'N/A'}</span>
+                    </div>
+                    <div class="note-card">
+                        <strong>Fondo</strong>
+                        <span>${product.marketing?.notes?.foundation || 'N/A'}</span>
                     </div>
                 </div>
-            `;
+            </section>
+
+            <div class="faq-section">
+                <h3>Preguntas Frecuentes</h3>
+                <div id="faqList" class="faq-accordion">
+                    ${(product.faqs || []).map((faq, index) => `
+                        <div class="faq-item">
+                            <button class="faq-question-btn" onclick="this.parentElement.classList.toggle('active')">
+                                <strong>${faq.q}</strong>
+                            </button>
+                            <div class="faq-answer-content">
+                                <p>${faq.a}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+    `;
 
         const grid = document.getElementById('variantGrid');
         const purchaseBox = document.getElementById('purchaseBox');
@@ -232,3 +275,4 @@
         document.getElementById("backContainer").appendChild(back);
 
     }
+

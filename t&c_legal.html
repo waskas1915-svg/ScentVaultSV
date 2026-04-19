@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScentVaultSV - Legal</title>
+    <link rel="stylesheet" href="./css/header+cart.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link id="dynamic-css" rel="stylesheet" href="">
+</head>
+<body>
+
+    <header></header> <main id="legal-content-root"></main>
+
+    <script type="module">
+        import { initHeader } from './js/header.js';
+        import { initFooter } from './js/footer.js';
+        import { loadLegalContent } from './js/t&c_legal.js';
+
+        // Ejecución en orden
+        initHeader();
+        loadLegalContent();
+        initFooter();
+    </script>
+</body>
+</html>

@@ -22,6 +22,14 @@ async function init() {
     console.error(err);
     showToast("Failed to load products", "error");
   }
+  const overlay = document.getElementById("cartOverlay");
+  if (overlay) {
+    // Usamos addEventListener en lugar de .onclick
+    overlay.addEventListener('click', () => {
+      console.log("Cerrando desde overlay...");
+      closeCart();
+    });
+  }
 }
 
 function handleAddToCart(id, name, size, price, image, ml) {
@@ -39,12 +47,11 @@ function unlockScroll() {
 function refreshCart() {
   const preview = document.getElementById("cartPreview");
   const overlay = document.getElementById("cartOverlay");
-  if (preview?.classList.contains("show")) return;
-
-  lockScroll();
-
-  preview?.classList.add("show");
-  overlay?.classList.add("show");
+  if (!preview?.classList.contains("show")) {
+    lockScroll();
+    preview?.classList.add("show");
+    overlay?.classList.add("show");
+  }
 
   renderCart({
     refreshCart,
@@ -97,3 +104,4 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btn) btn.onclick = refreshCart;
   if (overlay) overlay.onclick = closeCart;
 });
+

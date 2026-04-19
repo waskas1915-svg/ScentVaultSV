@@ -85,67 +85,75 @@
     function bindEmptyCartEvents(closeCart) {
     const btn = document.getElementById("continueShoppingBtn");
     if (btn) btn.onclick = closeCart;
-}
+    }
     
     export function renderCart({ refreshCart, closeCart, onCheckout }) {
-        const preview = document.getElementById("cartPreview");
-        if (!preview) return;
+    const preview = document.getElementById("cartPreview");
+    if (!preview) return;
 
-        // ✅ handle empty cart FIRST
-        if (cart.length === 0) {
-            preview.innerHTML = renderEmptyCart();
-            bindEmptyCartEvents(closeCart);   
-            return;
+    // ✅ Limpiamos el contenedor antes de decidir qué renderizar
+    preview.innerHTML = ""; 
+
+    if (cart.length === 0) {
+        // Inyectamos el HTML
+        preview.innerHTML = renderEmptyCart();
+        
+        // ASIGNACIÓN MANUAL DEL EVENTO (Más seguro que bindEmptyCartEvents)
+        const continueBtn = document.getElementById("continueShoppingBtn");
+        if (continueBtn) {
+            continueBtn.onclick = (e) => {
+                e.preventDefault();
+                closeCart(); // Esta es la función que viene del objeto que recibe renderCart
+            };
         }
+        return;
+    }
 
-        let html = `
+        // 1. Cabecera (Siempre arriba)
+        let headerHtml = `
             <div class="cart-header">
                 <h3>Cart</h3>
                 <button id="closeCartBtn">✕</button>
             </div>
         `;
-        
+
+        let itemsHtml = '<div class="cart-items">'; // Abrimos el contenedor con scroll
         let total = 0;
 
         cart.forEach((item, index) => {
             const qty = item.qty || 1;
-            const itemTotal = item.price * qty;
-            total += itemTotal;
+            total += item.price * qty;
 
-            html += `
+            itemsHtml += `
                 <div class="cart-item">
-                    <img src="${item.image}" 
-                        class="cart-item-img"
-                        onerror="this.src='./images/noimage.png'">
-
+                    <img src="${item.image}" class="cart-item-img" onerror="this.src='./images/noimage.png'">
                     <div class="cart-item-info">
                         <p class="cart-name">${item.name}</p>
                         <p class="cart-size">${item.size}</p>
                         <p class="cart-price">$${item.price}</p>
-
                         <div class="qty-controls">
                             <button class="qty-btn" data-index="${index}" data-change="-1">−</button>
                             <span>${qty}</span>
                             <button class="qty-btn" data-index="${index}" data-change="1">+</button>
                         </div>
-
-                        <button class="remove-btn" data-index="${index}">
-                            Remove
-                        </button>
+                        <button class="remove-btn" data-index="${index}">Remove</button>
                     </div>
                 </div>
             `;
-         });
+        });
 
-         html += `
+        itemsHtml += '</div>'; // Cerramos el contenedor con scroll
+
+        // 2. Footer (Siempre abajo)
+        let footerHtml = `
             <div class="cart-footer">
-                <p class="cart-total">Subtotal: $${total.toFixed(2)}</p>
-                <button id="checkoutBtn" class="primary-btn">
-                    Checkout
-                </button>
+                <p class="cart-total"><strong>Subtotal: $${total.toFixed(2)}</strong></p>
+                <button id="checkoutBtn" class="primary-btn">Checkout</button>
             </div>
         `;
-        preview.innerHTML = html;
+
+        // 3. Inyectamos todo en el orden correcto
+        preview.innerHTML = headerHtml + itemsHtml + footerHtml;
         document.getElementById("closeCartBtn").onclick = closeCart;
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.onclick = () => {
@@ -177,17 +185,15 @@
         updateCartUI();
     }
 
-    function renderEmptyCart() {
+    export function renderEmptyCart() {
     return `
-            <div class="cart-empty-state">
-                <div class="empty-icon"> <img src="./images/emptycart2.png" class="empty-icon-img"> </div>
-
-                <h2>Your shopping bag is empty</h2>
-                <p>You have no items in your shopping bag. Let’s go buy something!</p>
-
-                <button id="continueShoppingBtn" class="primary-btn">
-                    Continue Shopping
-                </button>
-            </div>
-        `;
+        <div class="cart-empty-container">
+            <img src="./images/emptycart2.png" class="cart-empty-img" alt="Empty Cart">
+            <h2>Your shopping bag is empty</h2>
+            <p>You have no items in your shopping bag. Let’s go buy something!</p>
+            <button id="continueShoppingBtn" class="primary-btn continue-shopping">
+                Continue Shopping
+            </button>
+        </div>
+    `;
     }

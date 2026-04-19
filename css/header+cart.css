@@ -1,0 +1,90 @@
+/* ============================================================
+   ESTRUCTURA DEL HEADER (Global)
+   ============================================================ */
+
+   .main-navbar {
+    background-color: #3d342d !important;
+    width: 100%;
+    padding: 10px 5% !important; /* Un padding más discreto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky; /* O fixed, si prefieres que siga el scroll siempre */
+    top: 0;
+    
+    /* CRÍTICO: El z-index debe ser alto para superar al contenido legal */
+    z-index: 10000 !important; 
+    
+    min-height: 130px;
+    border-bottom: 2px solid #bfa36a;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative; /* Importante para posicionar logo y carrito */
+    align-items: center;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+.logo-wrapper {
+    /* Mantenemos el centrado absoluto */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Aseguramos que el logo no se superponga internamente */
+    z-index: 10001 !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    /* Ajusta el tamaño máximo para que no se deforme */
+    max-width: 180px; 
+    max-height: 120px; /* Reduje el alto máximo para que se vea más elegante */
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    display: block;
+    transition: transform 0.4s ease-in-out, opacity 0.3s ease;
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    
+    /* ELIMINA ESTO SI LO TIENES: filter: drop-shadow(...) can be costly */
+}
+
+#logoLink:hover #logo {
+    /* SUTIL: Escala a 1.02 es suficiente (2% más grande) */
+    transform: translate(0, -3px) scale(1.02); /* Pequeña subida + escala sutil */
+    
+    /* Opcional: una muy leve transparencia para dar sensación de clic */
+    opacity: 0.9; 
+}
+
+/* ============================================================
+   CARRITO (Se queda aquí porque es parte del Header)
+   ============================================================ */
+#cartBtn {
+    margin-left: auto !important; /* Empuja el botón al extremo derecho */
+    position: relative;
+    z-index: 1001;
+    background-color: #bfa36a;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cartBtn:hover, .cart-button:hover {
+    background-color: #a68b54;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

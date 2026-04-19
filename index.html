@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>ScentVaultSV | Perfumes y Decants</title>
-    <link rel="stylesheet" href="css/animation.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/header+logo.css">
-    <link rel="stylesheet" href="css/product_grid.css">
-    <link rel="stylesheet" href="css/product_detail.css">
-    <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="css/checkout.css">
-    <link rel="stylesheet" href="css/main_btn.css">
-    <link rel="stylesheet" href="css/toast.css">
-    <link rel="stylesheet" href="css/phone.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+  <head>
+      <meta charset="UTF-8">
+      <title>ScentVaultSV | Perfumes y Decants</title>
+      <link rel="stylesheet" href="css/animation.css">
+      <link rel="stylesheet" href="css/base.css">
+      <link rel="stylesheet" href="css/header+cart.css">
+      <link rel="stylesheet" href="css/product_grid.css">
+      <link rel="stylesheet" href="css/product_detail.css">
+      <link rel="stylesheet" href="css/cart.css">
+      <link rel="stylesheet" href="css/checkout.css">
+      <link rel="stylesheet" href="css/main_btn.css">
+      <link rel="stylesheet" href="css/toast.css">
+      <link rel="stylesheet" href="css/phone.css">
+      <link rel="stylesheet" href="css/footer.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
 
-<header>
-  <img src="images/logo_removebg.png" id="logo" alt="ScentVaultSV Logo">
-</header>
 
-<button id="cartBtn">🛒 (0)</button>
+    <header></header>
 
-<!-- Cart Drawer -->
-<div id="cartPreview" class="cart-preview"></div>
+    <!-- Cart Drawer -->
+    <div id="cartPreview" class="cart-preview"></div>
 
-<!-- Overlay -->
-<div id="cartOverlay"></div>
+    <!-- Overlay -->
+    <div id="cartOverlay"></div>
 
-<!-- Main Content -->
-<main>
-  <div id="products"></div>
-</main>
+    <!-- Main Content -->
+    <main>
+      <div id="products"></div>
+    </main>
 
-<!-- toast container -->
-<div id="toastContainer"></div>
+    <!-- toast container -->
+    <div id="toastContainer"></div>
 
-<script type="module" src="./js/app.js"></script>
-</body>
+    <script type="module" src="./js/app.js"></script>
+    <script type="module">
+        import { initHeader } from './js/header.js';
+        initHeader();
+        import { initFooter } from './js/footer.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            initFooter();
+        });
+    </script>
+  </body>
+
 </html>

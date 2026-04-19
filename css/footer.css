@@ -1,0 +1,76 @@
+.main-footer {
+    background-color: #3d342d;
+    color: #fcfaf7;
+    padding: 60px 20px;
+    margin-top: 80px;
+    text-align: center;
+    border-top: 3px solid #bfa36a;
+    box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.footer-logo p {
+    color: #bfa36a;
+    font-family: 'Serif', Georgia, serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.copyright {
+    font-size: 0.75rem; /* Un poco más pequeño para que no compita con la marca */
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    opacity: 0.6; /* Un poco más sutil */
+}
+
+.footer-legal-links {
+    border-top: 1px solid rgba(191, 163, 106, 0.2); /* Una línea divisoria muy tenue */
+    padding-top: 20px;
+    gap: 25px; /* Un poco más de espacio entre los links */
+}
+
+.footer-link {
+    color: #bfa36a;
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.footer-divider {
+    color: #bfa36a;
+    opacity: 0.3;
+}
+
+.footer-brand-text {
+    margin-bottom: 30px;
+    color: #bfa36a; /* Tu Dorado */
+}
+
+.footer-brand-text p {
+    font-family: 'Playfair Display', serif; /* O la fuente que uses en tus títulos */
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.brand-subtext {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    display: block;
+    margin-top: 5px;
+}

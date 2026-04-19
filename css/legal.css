@@ -1,0 +1,90 @@
+/* ==========================================
+   ESTILOS ESPECÍFICOS PARA PÁGINAS LEGALES
+   ========================================== */
+
+header {
+    margin-top: 0 !important;
+    top: 0 !important;
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Contenedor principal que sostiene el cuadro de texto */
+#legal-content-root {
+    padding: 60px 20px;
+    background-color: #fcfaf7; /* Fondo crema global de la página */
+    min-height: 80vh;
+}
+
+/* Tarjeta blanca/crema donde vive el texto */
+.legal-wrapper {
+    max-width: 850px;
+    margin: 60px auto 80px;
+    background-color: #fcfaf7;
+    color: #3d342d;
+    line-height: 1.8;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden; /* Para que el header interno respete el border-radius */
+    position: relative;
+    z-index: 1;
+}
+
+/* Banner marrón INTERNO del contenido (Términos y Condiciones) */
+.legal-header {
+    background-color: #3d342d;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.legal-header h1 {
+    color: #bfa36a;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.last-update {
+    display: block;
+    color: #bfa36a;
+    opacity: 0.7;
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* Cuerpo del texto legal */
+.legal-body-content {
+    padding: 40px; /* Espaciado interno para el texto */
+}
+
+h2 {
+    color: #bfa36a;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 35px;
+    border-left: 4px solid #bfa36a;
+    padding-left: 15px;
+}
+
+section p {
+    margin-bottom: 15px;
+}
+
+ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+strong {
+    color: #1a1a1a;
+}
