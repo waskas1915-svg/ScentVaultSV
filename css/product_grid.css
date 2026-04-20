@@ -26,11 +26,6 @@
     transition: all 0.3s ease;
 }
 
-.product-card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-}
-
 .product-card img {
     width: 150px;
     height: 150px;
@@ -55,6 +50,25 @@
 
 .product-card p {
   margin: 0;
+}
+
+.product-card.clickable {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card.clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.product-card.out-of-stock {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.product-card.out-of-stock-card {
+    opacity: 0.7;
 }
 
 .product-img {

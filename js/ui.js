@@ -4,39 +4,49 @@
 
     //Show products
     export function showProducts(products, addToCart) {
-        const container = document.getElementById('products');
+    const container = document.getElementById('products');
+    container.innerHTML = `<div id="productGrid"></div>`;
+    const grid = document.getElementById('productGrid');
 
-        // Create grid container
-        container.innerHTML = `<div id="productGrid"></div>`;
+    products.forEach(product => {
+        const div = document.createElement('div');
+        div.classList.add("product-card");
 
-        const grid = document.getElementById('productGrid');
+        const hasStock = product.stock_ml > 0;
 
-        products.forEach(product => {
-            const div = document.createElement('div');
-            div.classList.add("product-card");
+        
+        if (!hasStock) {
+        div.classList.add("out-of-stock-card");
+        } else {
+            div.classList.add("clickable");
+            div.onclick = () => viewProduct(product.id, products, addToCart);
+        }
 
-            const hasStock = product.stock_ml > 0;
-            div.innerHTML = `
-                <img src="${product.image}" class="product-img">
-                <h3>${product.name}</h3>
+        div.innerHTML = `
+            <img src="${product.image}" class="product-img">
+            <h3>${product.name}</h3>
 
-                <div class="card-bottom">
-                    <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
-                        ${hasStock ? 'In Stock' : 'Out of Stock'}
-                    </p>
-                    <button class="primary-btn" ${!hasStock ? "disabled" : ""}>
-                        View Options
-                    </button>
-                </div>
-            `;
-                const btn = div.querySelector('button');
-                if (hasStock) {
-                    btn.onclick = () => viewProduct(product.id, products, addToCart);
-                }
+            <div class="card-bottom">
+                <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
+                    ${hasStock ? 'In Stock' : 'Out of Stock'}
+                </p>
+                <button class="primary-btn" ${!hasStock ? "disabled" : ""}>
+                    View Options
+                </button>
+            </div>
+        `;
 
-            grid.appendChild(div); 
-        });
-    }
+        const btn = div.querySelector('button');
+        if (hasStock) {
+            btn.onclick = (e) => {
+                e.stopPropagation(); 
+                viewProduct(product.id, products, addToCart);
+            };
+        }
+
+        grid.appendChild(div); 
+    });
+}
 
     //View products
 

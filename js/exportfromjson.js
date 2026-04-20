@@ -1,4 +1,5 @@
 //Export products from json
+import { db } from "./firebase.js";
 
 export async function uploadProducts() {
   try {

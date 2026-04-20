@@ -46,6 +46,17 @@ export function loadLegalContent() {
                     <h2>6. Propiedad Intelectual</h2>
                     <p>Las marcas y nombres de fragancias son propiedad de sus respectivos dueños. ScentVaultSV los utiliza únicamente con fines descriptivos e identificativos.</p>
                 </section>
+
+                <section>
+                    <h2>7. RECOPILACIÓN Y USO DE DATOS</h2>
+                    <p> Al registrar una cuenta en ScentVaultSV, el usuario acepta que recopilemos la siguiente información: nombre completo, dirección de envío, correo electrónico y número de teléfono (opcional). <br>Estos datos serán utilizados exclusivamente para:</p>
+                    <ul>
+                        <li><strong>Procesar y enviar</strong> sus pedidos de fragancias y decants.</li>
+                        <li><strong>Comunicar actualizaciones sobre el estado de su envío.</strong></li>
+                        <li>Mejorar su experiencia de compra mediante un <strong>historial de pedidos.</strong></li>
+                        <li>Poder ser parte de un <strong>programa de lealtad</strong> que le permitira aplicar a descuentos</li>
+                    </ul>
+                </section>
             </div>
         `;
     } else if (page === 'privacidad') {

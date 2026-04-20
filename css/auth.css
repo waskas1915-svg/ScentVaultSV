@@ -1,0 +1,353 @@
+/* Contenedor principal dentro del drawer */
+.auth-drawer-container {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.auth-header-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.auth-header-section p {
+    font-size: 15px;
+    color: #777;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.auth-form-group {
+    width: 100%;
+    max-width: 100%; /* Evita que crezca más que el padre */
+    box-sizing: border-box;
+}
+
+/* Inputs con estilo ScentVault */
+.scent-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.scent-input:focus {
+    border-color: #bfa36a;
+    outline: none;
+}
+
+.scent-input-row {
+    display: flex; 
+    gap: 10px;      /* Espacio entre nombre y apellido */
+    width: 100%;
+    margin-bottom: 0; /* Para que no sume doble margen con los inputs */
+}
+
+.scent-input-row .scent-input {
+    flex: 1;        /* Ambos ocupan el 50% del ancho */
+}
+
+/* Botón Continuar */
+.gold-btn.full-width {
+    width: 100%;
+    background-color: #bfa36a;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+/* Divisor O */
+.scent-divider {
+    margin: 30px 0;
+    border-top: 1px solid #eee;
+    position: relative;
+    text-align: center;
+}
+
+.scent-divider span {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 0 15px;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Botones Sociales */
+.social-btn.outline {
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    letter-spacing: 0.3px;
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.social-btn.outline:hover {
+    background: #fcfaf7;
+    border-color: #bfa36a;
+}
+
+/* Legal */
+.auth-legal-text {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+.auth-legal-text a {
+    color: #1a1a1a;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Footer del Drawer (Estilo Lista) */
+.auth-drawer-footer {
+    margin-top: auto; /* Empuja el footer al fondo */
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+}
+
+.footer-item {
+    display: flex;
+    align-items: center;
+    padding: 18px 5px;
+    border-bottom: 1px solid #f9f9f9;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.footer-item:hover {
+    background-color: #fcfaf7;
+    padding-left: 10px;
+}
+
+.footer-icon { margin-right: 15px; font-size: 18px; }
+.footer-arrow { margin-left: auto; color: #ccc; }
+
+.footer-alert-box {
+    margin-top: 20px;
+    background: #fcfaf7;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #555;
+}
+
+/* Centrar el footer de la cuenta */
+.auth-footer-login {
+    margin-top: 25px;
+    text-align: center; /* Esto centra el texto "¿Ya tienes una cuenta?" */
+    width: 100%;
+}
+
+/* Cambiar el estilo del enlace "Iniciar sesión" */
+.auth-footer-login a {
+    color: #bfa36a; /* Tu dorado de marca */
+    text-decoration: none; /* Quitamos el subrayado simple */
+    font-weight: 700; /* Lo hacemos resaltar con grosor */
+    transition: color 0.3s ease;
+}
+
+.auth-footer-login a:hover {
+    color: #a68b54; /* Un dorado un poco más oscuro al pasar el mouse */
+    text-decoration: underline; /* El subrayado solo aparece al pasar el mouse */
+}
+
+/*perfil*/
+
+.profile-drawer-wrapper {
+    padding: 30px 25px;
+    color: #1a1a1a;
+}
+
+.profile-section-header {
+    text-align: center; /* Centra el texto H2 */
+    padding: 20px 0;
+}
+
+/* Encabezado más elegante */
+.profile-section-header h2 {
+    font-family: 'Playfair Display', serif; /* O una Serif elegante si tienes */
+    font-size: 28px;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+/* Badge de Dinero en Dorado ScentVault */
+.vault-cash-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcf8f0; /* Fondo crema muy suave */
+    border: 1px solid #bfa36a; /* Borde dorado */
+    color: #666;
+    padding: 5px 15px;
+    border-radius: 4px; /* Menos redondeado, más arquitectónico */
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.profile-divider {
+    border: 0;
+    border-top: 1px solid #f0f0f0;
+    margin: 10px 0 20px 0;
+}
+
+.gold-text {
+    color: #bfa36a;
+    font-weight: 800;
+    margin-left: 5px;
+}
+
+/* Cuadro de Alerta Minimalista */
+.profile-alert-box {
+    background: transparent;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.alert-icon {
+    color: #bfa36a; /* Cambiamos el azul por tu dorado */
+    font-size: 18px;
+}
+
+.alert-content p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Lista de Menú con Estilo Boutique */
+.menu-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f8f8f8;
+    cursor: pointer;
+}
+
+.menu-item-row:hover {
+    padding-left: 8px;
+    border-bottom-color: #bfa36a;
+}
+
+.item-label {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.profile-footer-action {
+    margin-top: 40px;
+}
+
+.item-icon {
+    margin-right: 15px;
+    filter: grayscale(1); /* Iconos en blanco y negro para que no distraigan */
+    opacity: 0.7;
+}
+
+/* Botón Sign Out Elegante */
+.sign-out-button {
+    margin-top: 40px;
+    width: 100%;
+    padding: 18px;
+    background: #1a1a1a; /* Negro total */
+    color: #fff;
+    border: none;
+    border-radius: 0; /* Bordes rectos para lujo */
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.sign-out-button:hover {
+    background: #bfa36a; /* Cambio a dorado al pasar el mouse */
+}
+
+/* Contenedor del password para posicionar el botón */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.password-wrapper .scent-input {
+    padding-right: 45px; /* Espacio para que el texto no tape el ojo */
+    margin-bottom: 0;
+}
+
+/* El botón del ojo */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+/* Texto de requisitos */
+.password-requirements {
+    font-size: 11px;
+    color: #888;
+    margin: 5px 0 15px 5px;
+    line-height: 1.4;
+}

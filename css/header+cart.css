@@ -27,6 +27,15 @@
     justify-content: space-between;
     position: relative; /* Importante para posicionar logo y carrito */
     align-items: center;
+    padding: 0 20px;
+}
+
+.header-right {
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    z-index: 10;
 }
 
 /* ============================================================
@@ -69,7 +78,7 @@
 }
 
 /* ============================================================
-   CARRITO (Se queda aquí porque es parte del Header)
+   CARRITO 
    ============================================================ */
 #cartBtn {
     margin-left: auto !important; /* Empuja el botón al extremo derecho */
@@ -87,4 +96,29 @@
 #cartBtn:hover, .cart-button:hover {
     background-color: #a68b54;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ESTILO PARA EL LINK DE SIGN IN */
+.nav-link {
+    text-decoration: none;
+    color: #fcfaf7 !important; /* Crema igual al fondo/logo */
+    font-size: 11px; /* Un poco más pequeño para que sea elegante */
+    font-weight: 600;
+    letter-spacing: 2px; /* Espaciado de lujo */
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    opacity: 0.85; /* Un toque de transparencia lo hace ver más fino */
+}
+
+.nav-link:hover {
+    color: #bfa36a !important;
+    opacity: 1;
+}
+
+.user-icon {
+    font-size: 16px;
+    filter: brightness(0) invert(1) opacity(0.7);  
 }

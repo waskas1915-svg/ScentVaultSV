@@ -14,6 +14,8 @@
       <link rel="stylesheet" href="css/toast.css">
       <link rel="stylesheet" href="css/phone.css">
       <link rel="stylesheet" href="css/footer.css">
+      <link rel="stylesheet" href="css/drawer.css">
+      <link rel="stylesheet" href="css/auth.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -21,11 +23,20 @@
 
     <header></header>
 
-    <!-- Cart Drawer -->
-    <div id="cartPreview" class="cart-preview"></div>
+    <!-- side-drawer -->
+    <div id="drawerOverlay" class="overlay"></div>
+    <div id="unifiedDrawer" class="side-drawer">
+        <div class="drawer-header">
+            <div class="drawer-tabs">
+                <span class="tab-btn" data-tab="wishlist">Wishlist(0)</span>
+                <span class="tab-btn active-tab" data-tab="account">Cuenta</span>
+                <span class="tab-btn" data-tab="cart">Bag(<span id="bag-count">0</span>)</span>
+            </div>
+            <button id="closeDrawerBtn" class="close-x">×</button>
+        </div>
 
-    <!-- Overlay -->
-    <div id="cartOverlay"></div>
+        <div id="drawerContent" class="drawer-content"></div>
+    </div>
 
     <!-- Main Content -->
     <main>

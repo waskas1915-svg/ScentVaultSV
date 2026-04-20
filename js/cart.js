@@ -73,11 +73,15 @@
     //update cart
 
     export function updateCartUI() {
-        const btn = document.getElementById("cartBtn");
-        if (!btn) return;
-
         const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-        btn.innerText = `🛒 (${totalItems})`;
+        
+        // 1. El botón de la navbar principal
+        const btn = document.getElementById("cart-count");
+        if (btn) btn.innerText = totalItems;
+
+        // 2. La pestaña dentro del Drawer (Bag(0))
+        const tabBag = document.getElementById("bag-count");
+        if (tabBag) tabBag.innerText = totalItems;
     }
 
     //Rendercart
@@ -88,72 +92,58 @@
     }
     
     export function renderCart({ refreshCart, closeCart, onCheckout }) {
-    const preview = document.getElementById("cartPreview");
-    if (!preview) return;
-
-    // ✅ Limpiamos el contenedor antes de decidir qué renderizar
-    preview.innerHTML = ""; 
-
-    if (cart.length === 0) {
-        // Inyectamos el HTML
-        preview.innerHTML = renderEmptyCart();
-        
-        // ASIGNACIÓN MANUAL DEL EVENTO (Más seguro que bindEmptyCartEvents)
-        const continueBtn = document.getElementById("continueShoppingBtn");
-        if (continueBtn) {
-            continueBtn.onclick = (e) => {
-                e.preventDefault();
-                closeCart(); // Esta es la función que viene del objeto que recibe renderCart
-            };
-        }
+    // 1. DECLARAMOS LA VARIABLE (Esto es lo que faltaba)
+    const contentContainer = document.getElementById("drawerContent"); 
+    
+    // Verificación de seguridad
+    if (!contentContainer) {
+        console.error("No se encontró el contenedor drawerContent");
         return;
     }
 
-        // 1. Cabecera (Siempre arriba)
-        let headerHtml = `
-            <div class="cart-header">
-                <h3>Cart</h3>
-                <button id="closeCartBtn">✕</button>
-            </div>
-        `;
+    // 2. Limpiamos el contenido previo
+    contentContainer.innerHTML = ""; 
 
-        let itemsHtml = '<div class="cart-items">'; // Abrimos el contenedor con scroll
-        let total = 0;
+    if (cart.length === 0) {
+        contentContainer.innerHTML = renderEmptyCart();
+        const continueBtn = document.getElementById("continueShoppingBtn");
+        if (continueBtn) continueBtn.onclick = closeCart;
+        return;
+    }
 
-        cart.forEach((item, index) => {
-            const qty = item.qty || 1;
-            total += item.price * qty;
-
-            itemsHtml += `
-                <div class="cart-item">
-                    <img src="${item.image}" class="cart-item-img" onerror="this.src='./images/noimage.png'">
-                    <div class="cart-item-info">
-                        <p class="cart-name">${item.name}</p>
-                        <p class="cart-size">${item.size}</p>
-                        <p class="cart-price">$${item.price}</p>
-                        <div class="qty-controls">
-                            <button class="qty-btn" data-index="${index}" data-change="-1">−</button>
-                            <span>${qty}</span>
-                            <button class="qty-btn" data-index="${index}" data-change="1">+</button>
-                        </div>
-                        <button class="remove-btn" data-index="${index}">Remove</button>
+    // ELIMINAMOS el let headerHtml. Solo generamos los items y el footer.
+    let itemsHtml = '<div class="cart-items">';
+    let total = 0;
+    cart.forEach((item, index) => {
+        const qty = item.qty || 1;
+        total += item.price * qty;
+        itemsHtml += `
+            <div class="cart-item">
+                <img src="${item.image}" class="cart-item-img">
+                <div class="cart-item-info">
+                    <p class="cart-name">${item.name}</p>
+                    <p class="cart-size">${item.size}</p>
+                    <p class="cart-price">$${item.price}</p>
+                    <div class="qty-controls">
+                        <button class="qty-btn" data-index="${index}" data-change="-1">−</button>
+                        <span>${qty}</span>
+                        <button class="qty-btn" data-index="${index}" data-change="1">+</button>
                     </div>
+                    <button class="remove-btn" data-index="${index}">Remove</button>
                 </div>
-            `;
-        });
+            </div>`;
+    });
+    itemsHtml += '</div>';
 
-        itemsHtml += '</div>'; // Cerramos el contenedor con scroll
+    let footerHtml = `
+        <div class="cart-footer">
+            <p class="cart-total"><strong>Subtotal: $${total.toFixed(2)}</strong></p>
+            <button id="checkoutBtn" class="primary-btn black-btn">CHECKOUT</button>
+        </div>
+    `;
 
-        // 2. Footer (Siempre abajo)
-        let footerHtml = `
-            <div class="cart-footer">
-                <p class="cart-total"><strong>Subtotal: $${total.toFixed(2)}</strong></p>
-                <button id="checkoutBtn" class="primary-btn">Checkout</button>
-            </div>
-        `;
-
-        // 3. Inyectamos todo en el orden correcto
-        preview.innerHTML = headerHtml + itemsHtml + footerHtml;
+    // Inyectamos solo el cuerpo y el footer
+    contentContainer.innerHTML = itemsHtml + footerHtml;
         document.getElementById("closeCartBtn").onclick = closeCart;
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.onclick = () => {

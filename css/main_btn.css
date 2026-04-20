@@ -51,6 +51,17 @@
   transition: transform 0.2s ease;
 }
 
+/* Estilo para el botón cuando NO hay stock */
+.primary-btn:disabled {
+    background-color: #d1d1d1 !important; 
+    color: #888 !important;              
+    cursor: not-allowed;                 
+    transform: none !important;          
+    box-shadow: none !important;         
+    pointer-events: none;                
+    border: none;
+}
+
 .secondary-btn {
     background: var(--cafe-oscuro);
     color: white;
