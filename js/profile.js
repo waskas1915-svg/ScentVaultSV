@@ -6,35 +6,30 @@ import { signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { showToast } from "./toast.js"; 
 
 export async function renderProfilePage(activeTab = 'settings') {
-    // Cambiamos 'main-content' por 'products' que es el que tú usas
+    // 1. Usamos el ID correcto de tu HTML
     const mainContent = document.getElementById('products'); 
-    
-    if (!mainContent) {
-        console.error("No se encontró el contenedor 'products'");
-        return; 
-    }
+    if (!mainContent) return;
 
     const user = auth.currentUser;
     if (!user) return;
 
-    // Cargamos datos de Firebase
     const userDoc = await getDoc(doc(db, "users", user.uid));
     const userData = userDoc.data();
 
-    // 2. Estructura Limpia (Sin duplicados y sin onclick)
+    // 2. ESTRUCTURA PLANA: Sidebar, Main y Spacer al mismo nivel
     mainContent.innerHTML = `
-        <div class="profile-page-layout container">
+        <div class="profile-page-layout">
             
             <aside class="profile-sidebar">
                 <nav class="sidebar-nav">
-                    <button class="nav-item ${activeTab === 'overview' ? 'active' : ''}" data-tab="overview">
+                    <button class="nav-item ${activeTab === 'overview' ? 'active' : ''}" onclick="renderProfilePage('overview')">
                         <span class="icon">📦</span> Overview
                     </button>
-                    <button class="nav-item ${activeTab === 'history' ? 'active' : ''}" data-tab="history">
-                        <span class="icon">🛍️</span> Purchase History
+                    <button class="nav-item ${activeTab === 'history' ? 'active' : ''}" onclick="renderProfilePage('history')">
+                        <span class="icon">🛍️</span> Historial
                     </button>
-                    <button class="nav-item ${activeTab === 'loyalty' ? 'active' : ''}" data-tab="loyalty">
-                        <span class="icon">💳</span> Loyalty & Rewards
+                    <button class="nav-item ${activeTab === 'loyalty' ? 'active' : ''}" onclick="renderProfilePage('loyalty')">
+                        <span class="icon">💳</span> Recompensas
                     </button>
 
                     <div class="sidebar-menu-group">
@@ -44,9 +39,9 @@ export async function renderProfilePage(activeTab = 'settings') {
                         </button>
                         
                         <div class="sidebar-sub-menu ${['settings', 'address', 'wishlist'].includes(activeTab) ? 'open' : ''}" id="sidebar-sub-menu">
-                            <div class="sub-item ${activeTab === 'settings' ? 'selected' : ''}" data-tab="settings">Perfil</div>
-                            <div class="sub-item ${activeTab === 'address' ? 'selected' : ''}" data-tab="address">Mi dirección</div>
-                            <div class="sub-item ${activeTab === 'wishlist' ? 'selected' : ''}" data-tab="wishlist">Wishlist</div>
+                            <div class="sub-item ${activeTab === 'settings' ? 'selected' : ''}" onclick="renderProfilePage('settings')">Perfil</div>
+                            <div class="sub-item ${activeTab === 'address' ? 'selected' : ''}" onclick="renderProfilePage('address')">Mi dirección</div>
+                            <div class="sub-item ${activeTab === 'wishlist' ? 'selected' : ''}" onclick="renderProfilePage('wishlist')">Wishlist</div>
                         </div>
                     </div>
 
@@ -67,21 +62,12 @@ export async function renderProfilePage(activeTab = 'settings') {
         </div>
     `;
 
-    // --- LÓGICA DE EVENTOS (Adiós a los ReferenceErrors) ---
-
-    // 3. Manejo de pestañas (Navegación interna)
-    mainContent.querySelectorAll('[data-tab]').forEach(button => {
-        button.onclick = () => {
-            const targetTab = button.getAttribute('data-tab');
-            renderProfilePage(targetTab); // Recarga la vista con la nueva pestaña
-        };
-    });
-
-    // 4. Toggle del Acordeón de Configuración
+    // --- LÓGICA DE INTERACCIÓN ---
+    
+    // Toggle del acordeón
     const sidebarToggle = document.getElementById('toggle-sidebar-settings');
     const sidebarSubMenu = document.getElementById('sidebar-sub-menu');
     const sidebarIcon = document.getElementById('sidebar-icon');
-
     if (sidebarToggle) {
         sidebarToggle.onclick = () => {
             const isOpen = sidebarSubMenu.classList.toggle('open');
@@ -89,10 +75,11 @@ export async function renderProfilePage(activeTab = 'settings') {
         };
     }
 
-    // 5. Logout
-    document.getElementById('page-logout').onclick = () => {
-        signOut(auth).then(() => location.reload());
-    };
+    // Logout
+    document.getElementById('page-logout').onclick = () => signOut(auth).then(() => location.reload());
+
+    // Hacemos la función global para que los onclick del HTML funcionen
+    window.renderProfilePage = renderProfilePage;
 }
 
 function renderTabContent(tab, userData, user) {

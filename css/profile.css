@@ -19,8 +19,9 @@
     
     width: 250px;
     
+    
     /* CENTRADO VERTICAL (Para que no se vea desordenado) */
-    top: 150px;            /* Ajusta este número para que baje o suba */
+    top: 0px;            /* Ajusta este número para que baje o suba */
     z-index: 10;
 }
 
@@ -70,7 +71,7 @@
 
 /* Contenido Principal */
 .profile-main-content {
-    width: 700px;          /* Ancho fijo para que el centro sea exacto */
+    width: 100%;          /* Ancho fijo para que el centro sea exacto */
     margin: 0;             /* No necesita márgenes, el padre lo centra */
 }
 

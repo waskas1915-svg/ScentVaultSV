@@ -40,8 +40,23 @@
         display: none;
     }
     .profile-page-layout {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        grid-template-columns: 1fr;
     }
 }
 
+@media (max-width: 480px) {
+    .user-greeting {
+        display: none;              /* En teléfonos muy pequeños, ocultamos el "Hola, Kevin" */
+    }
+    
+    .account-icon-only {
+        display: block;             /* Mostramos solo un icono de personita en su lugar */
+    }
+
+    .header-logo img {
+        max-height: 30px;           /* Logo más pequeño para ganar espacio */
+    }
+}
