@@ -11,18 +11,10 @@
 
 /* Sidebar */
 .profile-sidebar {
-    position: absolute;
-    /* CÁLCULO DE PRECISIÓN:
-       Desde la derecha, muévete el 50% de la pantalla (centro),
-       luego suma la mitad del contenido (350px) y un gap (40px) */
-    right: calc(50% + 350px + 40px); 
-    
+    grid-column: 1;
+    justify-self: end; 
     width: 250px;
-    
-    
-    /* CENTRADO VERTICAL (Para que no se vea desordenado) */
-    top: 0px;            /* Ajusta este número para que baje o suba */
-    z-index: 10;
+    position: relative; /* Cambiado de absolute a relative */
 }
 
 .sidebar-user-greet h2 {
@@ -71,8 +63,27 @@
 
 /* Contenido Principal */
 .profile-main-content {
-    width: 100%;          /* Ancho fijo para que el centro sea exacto */
-    margin: 0;             /* No necesita márgenes, el padre lo centra */
+    grid-column: 2;
+    width: 100%;
+    min-width: 700px;
+}
+
+.profile-grid-spacer {
+    grid-column: 3;
+    width: 250px;
+    visibility: hidden;
+}
+
+.address-card {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto 20px;
+}
+
+.profile-sidebar-spacer {
+    width: 250px;      /* Exactamente igual que el sidebar */
+    justify-self: start;
+    visibility: hidden; /* Invisible pero ocupa espacio para equilibrar */
 }
 
 .page-title {
@@ -194,16 +205,19 @@
 }
 
 .profile-page-layout {
+    display: grid;
+    /* Columna 1: Sidebar | Columna 2: Centro Fijo | Columna 3: Espaciador */
+    grid-template-columns: 1fr 700px 1fr; 
+    gap: 50px;
+    align-items: flex-start;
     width: 100%;
-    position: relative;    /* Es el eje de referencia */
-    display: flex;
-    justify-content: center; /* ESTO centra el Main Content con el logo */
-    margin: 60px 0;
-    min-height: 80vh;      /* Para que el footer no se pegue */
+    max-width: 1500px;
+    margin: 60px auto;
 }
 
-.profile-sidebar-spacer {
-    display: none !important;
+.profile-sidebar {
+    justify-self: end; /* Empuja el menú contra el contenido */
+    width: 250px;
 }
 
 .loyalty-stats-row, .settings-form-container {
@@ -224,22 +238,16 @@
 }
 
 .section-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .add-address-btn {
-    background: #000;
-    color: #fff;
-    padding: 15px 25px;
-    border: none;
-    font-weight: 700;
-    font-size: 12px;
+    display: block;          /* Para que acepte márgenes laterales */
+    margin: 20px auto 40px;  /* 'auto' a los lados lo centra horizontalmente */
+    padding: 15px 35px;
+    font-size: 13px;
     letter-spacing: 1px;
-    cursor: pointer;
-    margin-bottom: 40px;
-    transition: background 0.3s;
 }
 
 .add-address-btn:hover {
@@ -259,7 +267,10 @@
 .address-card {
     border: 1px solid #e0e0e0;
     padding: 25px;
+    max-width: 600px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     background: #fff;
     transition: border-color 0.3s;
 }
@@ -304,4 +315,126 @@
     font-size: 13px;
     cursor: pointer;
     font-weight: 600;
+}
+
+/* address */
+
+.address-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.address-modal-content {
+    background: #fff;
+    padding: 40px;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 4px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.cancel-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.cancel-btn:hover { color: #000; }
+
+/* Estilo para el selector de departamentos */
+.address-modal-content select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Estilo para el punto de referencia */
+.address-modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: none; /* Evita que el usuario lo deforme */
+}
+
+/* El botón dorado de ScentVault */
+.gold-btn {
+    background-color: #bfa36a;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.gold-btn:hover {
+    background-color: #a68d5b;
+}
+
+.address-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.delete-btn-link {
+    background: none;
+    border: none;
+    color: #dc3545; /* Rojo para advertencia */
+    text-decoration: underline;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.delete-btn-link:hover {
+    color: #a71d2a;
+}
+
+.ref-text {
+    font-style: italic;
+    color: #777;
+    font-size: 13px;
+    margin-top: 5px;
+    border-left: 2px solid #bfa36a;
+    padding-left: 8px;
+}
+
+/* EL TABLERO MAESTRO */
+.profile-grid-layout {
+    display: grid;
+    /* Columna 1: Sidebar | Columna 2: Centro Fijo | Columna 3: Espaciador */
+    grid-template-columns: 1fr 750px 1fr; 
+    gap: 40px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1600px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.profile-main-content .breadcrumb-nav,
+.profile-main-content .page-title {
+    text-align: center;
+    width: 100%;
 }
