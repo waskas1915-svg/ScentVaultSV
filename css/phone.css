@@ -35,4 +35,13 @@
 
 }
 
+@media (max-width: 1024px) {
+    .profile-sidebar-spacer {
+        display: none;
+    }
+    .profile-page-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+}
 

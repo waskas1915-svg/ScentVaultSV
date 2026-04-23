@@ -351,3 +351,46 @@
     margin: 5px 0 15px 5px;
     line-height: 1.4;
 }
+
+/* --- ESTILOS WELCOME BACK --- */
+
+.forgot-pass {
+    color: #bfa36a; /* Tu dorado */
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s;
+}
+
+.forgot-pass:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.back-btn-container {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 1px solid #f2f2f2;
+    padding-top: 20px;
+}
+
+.back-btn-text {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    transition: color 0.3s;
+}
+
+.back-btn-text:hover {
+    color: #1a1a1a;
+}

@@ -12,7 +12,7 @@ export function initHeader() {
     header.innerHTML = `
         <div class="header-content">
             <div class="logo-wrapper" id="logoLink" style="cursor: pointer;">
-                <img src="images/logo_removebg.png" alt="Logo" id="logo">
+                <img src="images/logo_rb2.png" alt="Logo" id="logo">
             </div>
             
             ${!isLegalPage ? `

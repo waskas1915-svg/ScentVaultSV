@@ -52,7 +52,10 @@ export async function switchTab(tabName) {
         renderCart({ 
             closeCart: closeDrawer, 
             refreshCart: () => switchTab('cart'),
-            onCheckout: handleCheckout // Asegúrate de que esta función esté disponible
+            onCheckout: () => {
+                closeDrawer(); // Primero cerramos el panel
+                handleCheckout(); // Luego ejecutamos la lógica de ir al pago
+            }
         });
 
     } else if (tabName === 'account') {

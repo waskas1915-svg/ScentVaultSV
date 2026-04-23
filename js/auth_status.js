@@ -5,14 +5,16 @@ import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/1
 import { 
     createUserWithEmailAndPassword, 
     updateProfile,
-    sendEmailVerification
+    sendEmailVerification,
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { showToast } from "./toast.js";
 import { 
     GoogleAuthProvider, 
     signInWithPopup 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"
-import { switchTab, openDrawer } from "./drawer.js";
+import { switchTab, openDrawer, closeDrawer } from "./drawer.js";
+import { renderProfilePage } from "./profile.js";
 
 export function checkUserStatus() {
     const authStatus = document.getElementById('auth-status');
@@ -166,15 +168,21 @@ export function renderLoginView() {
 
 export function renderWelcomeBack(email) {
     const container = document.getElementById('drawerContent');
+    if (!container) return;
+
+    // 1. Inyectamos el HTML
     container.innerHTML = `
         <div class="auth-drawer-container animate-fade-in">
-            <div class="auth-header-section">
+            <div class="auth-header-section" style="text-align: center;">
                 <h2>¡Qué bueno verte!</h2>
-                <p>Ingresa tu contraseña para entrar a tu cuenta de <strong>${email}</strong></p>
+                <p>Ingresa tu contraseña para entrar a tu cuenta de <br><strong>${email}</strong></p>
             </div>
 
             <div class="auth-form-group">
-                <input type="password" id="login-password" placeholder="Contraseña" class="scent-input">
+                <div class="password-wrapper">
+                    <input type="password" id="login-password" placeholder="Contraseña" class="scent-input">
+                    <button type="button" class="toggle-password" data-target="login-password">👁️</button>
+                </div>
                 <button id="btn-login-final" class="primary-btn gold-btn full-width">INICIAR SESIÓN</button>
             </div>
 
@@ -182,20 +190,68 @@ export function renderWelcomeBack(email) {
                 <a href="#" class="forgot-pass" id="reset-pass">¿Olvidaste tu contraseña?</a>
             </div>
             
-            <button class="back-btn-text" id="go-back">
-                ← Usar otro correo
-            </button>
+            <div class="back-btn-container">
+                <button class="back-btn-text" id="go-back">
+                    <span>←</span> USAR OTRO CORREO
+                </button>
+            </div>
         </div>
     `;
 
-    // Botón Volver
-    document.getElementById('go-back').onclick = renderAccountView;
+    // --- CONEXIÓN DE CABLES (Después del innerHTML) ---
 
-    // Lógica de Login Final
-    document.getElementById('btn-login-final').onclick = async () => {
-        const password = document.getElementById('login-password').value;
-        // Aquí llamarás a signInWithEmailAndPassword(auth, email, password)
-    };
+    // 2. Lógica de Recuperación (Password Reset)
+    const resetLink = document.getElementById('reset-pass');
+    if (resetLink) {
+        resetLink.onclick = async (e) => {
+            e.preventDefault();
+            console.log("Intentando enviar correo a:", email); // Esto DEBE salir en consola
+            
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showToast("Te hemos enviado un correo de recuperación 📧", "success");
+            } catch (error) {
+                console.error("Error de Firebase:", error.code, error.message);
+                showToast("No pudimos enviar el correo. Revisa tu conexión.", "error");
+            }
+        };
+    }
+
+    // 3. Botón Volver
+    const backBtn = document.getElementById('go-back');
+    if (backBtn) backBtn.onclick = renderAccountView;
+
+    // 4. Lógica de Login Final
+    const loginBtn = document.getElementById('btn-login-final');
+    if (loginBtn) {
+        loginBtn.onclick = async () => {
+            const password = document.getElementById('login-password').value;
+            if(!password) return showToast("Ingresa tu contraseña", "error");
+
+            loginBtn.innerText = "ENTRANDO...";
+            loginBtn.disabled = true;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast("¡Bienvenido! ✨", "success");
+                setTimeout(() => location.reload(), 1500);
+            } catch (error) {
+                loginBtn.innerText = "INICIAR SESIÓN";
+                loginBtn.disabled = false;
+                showToast("Contraseña o datos incorrectos", "error");
+            }
+        };
+    }
+
+    // 5. Toggle Password (El ojo)
+    const toggle = container.querySelector('.toggle-password');
+    if (toggle) {
+        toggle.onclick = () => {
+            const input = document.getElementById('login-password');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            toggle.textContent = input.type === 'password' ? '👁️' : '🔒';
+        };
+    }
 }
 
 export function renderRegisterForm(email) {
@@ -358,9 +414,18 @@ async function loginWithGoogle() {
 async function renderProfileView(user) {
     const container = document.getElementById('drawerContent');
     
-    // Obtenemos datos de Firestore
+    // 1. Obtenemos datos de Firestore
     const userDoc = await getDoc(doc(db, "users", user.uid));
     const userData = userDoc.data();
+    
+    // 2. Extraemos los puntos o ponemos 0 si no existen todavía
+    const loyalty = userData?.loyalty || { vaultPoints: 0, bottlesRecycled: 0 };
+    const points = loyalty.vaultPoints || 0;
+    const bottles = loyalty.bottlesRecycled || 0;
+
+    // Cálculo opcional: 200 VP = $5 USD (es decir, cada punto vale $0.025)
+    const cashValue = (points * 0.025).toFixed(2);
+
     const firstName = userData?.firstName || user.displayName?.split(' ')[0] || "Usuario";
 
     container.innerHTML = `
@@ -368,14 +433,29 @@ async function renderProfileView(user) {
             
             <div class="profile-section-header">
                 <h2>¡Bienvenido, ${firstName}!</h2>
+                
                 <div class="vault-cash-badge">
-                    YOU HAVE <span class="gold-text">$0.00 VAULT CASH</span>
+                    YOU HAVE <span class="gold-text">${points} VAULT POINTS</span>
                 </div>
+                
+                <p class="points-subtitle">Crédito disponible: <strong>$${cashValue} USD</strong></p>
             </div>
 
             <hr class="profile-divider">
 
             <div class="profile-menu-list">
+                <div class="loyalty-stats-row">
+                    <div class="stat-item">
+                        <span class="stat-number">${bottles}</span>
+                        <span class="stat-label">FRASCOS RECICLADOS</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">${points}</span>
+                        <span class="stat-label">PUNTOS TOTALES</span>
+                    </div>
+                </div>
+
                 <div class="menu-item-row">
                     <div class="item-label">VISTA GENERAL</div>
                     <span class="plus-symbol">→</span>
@@ -387,15 +467,23 @@ async function renderProfileView(user) {
                 </div>
 
                 <div class="menu-item-row">
-                    <div class="item-label">PREMIOS Y LEALTAD</div>
+                    <div class="item-label">MIS RECOMPENSAS</div>
                     <span class="plus-symbol">+</span>
                 </div>
 
-                <div class="menu-item-row">
-                    <div class="item-label">CONFIGURACIÓN</div>
-                    <span class="plus-symbol">+</span>
+                <div class="menu-item-group">
+                        <div class="menu-item-row" id="toggle-settings">
+                            <div class="item-label">CONFIGURACIÓN</div>
+                            <span class="plus-symbol" id="settings-icon">+</span>
+                        </div>
+                        
+                        <div class="sub-menu-container" id="settings-sub-menu">
+                            <div class="sub-menu-item" id="go-to-profile">Perfil</div>
+                            <div class="sub-menu-item" id="go-to-address">Mi dirección</div>
+                            <div class="sub-menu-item" id="go-to-wishlist">Wishlist</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
             <div class="profile-footer-action">
                 <button id="btn-logout" class="primary-btn gold-btn full-width">CERRAR SESIÓN</button>
@@ -403,6 +491,30 @@ async function renderProfileView(user) {
 
         </div>
     `;
+
+    // 1. Toggle del Sub-menú
+    const toggleBtn = document.getElementById('toggle-settings');
+    const subMenu = document.getElementById('settings-sub-menu');
+    const icon = document.getElementById('settings-icon');
+
+    toggleBtn.onclick = () => {
+        const isOpen = subMenu.classList.toggle('open');
+        icon.textContent = isOpen ? "−" : "+";
+    };
+
+    // 2. Navegación de las sub-opciones
+    document.getElementById('go-to-profile').onclick = () => {
+        closeDrawer();
+        renderProfilePage('settings');
+    }
+    document.getElementById('go-to-address').onclick = () => {
+        closeDrawer(); // Importante cerrar el drawer para ver el dashboard
+        renderProfilePage('address'); 
+    };
+    document.getElementById('go-to-wishlist').onclick = () => {
+        closeDrawer(); // Cerramos el drawer para ver la wishlist en grande
+        window.location.href = "wishlist.html"; 
+    };
 
     document.getElementById('btn-logout').onclick = async () => {
         await signOut(auth);

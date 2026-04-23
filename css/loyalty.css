@@ -1,0 +1,60 @@
+/* --- HEADER Y PUNTOS --- */
+.profile-section-header {
+    text-align: center;
+    padding: 10px 0 20px 0;
+}
+
+.vault-cash-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto; /* Centrado horizontal automático */
+    width: fit-content; /* Se ajusta al texto */
+    border: 1px solid #bfa36a;
+    padding: 8px 18px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    background-color: #fcfcfc;
+}
+
+.points-subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-top: -5px;
+}
+
+/* --- FILA DE ESTADÍSTICAS --- */
+.loyalty-stats-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.stat-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 30px;
+    background-color: #ddd;
+}

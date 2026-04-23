@@ -92,16 +92,13 @@
     }
     
     export function renderCart({ refreshCart, closeCart, onCheckout }) {
-    // 1. DECLARAMOS LA VARIABLE (Esto es lo que faltaba)
     const contentContainer = document.getElementById("drawerContent"); 
     
-    // Verificación de seguridad
     if (!contentContainer) {
         console.error("No se encontró el contenedor drawerContent");
         return;
     }
 
-    // 2. Limpiamos el contenido previo
     contentContainer.innerHTML = ""; 
 
     if (cart.length === 0) {
@@ -111,7 +108,6 @@
         return;
     }
 
-    // ELIMINAMOS el let headerHtml. Solo generamos los items y el footer.
     let itemsHtml = '<div class="cart-items">';
     let total = 0;
     cart.forEach((item, index) => {
@@ -142,15 +138,20 @@
         </div>
     `;
 
-    // Inyectamos solo el cuerpo y el footer
-    contentContainer.innerHTML = itemsHtml + footerHtml;
-        document.getElementById("closeCartBtn").onclick = closeCart;
+    // 1. Inyectamos el HTML
+        contentContainer.innerHTML = itemsHtml + footerHtml;
+
+        // 2. Vinculamos eventos (Eliminé la línea de closeCartBtn que causaba el error)
+        
+        // Botones de eliminar
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.onclick = () => {
                 const index = Number(btn.dataset.index);
                 removeFromCart(index, refreshCart);
             };
         });
+
+        // Botones de cantidad
         document.querySelectorAll(".qty-btn").forEach(btn => {
             btn.onclick = () => {
                 const index = Number(btn.dataset.index);
@@ -158,10 +159,12 @@
                 changeQty(index, change, refreshCart);
             };
         });
+
+        // BOTÓN DE CHECKOUT (Ahora sí llegará aquí sin errores)
         const checkoutBtn = document.getElementById("checkoutBtn");
-            if (checkoutBtn) {
-                checkoutBtn.onclick = onCheckout;
-            }
+        if (checkoutBtn) {
+            checkoutBtn.onclick = onCheckout;
+        }
     }
 
 

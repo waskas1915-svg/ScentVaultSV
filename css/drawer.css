@@ -104,3 +104,40 @@
 .animate-fade-in {
     animation: fadeIn 0.4s ease-out;
 }
+
+/* Contenedor del grupo */
+.menu-item-group {
+    border-bottom: 1px solid #f2f2f2;
+}
+
+/* El submenú oculto por defecto */
+.sub-menu-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fafafa;
+    padding-left: 20px;
+}
+
+.sub-menu-container.open {
+    max-height: 200px; /* Ajusta según el contenido */
+    padding-bottom: 10px;
+}
+
+/* Items del submenú */
+.sub-menu-item {
+    padding: 12px 0;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.sub-menu-item:hover {
+    color: #bfa36a; /* Tu dorado de marca */
+}
+
+/* Ajuste para que el row de configuración no tenga borde doble */
+.menu-item-group .menu-item-row {
+    border-bottom: none;
+}
