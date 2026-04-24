@@ -1,63 +1,60 @@
 // app.js
-import { loadProducts } from "./product.js";
+import { auth, db } from "./firebase.js";
 import { showProducts } from "./ui.js";
-import { renderCart, updateCartUI, addToCart } from "./cart.js";
-import { checkUserStatus } from "./auth_status.js";
-import { checkout, sendOrderWhatsApp } from "./checkout.js";
-import { showToast } from "./toast.js";
+import { updateCartUI, addToCart } from "./cart.js";
 import { initHeader } from "./header.js";
-import { initDrawer, openDrawer } from "./drawer.js"; // Importamos el nuevo Drawer
+import { initDrawer, openDrawer } from "./drawer.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-let allProducts = [];
+export let allProducts = [];
+
+onAuthStateChanged(auth, async (user) => {
+    try {
+        if (allProducts.length === 0) {
+            const querySnapshot = await getDocs(collection(db, "products"));
+            allProducts = querySnapshot.docs.map(doc => {
+                const data = doc.data();
+                return {
+                    // Usamos tu ID manual como principal para que coincida con ['511']
+                    id: String(data.id), 
+                    firebaseId: doc.id,
+                    ...data
+                };
+            });
+            // Hacemos la lista global para que otros archivos la lean
+            window.allProducts = allProducts; 
+        }
+        
+        // Dibujamos la tienda
+        await showProducts(allProducts, handleAddToCart);
+        
+    } catch (err) {
+        console.error("Error en el inicio:", err);
+    }
+});
 
 async function init() {
-    try {
-        allProducts = await loadProducts();
-        showProducts(allProducts, handleAddToCart);
-        
-        // Inicializamos los componentes modulares
-        initHeader();
-        initDrawer();
-        
-        updateCartUI(); // Actualiza contadores iniciales
-    } catch (err) {
-        console.error(err);
-        showToast("Failed to load products", "error");
-    }
+    initHeader();
+    initDrawer();
+    updateCartUI(); 
 }
 
-// Esta función ahora es mucho más simple
 function handleAddToCart(id, name, size, price, image, ml) {
     addToCart(id, name, size, price, image, ml, () => {
-        // En lugar de refreshCart manual, usamos el Drawer
         openDrawer('cart'); 
     });
 }
 
-export function handleCheckout() {
-    checkout({
-        closeCart: () => { /* Aquí podrías llamar a closeDrawer de drawer.js */ },
-        onSendOrder: handleSendOrder,
-        onBack: () => {
-            showProducts(allProducts, handleAddToCart);
-            window.scrollTo(0, 0);
-        }
-    });
+document.addEventListener("DOMContentLoaded", init);
+
+export function resetToHome() {
+    showProducts(allProducts, handleAddToCart);
+    window.scrollTo(0, 0);
 }
 
-function handleSendOrder({ subtotal, shipping, total }) {
-    sendOrderWhatsApp({ subtotal, shipping, total });
+// Logo click
+const logo = document.getElementById("logo");
+if (logo) {
+    logo.onclick = () => resetToHome();
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    init();
-
-    // El logo ahora es más simple
-    const logo = document.getElementById("logo");
-    if (logo) {
-        logo.onclick = () => {
-            showProducts(allProducts, handleAddToCart);
-            window.scrollTo(0, 0);
-        };
-    }
-});

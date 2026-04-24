@@ -1,21 +1,66 @@
-/* CSS para el botón de Wishlist en la tarjeta */
-.wishlist-btn {
+/* 3. EL BOTÓN DEL CORAZÓN (Look Boutique) */
+.wishlist-overlay-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: white;
+    background: transparent; /* Invisible por defecto */
+    border: none;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     cursor: pointer;
-    transition: transform 0.2s;
+    z-index: 5;
+    transition: all 0.3s ease; /* Transición suave */
+    padding-top: 3px !important;
+    padding: 0 !important;
+    line-height: 0 !important;
 }
 
-.wishlist-btn:hover {
-    transform: scale(1.1);
-    color: #bfa36a;
+/* El Icono de Corazón (SVG) */
+.wishlist-overlay-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: transparent; /* Tu Dorado ScentVault */
+    transition: transform 0.3s ease, fill 0.3s ease;
 }
+
+/* Efectos al pasar el mouse */
+.wishlist-overlay-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra suave al aparecer */
+}
+
+/* Estado Activo (Cuando ya es favorito) */
+.wishlist-overlay-btn.active svg {
+    filter: drop-shadow(0 0 2px rgba(191, 163, 106, 0.5));
+    fill: #a68d5b; /* Dorado más intenso */
+}
+
+.heart-icon-svg {
+    display: block;
+    transform: translate(-0.5px, 1.5px) !important;
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    fill: none; /* Corazón vacío */
+    stroke: #333; /* Color de la línea (negro suave) */
+    stroke-width: 1.8px;
+    transition: all 0.3s ease;
+}
+
+.heart-icon-svg:hover {
+    stroke: #bfa36a; /* Color de la línea (negro suave) */
+}
+
+.wishlist-overlay-btn.active .heart-icon-svg {
+    fill: #bfa36a; /* Se llena de tu dorado cuando es favorito */
+    stroke: #bfa36a;
+}
+
+.wishlist-items-list {
+    padding: 10px;
+}
+

@@ -22,4 +22,12 @@ export async function loadProducts() {
     console.error("Error loading products:", err);
     return [];
   }
+
+  const querySnapshot = await getDocs(collection(db, "products"));
+  return querySnapshot.docs.map(doc => ({
+      id: doc.id,           // <-- Este es el ID largo (7x9WzL2...)
+      numberId: doc.data().id, // Guardamos tu número (511) por si lo usas para otra cosa
+      ...doc.data()         // Trae el resto: name, image, price, etc.
+  }));
+
 }

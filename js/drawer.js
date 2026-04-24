@@ -2,8 +2,8 @@
 import { renderCart } from "./cart.js";
 import { auth } from "./firebase.js";
 import { renderAccountView } from "./auth_status.js";
-import { toggleWishlist, renderWishlistItems, renderEmptyWishlist, getWishlistFromFirebase } from "./wishlist.js";
-import { handleCheckout } from "./app.js";
+import { toggleWishlist, updateWishlistCounter, renderWishlistItems, renderEmptyWishlist, getWishlistFromFirebase } from "./wishlist.js";
+import { handleCheckout } from "./checkout.js";
 
 // Elementos del DOM (asegúrate de que los IDs coincidan con tu HTML)
 const drawer = document.getElementById('unifiedDrawer');
@@ -137,3 +137,4 @@ export async function renderWishlist() {
         switchTab('cart'); 
     };
 }
+window.closeDrawer = closeDrawer;

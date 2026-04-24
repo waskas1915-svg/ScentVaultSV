@@ -243,15 +243,27 @@
 }
 
 .add-address-btn {
-    display: block;          /* Para que acepte márgenes laterales */
-    margin: 20px auto 40px;  /* 'auto' a los lados lo centra horizontalmente */
-    padding: 15px 35px;
-    font-size: 13px;
-    letter-spacing: 1px;
+    display: block;
+    margin: 30px auto;
+    background-color: #1a1a1a; /* Negro para balancear con el header */
+    color: #fff;
+    border: 1px solid #1a1a1a;
+    padding: 14px 30px;
+    font-family: 'Montserrat', sans-serif; /* O tu sans-serif principal */
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .add-address-btn:hover {
-    background: #333;
+    background-color: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }
 
 .sub-title-gold {
@@ -282,7 +294,8 @@
 .address-details {
     font-size: 14px;
     line-height: 1.6;
-    color: #333;
+    color: #444;
+    margin: 3px 0;
     margin-bottom: 20px;
 }
 
@@ -290,6 +303,8 @@
     display: block;
     font-size: 16px;
     margin-bottom: 5px;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
@@ -310,11 +325,18 @@
 .edit-btn-link {
     background: none;
     border: none;
-    color: #bfa36a;
-    text-decoration: underline;
-    font-size: 13px;
-    cursor: pointer;
+    color: #bfa36a; /* Tu Dorado ScentVault */
+    font-size: 11px;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.edit-btn-link:hover {
+    text-decoration: underline;
+    color: #a68d5b;
 }
 
 /* address */
@@ -400,15 +422,20 @@
 .delete-btn-link {
     background: none;
     border: none;
-    color: #dc3545; /* Rojo para advertencia */
-    text-decoration: underline;
-    font-size: 13px;
-    cursor: pointer;
+    color: #999; /* Gris sutil inicialmente */
+    font-size: 11px;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    position: relative;
 }
 
 .delete-btn-link:hover {
-    color: #a71d2a;
+    color: #c0392b; /* Rojo quemado solo al pasar el mouse */
 }
 
 .ref-text {
@@ -431,6 +458,8 @@
     max-width: 1600px;
     margin: 60px auto;
     padding: 0 20px;
+    min-height: 70vh;
+    margin-bottom: 100px;
 }
 
 .profile-main-content .breadcrumb-nav,

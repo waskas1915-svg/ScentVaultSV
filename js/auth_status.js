@@ -513,7 +513,7 @@ async function renderProfileView(user) {
     };
     document.getElementById('go-to-wishlist').onclick = () => {
         closeDrawer(); // Cerramos el drawer para ver la wishlist en grande
-        window.location.href = "wishlist.html"; 
+        renderProfilePage('wishlist');
     };
 
     document.getElementById('btn-logout').onclick = async () => {

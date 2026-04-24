@@ -156,3 +156,18 @@ export async function sendOrderWhatsApp({ subtotal, shipping, total }) {
     }
 }
 
+function handleSendOrder({ subtotal, shipping, total }) {
+    sendOrderWhatsApp({ subtotal, shipping, total });
+}
+
+export function handleCheckout() {
+    checkout({
+        closeCart: () => { /* Aquí podrías llamar a closeDrawer de drawer.js */ },
+        onSendOrder: handleSendOrder,
+        onBack: () => {
+            showProducts(allProducts, handleAddToCart);
+            window.scrollTo(0, 0);
+        }
+    });
+}
+

@@ -1,75 +1,89 @@
-// UI.js
+// ui.js
+import { auth, db } from './firebase.js';
+import { showToast } from "./toast.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { updateWishlistCounter } from "./wishlist.js"; 
 
-    import { showToast } from "./toast.js";
-
-    //Show products
-    export function showProducts(products, addToCart) {
+export async function showProducts(products, addToCart) {
     const container = document.getElementById('products');
     container.innerHTML = `<div id="productGrid"></div>`;
     const grid = document.getElementById('productGrid');
+    
+    const user = auth.currentUser;
+    let userWishlist = [];
+
+    if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+            userWishlist = userDoc.data()?.wishlist || [];
+        }
+    }
 
     products.forEach(product => {
         const div = document.createElement('div');
         div.classList.add("product-card");
 
         const hasStock = product.stock_ml > 0;
-
-        
-        if (!hasStock) {
-        div.classList.add("out-of-stock-card");
-        } else {
-            div.classList.add("clickable");
-            div.onclick = () => viewProduct(product.id, products, addToCart);
-        }
+        const isFavorite = userWishlist.includes(String(product.id));
 
         div.innerHTML = `
-            <img src="${product.image}" class="product-img">
+            <div class="product-img-container">
+                <img src="${product.image}" class="product-img">
+                <button class="wishlist-overlay-btn ${isFavorite ? 'active' : ''}" 
+                        onclick="toggleWishlist(event, '${product.id}')" 
+                        id="wish-btn-${product.id}">
+                    <svg class="heart-icon-svg" viewBox="0 0 24 24"> <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </button>
+            </div>
             <h3>${product.name}</h3>
-
             <div class="card-bottom">
                 <p class="${hasStock ? 'in-stock' : 'out-of-stock'}">
                     ${hasStock ? 'In Stock' : 'Out of Stock'}
                 </p>
-                <button class="primary-btn" ${!hasStock ? "disabled" : ""}>
+                <button class="primary-btn gold-btn">
                     View Options
                 </button>
             </div>
         `;
 
-        const btn = div.querySelector('button');
+        // Click en toda la card o en el botón
         if (hasStock) {
-            btn.onclick = (e) => {
-                e.stopPropagation(); 
-                viewProduct(product.id, products, addToCart);
+            div.classList.add("clickable");
+            const action = () => viewProduct(product.id, products, addToCart);
+            div.onclick = action;
+            div.querySelector('.primary-btn').onclick = (e) => {
+                e.stopPropagation();
+                action();
             };
+        } else {
+            div.classList.add("out-of-stock-card");
         }
 
         grid.appendChild(div); 
     });
+
+    if (typeof updateWishlistCounter === 'function') {
+        updateWishlistCounter(userWishlist.length);
+    }
 }
 
-    //View products
-
-    export function viewProduct(productId, products, addToCart) {
-    const product = products.find(p => p.id === productId);
+export function viewProduct(productId, products, addToCart) {
+    const product = products.find(p => String(p.id) === String(productId));
     if (!product) return;
+
     const container = document.getElementById('products');
-    let selectedVariant = null;
+    window.scrollTo(0, 0);
 
     container.innerHTML = `
         <div class="product-view">
             <div class="product-view-left">
-                <div class="product-title">
-                    <h2 class="product-title-main">${product.name}</h2>
-                </div>
+                <h2 class="product-title-main">${product.name}</h2>
                 <div class="product-image-container">
-                    <img id="variant-image" 
-                        src="${product.images?.[0] || product.image}"
-                        onerror="this.src='./images/noimage.png'">
+                    <img id="variant-image" src="${product.image}">
                 </div>
                 <div id="thumbnailRow" class="thumbnail-row"></div>
             </div>
-            
             <div class="product-info">
                 <div id="variantGrid"></div>
                 <div id="purchaseBox"></div>
@@ -83,206 +97,61 @@
                 <p class="tagline">"${product.marketing?.tagline || ''}"</p>
                 <p class="description-text">${product.description || ''}</p>
             </header>
-
             <div class="specs-bar">
                 <span>FAMILIA: ${product.marketing?.family || 'N/A'}</span>
                 <span class="separator">|</span>
                 <span>TIPO: ${product.marketing?.scent_type || 'N/A'}</span>
             </div>
-
             <section class="composition-section">
                 <h3>Notas de la Fragancia</h3>
                 <div class="notes-grid">
-                    <div class="note-card">
-                        <strong>Salida</strong>
-                        <span>${product.marketing?.notes?.opening || 'N/A'}</span>
-                    </div>
-                    <div class="note-card">
-                        <strong>Corazón</strong>
-                        <span>${product.marketing?.notes?.heart || 'N/A'}</span>
-                    </div>
-                    <div class="note-card">
-                        <strong>Fondo</strong>
-                        <span>${product.marketing?.notes?.foundation || 'N/A'}</span>
-                    </div>
+                    <div class="note-card"><strong>Salida</strong><span>${product.marketing?.notes?.opening || 'N/A'}</span></div>
+                    <div class="note-card"><strong>Corazón</strong><span>${product.marketing?.notes?.heart || 'N/A'}</span></div>
+                    <div class="note-card"><strong>Fondo</strong><span>${product.marketing?.notes?.foundation || 'N/A'}</span></div>
                 </div>
             </section>
-
-            <div class="faq-section">
-                <h3>Preguntas Frecuentes</h3>
-                <div id="faqList" class="faq-accordion">
-                    ${(product.faqs || []).map((faq, index) => `
-                        <div class="faq-item">
-                            <button class="faq-question-btn" onclick="this.parentElement.classList.toggle('active')">
-                                <strong>${faq.q}</strong>
-                            </button>
-                            <div class="faq-answer-content">
-                                <p>${faq.a}</p>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
+        </div>
     `;
 
-        const grid = document.getElementById('variantGrid');
-        const purchaseBox = document.getElementById('purchaseBox');
-        const thumbnailRow = document.getElementById('thumbnailRow');
-        const thumbnails = thumbnailRow.children;
-        const sizeOptions = grid.children;
-        function clearSelection() {
-                Array.from(sizeOptions).forEach(el => {
-                el.classList.remove('selected');
-                });
-        }
-        function updateActiveThumbnail(image) {
-                Array.from(thumbnails).forEach(t => {
-                    t.classList.toggle('active', t.getAttribute('src') === image)
-                });
-        }
-        function setMainImage(src) {
-            const mainImg = document.getElementById("variant-image");
-            if (mainImg) {
-                mainImg.src = src;
-            }
-        }
-        // create thumbnails
-        const images = product.images?.length ? product.images : [product.image];
-            images.forEach((img, i) => {
-        const thumb = document.createElement('img');
-            thumb.src = img;
-            thumb.classList.add('thumbnail');
-            thumb.onclick = () => {
-                setMainImage(img);
-                updateActiveThumbnail(img);
-                clearSelection();
-                selectedVariant = null;
-                updatePurchaseBox()
-            };
-            thumbnailRow.appendChild(thumb);
-            if (i === 0) thumb.classList.add('active');
-            });
+    // Lógica de Variantes
+    const vGrid = document.getElementById('variantGrid');
+    const pBox = document.getElementById('purchaseBox');
+    let selectedVariant = null;
 
-        console.log("FULL PRODUCT:", product);
-        console.log("VARIANTS:", product.variants);   
-        selectedVariant = null;    
-        grid.innerHTML = ''
-        //variants  
-        product.variants.forEach((variant, index) => {
-            const card = document.createElement('div');
-                card.classList.remove('selected');
-                card.classList.add('size-option');
-            const variantML = parseInt(variant.size); // "3ML" → 3
-            const isAvailable = variant.in_stock && product.stock_ml >= variantML
-                if (!isAvailable) {
-                    card.classList.add('out');
-                }
+    product.variants.forEach(variant => {
+        const card = document.createElement('div');
+        card.className = 'size-option';
+        const isAvail = variant.in_stock && product.stock_ml >= parseInt(variant.size);
+        if (!isAvail) card.classList.add('out');
 
-                card.innerHTML = `
-                    <img src="${variant.image}" width="80"
-                    onerror="this.src='./images/noimage.png'">
-                    <p><strong>${variant.size}</strong></p>
-                    <p class="price">$${variant.price}</p>
-                    ${!isAvailable ? '<p class="out-of-stock-label">Out of Stock</p>' : ''}
-                `;
-                
-            // click logic
-            card.onclick = () => {
-                if (!isAvailable) {
-                    showToast("This option is out of stock", "error");
-                    return;
-                }
-                clearSelection();
-                selectedVariant = variant;
-                const img = variant.image || product.image || './images/noimage.png';
-                setMainImage(img);
-                updateActiveThumbnail(img);
-                card.classList.add('selected');
-                updatePurchaseBox();
-            };
-            grid.appendChild(card);
-                    
-        });    
+        card.innerHTML = `
+            <img src="${variant.image || product.image}" width="80">
+            <p><strong>${variant.size}</strong></p>
+            <p class="price">$${variant.price}</p>
+        `;
 
-        const firstAvailable = product.variants.find(v => {
-            const ml = parseInt(v.size) || 0;
-            return v.in_stock === true && product.stock_ml >= ml;
-        });
-            if (!firstAvailable) {
-                // No variants available
-                    grid.innerHTML = `
-                        <div class="out-of-stock-box">
-                            <p class="out-of-stock-message">
-                                All variants are out of stock
-                            </p>
-                        </div>
-                    `;
-                    purchaseBox.innerHTML = ""
-                return; // stop further execution
-            }
-
-                selectedVariant = firstAvailable;
-                const defaultImage = product.images?.[0] || product.image;
-                setMainImage(defaultImage);
-                updateActiveThumbnail(defaultImage);
-                updatePurchaseBox(); 
+        card.onclick = () => {
+            if (!isAvail) return;
+            document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedVariant = variant;
+            document.getElementById('variant-image').src = variant.image || product.image;
             
-
-
-        function updatePurchaseBox() {
-            if (!selectedVariant) {
-                // En lugar de 'return', mostramos el botón deshabilitado
-                purchaseBox.innerHTML = `
-                    <div class="purchase-box">
-                        <button class="primary-btn" style="opacity: 0.5; cursor: not-allowed;" disabled>
-                            Seleccione un tamaño
-                        </button>
-                    </div>`;
-                return;
-            }
-
-            purchaseBox.innerHTML = `
-                <div class="purchase-box">
-                    <button id="addCartBtn" class="primary-btn">Add to Cart</button>
-                </div>`;
-                    
-            const addBtn = document.getElementById("addCartBtn");
-                if (addBtn) {
-                    addBtn.onclick = () => {
-                        if (!selectedVariant) {
-                            showToast("Please select an option", "error");
-                            return;
-                        }
-
-                        addToCart(
-                            product.id,
-                            product.name,
-                            selectedVariant.size,
-                            selectedVariant.price,
-                            product.image,
-                            selectedVariant.ml
-                        );
-
-                        showToast("Added to cart 🛒", "success");
-
-                        // trigger CSS animation
-                        addBtn.classList.add("added");
-                        setTimeout(() => addBtn.classList.remove("added"), 300);
-                    };
-                }
-
-        }
-
-        // Back button
-        const back = document.createElement('button');
-        back.innerText = "⬅ Back";
-
-        back.onclick = () => {
-            showProducts(products, addToCart);
+            pBox.innerHTML = `<button id="addBtn" class="primary-btn">Add to Cart</button>`;
+            document.getElementById('addBtn').onclick = () => {
+                addToCart(product.id, product.name, variant.size, variant.price, product.image, variant.ml);
+                showToast("Added to cart 🛒", "success");
+            };
         };
+        vGrid.appendChild(card);
+    });
 
-        back.classList.add("secondary-btn");
-        document.getElementById("backContainer").appendChild(back);
+    const backBtn = document.createElement('button');
+    backBtn.className = 'secondary-btn';
+    backBtn.innerText = "⬅ Back to Shop";
+    backBtn.onclick = () => showProducts(products, addToCart);
+    document.getElementById('backContainer').appendChild(backBtn);
+}
 
-    }
-
+// Hacemos la función global para que el HTML la encuentre
+window.viewProduct = viewProduct;
