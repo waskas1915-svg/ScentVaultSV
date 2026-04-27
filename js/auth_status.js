@@ -437,9 +437,8 @@ async function renderProfileView(user) {
                 <div class="vault-cash-badge">
                     YOU HAVE <span class="gold-text">${points} VAULT POINTS</span>
                 </div>
-                
-                <p class="points-subtitle">Crédito disponible: <strong>$${cashValue} USD</strong></p>
             </div>
+        
 
             <hr class="profile-divider">
 
@@ -457,17 +456,17 @@ async function renderProfileView(user) {
                 </div>
 
                 <div class="menu-item-row">
-                    <div class="item-label">VISTA GENERAL</div>
+                    <div class="item-label" id="go-to-overview">VISTA GENERAL</div>
                     <span class="plus-symbol">→</span>
                 </div>
 
                 <div class="menu-item-row">
-                    <div class="item-label">HISTORIAL DE COMPRAS</div>
+                    <div class="item-label" id="go-to-history">HISTORIAL DE COMPRAS</div>
                     <span class="plus-symbol">→</span>
                 </div>
 
                 <div class="menu-item-row">
-                    <div class="item-label">MIS RECOMPENSAS</div>
+                    <div class="item-label" id="go-to-rewards">MIS RECOMPENSAS</div>
                     <span class="plus-symbol">+</span>
                 </div>
 
@@ -503,6 +502,21 @@ async function renderProfileView(user) {
     };
 
     // 2. Navegación de las sub-opciones
+    document.getElementById('go-to-overview').onclick = () => {
+            closeDrawer();
+            renderProfilePage('overview');
+        }
+
+    document.getElementById('go-to-rewards').onclick = () => {
+            closeDrawer();
+            renderProfilePage('loyalty');
+        }
+
+    document.getElementById('go-to-history').onclick = () => {
+            closeDrawer();
+            renderProfilePage('history');
+        }
+
     document.getElementById('go-to-profile').onclick = () => {
         closeDrawer();
         renderProfilePage('settings');
