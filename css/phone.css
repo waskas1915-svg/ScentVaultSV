@@ -33,6 +33,18 @@
      display: none;
   }  
 
+  #productGrid {
+        /* Cambiamos a un mínimo de 140px para forzar 2 columnas en móviles */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px; /* Reducimos el espacio entre tarjetas para ganar pantalla */
+        padding: 10px; /* Menos espacio en los bordes de la pantalla */
+    }
+
+    .product-card {
+        padding: 12px; /* Tarjetas más compactas */
+        border-radius: 12px;
+    }
+
 }
 
 @media (max-width: 1024px) {
