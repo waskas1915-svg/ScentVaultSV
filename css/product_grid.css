@@ -111,3 +111,37 @@
     flex-direction: column;
     gap: 8px; 
 }
+
+.product-img-container.out-of-stock-filter {
+    position: relative !important;
+    overflow: hidden !important; /* Mantiene el badge dentro de los bordes redondeados */
+}
+
+/* Opacidad sutil a la imagen del perfume agotado */
+.product-img-container.out-of-stock-filter .product-img {
+    filter: brightness(0.7) grayscale(0.2);
+}
+
+/* Centrado perfecto del badge "AGOTADO" sobre la imagen */
+.sold-out-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Truco clave para centrar ejes X e Y */
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo oscuro semitransparente premium */
+    color: #ffffff;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    z-index: 2;
+    pointer-events: none; /* Evita que interfiera con los clics */
+    white-space: nowrap;
+}
+
+/* Estilo para la tarjeta deshabilitada completa (opcional) */
+.disabled-card {
+    cursor: default;
+}

@@ -6,19 +6,11 @@
         grid-template-columns: 1fr;
     }
     
-  .product-view {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+  
 
   #variant-image {
     width: 100%;
     max-width: 300px;
-  }
-
-  .product-info {
-    width: 100%;
   }
 
   .notes-grid-layout {
@@ -32,38 +24,106 @@
   .footer-divider {
      display: none;
   }  
+   /* Header */
 
+   .main-navbar {
+        min-height: 70px !important; 
+        padding: 10px 15px !important;
+    }
+
+    .header-content {
+        padding: 0 5px;
+        /* Quitamos las restricciones para que flexbox alinee de forma natural */
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* 2. Rompemos el posicionamiento absoluto del logo en móviles */
+    .logo-wrapper {
+        position: static !important; /* Vuelve al flujo normal de flexbox */
+        transform: none !important;
+        left: auto !important;
+    }
+
+    /* 3. Hacemos el logo significativamente más pequeño en teléfonos */
+    #logo {
+        max-width: 100px !important;
+        max-height: 70px !important;
+    }
+
+    /* 4. Reducimos la separación del bloque derecho */
+    .header-right {
+        gap: 12px !important;
+    }
+
+    /* 5. Ajustamos el botón del carrito para que no ocupe tanto espacio */
+    #cartBtn {
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+    }
+
+    #auth-status .nav-link {
+        font-size: 0 !important; /* Esconde el texto de forma limpia */
+        letter-spacing: 0 !important;
+        gap: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    #auth-status .user-icon {
+        font-size: 20px !important; /* Hace el icono un poco más fácil de tocar */
+    }
+
+
+  /* Product grid */
   #productGrid {
-        /* Cambiamos a un mínimo de 140px para forzar 2 columnas en móviles */
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px; /* Reducimos el espacio entre tarjetas para ganar pantalla */
-        padding: 10px; /* Menos espacio en los bordes de la pantalla */
-    }
+        gap: 15px; 
+        padding: 10px; 
+  }
 
-    .product-card {
-        padding: 12px; /* Tarjetas más compactas */
+  .product-info {
+    width: 100%;
+  }
+
+  .product-view {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+    
+  .product-card {
+        padding: 12px; 
         border-radius: 12px;
-    }
-  .product-card img {
-        width: 100%; /* Ocupa todo el ancho disponible del contenedor */
-        height: auto; /* Mantiene la proporción original */
-        aspect-ratio: 1 / 1; /* Fuerza a que siga siendo un cuadrado perfecto */
+  }
+
+  .product-card img, .product-img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important; 
     }
 
     .product-img-container {
-        padding: 6px; /* Menos padding interno en móvil */
+        padding: 6px; 
         border-radius: 8px;
     }
 
-    /* Ajuste extra: Reducir tamaños de letra de títulos para que no rompan el diseño */
     .product-card h3 {
         font-size: 14px;
-        min-height: 40px; /* Reducimos la altura mínima para textos cortos */
+        min-height: 40px; 
         margin: 10px 0 2px 0;
     }
     
     .in-stock, .out-of-stock {
         font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .sold-out-badge {
+        padding: 6px 12px;
+        font-size: 11px;
+        letter-spacing: 1px;
     }
 
 }
@@ -82,14 +142,14 @@
 
 @media (max-width: 480px) {
     .user-greeting {
-        display: none;              /* En teléfonos muy pequeños, ocultamos el "Hola, Kevin" */
+        display: none;              
     }
     
     .account-icon-only {
-        display: block;             /* Mostramos solo un icono de personita en su lugar */
+        display: block;             
     }
 
     .header-logo img {
-        max-height: 30px;           /* Logo más pequeño para ganar espacio */
+        max-height: 30px;           
     }
 }
