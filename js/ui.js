@@ -86,7 +86,6 @@ export function viewProduct(productId, products, addToCart) {
     const container = document.getElementById('products');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // --- LÓGICA DE FAQS CORREGIDA PARA TU FIREBASE ('faqs', 'q', 'a') ---
     const faqHtml = (product.faqs && product.faqs.length > 0) ? `
         <section class="product-faq-section animate-fade-in">
             <h3 class="playfair">Preguntas Frecuentes</h3>
@@ -101,6 +100,15 @@ export function viewProduct(productId, products, addToCart) {
         </section>
     ` : '';
 
+    // Soporte para imágenes secundarias en formato de carrusel/galería abajo de la principal
+    const secondaryImagesHtml = (product.images && product.images.length > 1) ? `
+        <div class="thumbnail-row">
+            ${product.images.map(imgUrl => `
+                <img src="${imgUrl}" class="thumbnail" onclick="document.getElementById('variant-image').src='${imgUrl}'">
+            `).join('')}
+        </div>
+    ` : '';
+
     container.innerHTML = `
         <div class="product-view animate-fade-in">
             <div class="product-view-left">
@@ -108,6 +116,7 @@ export function viewProduct(productId, products, addToCart) {
                 <div class="product-image-container">
                     <img id="variant-image" src="${product.image}" class="main-pdp-img">
                 </div>
+                ${secondaryImagesHtml}
             </div>
             <div class="product-info">
                 <p class="select-size-label">SELECCIONA TAMAÑO (ML)</p>
@@ -145,7 +154,7 @@ export function viewProduct(productId, products, addToCart) {
         </div>
     `;
 
-    // Renderizado de Variantes
+    // Renderizado de Variantes con soporte para imágenes
     const vGrid = document.getElementById('variantGrid');
     const pBox = document.getElementById('purchaseBox');
 
@@ -156,18 +165,26 @@ export function viewProduct(productId, products, addToCart) {
         const mlValue = parseInt(variant.size);
         const isAvail = variant.in_stock && product.stock_ml >= mlValue;
         
-        if (!isAvail) card.classList.add('out-of-stock-variant');
+        if (!isAvail) card.classList.add('out');
+
+        // Volvemos a inyectar la etiqueta IMG usando la imagen específica de la variante o la genérica del producto
+        const variantImgSrc = variant.image || product.image;
 
         card.innerHTML = `
+            <img src="${variantImgSrc}" alt="${variant.size}" class="variant-thumb-img">
             <div class="variant-card-inner">
                 <p class="v-size"><strong>${variant.size}</strong></p>
-                <p class="v-price">$${variant.price}</p>
+                <p class="price">$${variant.price}</p>
                 ${!isAvail ? '<span class="v-status">Agotado</span>' : ''}
             </div>
         `;
 
         card.onclick = () => {
             if (!isAvail) return;
+            
+            // Cambiar imagen principal dinámicamente al seleccionar el tamaño
+            document.getElementById('variant-image').src = variantImgSrc;
+
             document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
             card.classList.add('selected');
             
@@ -179,10 +196,8 @@ export function viewProduct(productId, products, addToCart) {
         vGrid.appendChild(card);
     });
 
-    // Inicializar el módulo de reseñas (reviews.js)
     initReviews(product.id, document.getElementById('reviews-container'));
 
-    // Navegación de regreso
     const backBtn = document.createElement('button');
     backBtn.className = 'back-to-shop-link';
     backBtn.innerHTML = "← Volver a la colección";

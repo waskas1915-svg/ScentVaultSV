@@ -126,6 +126,265 @@
         letter-spacing: 1px;
     }
 
+    /* Product details */
+
+    #variant-image {
+        max-height: 350px !important;
+        object-fit: contain !important;
+    }
+
+    /* Grid de opciones de tamaño: de vertical a 2 o 3 columnas interactivas */
+    #variantGrid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    /* Ajustamos las tarjetas de opciones de tamaño para el móvil */
+    .size-option {
+        padding: 12px 8px !important;
+        border: 1px solid #e0d5ba !important;
+        border-radius: 10px !important;
+        background-color: #ffffff !important;
+    }
+
+    .size-option img.variant-thumb-img {
+        width: 65px !important; /* Miniaturas más compactas en celular */
+        height: 65px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .size-option p strong {
+        font-size: 0.9rem !important;
+    }
+
+    .size-option .price {
+        font-size: 0.95rem !important;
+    }
+
+    /* Ajustes para la sección inferior de marketing */
+    .pdp-marketing-fullwide {
+        margin-top: 30px !important;
+        padding: 15px !important;
+        border-radius: 12px !important;
+    }
+
+    .marketing-header {
+        padding: 30px 15px !important;
+    }
+
+    .marketing-header h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .tagline {
+        font-size: 1rem !important;
+    }
+
+    .description-text {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .specs-bar {
+        flex-direction: column !important; /* Familia y tipo uno abajo del otro en móvil */
+        gap: 8px !important;
+        align-items: center !important;
+    }
+
+    .specs-bar .separator {
+        display: none !important; /* Ocultamos la barra divisora horizontal */
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr !important; /* Una sola columna para las notas de salida, corazón y fondo */
+        gap: 12px !important;
+    }
+
+ /* ==========================================================================
+       1. ESTRUCTURA Y CONTENEDORES PRINCIPALES
+       ========================================================================== */
+    
+    /* Desactiva el comportamiento flex horizontal de escritorio */
+    .profile-grid-layout {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 16px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+
+    /* CORRECCIÓN: Centrado absoluto del título "Mi Cuenta" */
+    .dashboard-title,
+    .profile-grid-layout h2,
+    #profile-tab-container h2,
+    .dashboard-view h2 {
+        text-align: center !important;
+        margin-top: 15px !important;
+        margin-bottom: 24px !important;
+        font-size: 26px !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    /* Asegura que el contenedor interno absorba todo el ancho disponible */
+    .profile-main-content-v2,
+    #profile-tab-container,
+    .dashboard-view {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+   /* ==========================================================================
+       2. BOTÓN DE APERTURA DEL MENÚ (Corrección de Visibilidad Absoluta)
+       ========================================================================== */
+    
+    /* El uso de selectores encadenados y el atributo garantiza ganarle a scripts de JS */
+    #menu-toggle-btn,
+    button#menu-toggle-btn.menu-toggle-btn,
+    [id="menu-toggle-btn"] {
+        display: flex !important;       /* Fuerza la visibilidad anulando 'none' */
+        visibility: visible !important; /* Previene bloqueos por opacidad o visibilidad */
+        opacity: 1 !important;
+        
+        /* Ajustes de Caja e Integración en el flujo */
+        align-items: center;
+        justify-content: center;   
+        gap: 10px;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px auto 20px auto !important; /* Separación limpia bajo el título */
+        padding: 14px 16px !important;
+        box-sizing: border-box !important;
+        
+        /* Estilos Estéticos de la Marca */
+        background-color: #fdfaf4 !important; /* Fondo crema suave premium */
+        border: 1px solid #e0d7c6 !important; /* Borde sutil */
+        border-radius: 8px !important;
+        color: #bfa36a !important;            /* Dorado característico */
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(191, 163, 106, 0.08) !important;
+    }
+
+    /* ==========================================================================
+       3. PANEL LATERAL DESLIZABLE (Account Sidebar Drawer)
+       ========================================================================== */
+    
+    .account-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: -300px !important; /* Oculto inicialmente a la izquierda */
+        width: 280px !important;
+        height: 100vh !important;
+        background-color: #ffffff !important;
+        box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15) !important;
+        z-index: 10000 !important; 
+        padding: 24px !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-right: 1px solid #eae6df !important;
+        box-sizing: border-box !important;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Clase activa controlada por tu archivo profile.js */
+    .account-sidebar.mobile-open {
+        left: 0 !important;
+    }
+
+    /* Cabecera interna del menú (Navegación + Botón cerrar X) */
+    .sidebar-mobile-header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eae6df;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-mobile-header h3 {
+        margin: 0;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #3d342d;
+    }
+
+    /* Botón X de cierre */
+    #menu-close-btn {
+        background: transparent;
+        border: none;
+        color: #8a8a8a;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 4px;
+    }
+
+    .sidebar-menu {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .sidebar-menu .menu-item {
+        width: 100% !important;
+        margin-bottom: 6px !important;
+    }
+
+    .sidebar-sub-menu {
+        padding-left: 24px !important;
+        margin-bottom: 12px;
+    }
+
+    /* ==========================================================================
+       4. CORTINA OSCURA TRASLÚCIDA (Overlay)
+       ========================================================================== */
+    
+    .sidebar-overlay {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        z-index: 9999 !important;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Activado mediante JS */
+    .sidebar-overlay.active {
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* ==========================================================================
+       5. CUADRÍCULAS Y COLUMNAS DE TARJETAS
+       ========================================================================== */
+
+    /* Fuerza el apilamiento vertical de Recompensas y Direcciones */
+    .dashboard-grid-row {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
+    }
+
+    .dashboard-card {
+        width: 100% !important;
+        margin: 0 !important;
+    }
 }
 
 @media (max-width: 1024px) {

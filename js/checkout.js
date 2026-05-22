@@ -116,7 +116,7 @@ export async function sendOrderWhatsApp({ subtotal, shipping, discount, total, n
     message += `*TOTAL:* $${total.toFixed(2)}\n\n`;
     message += `_Confirmo mi pedido generado en la web._`;
 
-    const whatsappLink = `https://wa.me/50376017160?text=${encodeURIComponent(message)}`;
+    const whatsappLink = `https://wa.me/50373042594?text=${encodeURIComponent(message)}`;
 
     // Objeto consolidado para el Recibo/PDF en success.js
     const fullOrderDetails = {
