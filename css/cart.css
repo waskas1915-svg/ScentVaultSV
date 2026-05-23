@@ -37,19 +37,29 @@
 }
 
 .cart-footer {
-    padding: 20px;
+    padding: 20px 25px;
     border-top: 1px solid #f0f0f0;
+    background-color: #ffffff; /* Evita transparencias al pasar ítems por detrás */
+    flex-shrink: 0; /* Impide que el scroll empuje este contenedor hacia abajo */
+    
+    /* Soporte para barras de navegación del sistema en teléfonos como el S24 */
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .cart-total {
-    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
     font-weight: 700;
-    margin-bottom: 15px;
+    color: #1a1a1a;
+    margin-top: 0;
+    margin-bottom: 16px;
 }
 
 #checkoutBtn {
     width: 100%;
-    background-color: #bfa36a; /* Tu dorado */
+    background-color: #bfa36a;
     color: white;
     border: none;
     padding: 15px;
@@ -58,6 +68,11 @@
     letter-spacing: 1px;
     cursor: pointer;
     border-radius: 4px;
+    transition: background 0.2s;
+}
+
+#checkoutBtn:active {
+    background-color: #a68b54;
 }
 
 /* ==========================================
@@ -65,9 +80,10 @@
    ========================================== */
 
 .cart-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 25px; /* Aumentamos a 25px para dar ese margen lateral de la captura original */
+    flex: 1; /* Absorbe todo el espacio intermedio */
+    overflow-y: auto !important; /* Activa el scroll exclusivamente aquí */
+    -webkit-overflow-scrolling: touch; /* Scroll fluido en dispositivos móviles */
+    padding: 10px 25px;
 }
 
 .cart-item {
@@ -231,4 +247,17 @@
     background-color: #a68b54;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(191, 163, 106, 0.3);
+}
+
+.drawer-content {
+    height: 100%;
+    overflow: hidden !important; /* Desactivamos el scroll viejo de todo el bloque */
+}
+
+.cart-drawer-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }

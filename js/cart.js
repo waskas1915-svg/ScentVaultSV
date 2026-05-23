@@ -109,12 +109,16 @@ export function renderCart({ refreshCart, closeCart, onCheckout }) {
         return;
     }
 
-    let itemsHtml = '<div class="cart-items">';
+    // --- ENVOLTORIO FLEXBOX PRINCIPAL ---
+    let cartHtml = `<div class="cart-drawer-view animate-fade-in">`;
+
+    // 1. Zona de productos
+    cartHtml += '<div class="cart-items">';
     let total = 0;
     cart.forEach((item, index) => {
         const qty = item.qty || 1;
         total += item.price * qty;
-        itemsHtml += `
+        cartHtml += `
             <div class="cart-item">
                 <img src="${item.image}" class="cart-item-img">
                 <div class="cart-item-info">
@@ -130,16 +134,19 @@ export function renderCart({ refreshCart, closeCart, onCheckout }) {
                 </div>
             </div>`;
     });
-    itemsHtml += '</div>';
+    cartHtml += '</div>'; // Cierre de .cart-items
 
-    let footerHtml = `
+    // 2. Zona de Footer Fijo
+    cartHtml += `
         <div class="cart-footer">
-            <p class="cart-total"><strong>Subtotal: $${total.toFixed(2)}</strong></p>
+            <p class="cart-total"><span>Subtotal:</span> <span>$${total.toFixed(2)}</span></p>
             <button id="checkoutBtn" class="primary-btn black-btn">CHECKOUT</button>
         </div>
     `;
 
-    contentContainer.innerHTML = itemsHtml + footerHtml;
+    cartHtml += `</div>`; // Cierre de .cart-drawer-view
+
+    contentContainer.innerHTML = cartHtml;
 
     const checkoutBtn = document.getElementById("checkoutBtn");
     if (checkoutBtn) checkoutBtn.onclick = onCheckout;
