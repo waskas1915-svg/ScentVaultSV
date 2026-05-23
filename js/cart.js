@@ -11,41 +11,50 @@ function saveCart() {
  * Añadir al carrito respetando el stock disponible
  */
 export function addToCart(id, name, size, price, image, ml, refreshCart) {
-    // IMPORTANTE: 'id' DEBE SER EL ID LARGO DE FIREBASE
-    const existing = cart.find(item => item.id === id && item.size === size);
+    // 1. Asegurar que el ID sea un String limpio para evitar fallos de tipo (Number vs String)
+    const productId = String(id);
+    const existing = cart.find(item => String(item.id) === productId && item.size === size);
 
-    // Buscamos el producto en la lista global para saber cuánto stock real queda
-    const productData = window.allProducts?.find(p => String(p.id) === String(id));
-    const stockDisponible = productData ? productData.stock_ml : 999;
+    // 2. Validación de Stock robusta
+    const productData = window.allProducts?.find(p => String(p.id) === productId);
+    const stockDisponible = productData ? parseInt(productData.stock_ml) : 999;
     const mlNecesarios = parseInt(size);
 
     if (existing) {
-        // Validamos si añadir uno más supera el stock de la botella
         if ((existing.qty + 1) * mlNecesarios > stockDisponible) {
             showToast("No hay suficiente stock en el Vault para añadir más", "error");
             return;
         }
         existing.qty += 1;
     } else {
-        // Validamos si el primer decant cabe en el stock
         if (mlNecesarios > stockDisponible) {
             showToast("Lo sentimos, este tamaño ya no está disponible", "error");
             return;
         }
-        cart.push({ id, name, size, price, image, ml, qty: 1 });
+        // Insertamos el nuevo decant asegurando que qty empiece en 1 explícitamente
+        cart.push({ id: productId, name, size, price: parseFloat(price), image, ml, qty: 1 });
     }
 
-    // Animación del botón
+    // 3. Persistencia Inmediata
+    saveCart();
+    updateCartUI();
+
+    // 4. Animación sutil del botón de la bolsa
     const btn = document.getElementById("cartBtn");
     if (btn) {
         btn.classList.add("cart-bounce");
         setTimeout(() => btn.classList.remove("cart-bounce"), 300);
     }
 
-    saveCart();
-    updateCartUI();
     showToast("Añadido al carrito 🛒", "success");
-    if (refreshCart) refreshCart();
+
+    // 5. TRUCO DE ORO: Forzamos un micro-timeout para que el DOM respire 
+    // y el render del drawer lea el array del carrito perfectamente actualizado
+    if (refreshCart) {
+        setTimeout(() => {
+            refreshCart();
+        }, 50); 
+    }
 }
 
 /**
@@ -153,9 +162,16 @@ export function renderCart({ refreshCart, closeCart, onCheckout }) {
 }
 
 // Hacer globales para los onclick
-window.changeQty = (index, amount) => changeQty(index, amount, () => window.switchTab('cart'));
-window.removeFromCart = (index) => removeFromCart(index, () => window.switchTab('cart'));
-
+window.changeQty = (index, amount) => {
+    changeQty(index, amount, () => {
+        setTimeout(() => window.switchTab('cart'), 30);
+    });
+};
+window.removeFromCart = (index) => {
+    removeFromCart(index, () => {
+        setTimeout(() => window.switchTab('cart'), 30);
+    });
+};
 export function getCart() { return cart; }
 
 export function clearCart() {
