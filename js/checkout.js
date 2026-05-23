@@ -183,47 +183,69 @@ export async function checkout({ closeCart, onBack }) {
     container.innerHTML = `
     <div class="checkout-wrapper animate-fade-in">
       <div class="checkout-left">
-        <button id="backBtn" class="back-btn">← Continuar Comprando</button>
+        <div class="checkout-back-container">
+            <button id="backBtn" class="back-link-btn">← Continuar Comprando</button>
+        </div>
+        
         <h2 class="playfair">Información de Envío</h2>
+        
         <div class="checkout-form">
           ${savedAddresses.length > 0 ? `
-            <div class="input-group" style="margin-bottom: 20px;">
-                <label class="checkout-label">Dirección Guardada</label>
-                <select id="addressSelector" class="checkout-select">
-                    <option value="">-- Seleccionar dirección --</option>
-                    ${savedAddresses.map((addr, index) => `<option value="${index}">${addr.colonia} (${addr.fullName})</option>`).join('')}
-                </select>
+            <div class="form-field">
+              <label class="checkout-label">Dirección Guardada</label>
+              <div class="checkout-select-wrapper">
+                  <select id="addressSelector" class="checkout-select">
+                      <option value="">-- Seleccionar dirección --</option>
+                      ${savedAddresses.map((addr, index) => `<option value="${index}">${addr.colonia} (${addr.fullName})</option>`).join('')}
+                  </select>
+              </div>
             </div>
           ` : ''}
-          <input id="custName" placeholder="Nombre completo" value="${savedCustomer.name || ''}" required>
-          <input id="custPhone" placeholder="Teléfono" value="${savedCustomer.phone || ''}" required>
-          <textarea id="custAddress" placeholder="Dirección exacta y departamento" required>${savedCustomer.address || ''}</textarea>
+          
+          <div class="form-field">
+             <label class="checkout-label">Nombre Completo</label>
+             <input id="custName" placeholder="Ej. Juan Pérez" value="${savedCustomer.name || ''}" required>
+          </div>
+
+          <div class="form-field">
+             <label class="checkout-label">Teléfono</label>
+             <input id="custPhone" placeholder="Ej. 7000-0000" value="${savedCustomer.phone || ''}" required>
+          </div>
+
+          <div class="form-field">
+             <label class="checkout-label">Dirección exacta y departamento</label>
+             <textarea id="custAddress" placeholder="Colonia, calle, número de casa y puntos de referencia..." required>${savedCustomer.address || ''}</textarea>
+          </div>
           
           <div class="coupon-box">
             <label class="checkout-label">¿Tienes un cupón de la Bóveda?</label>
-            <div style="display: flex; gap: 10px; margin-top: 5px;">
-                <input id="couponField" placeholder="SV-XXXX-XXXX" style="margin-bottom: 0;">
+            <div class="coupon-input-field">
+                <input id="couponField" placeholder="SV-XXXX-XXXX">
                 <button id="applyCouponBtn" class="gold-btn">APLICAR</button>
             </div>
           </div>
         </div>
+        
         <button id="continueBtn" class="primary-btn gold-btn checkout-btn">FINALIZAR PEDIDO</button>
       </div>
+      
       <div class="checkout-right">
         <h3 class="playfair">Resumen de Orden</h3>
         <div class="checkout-items-list">
             ${cart.map(item => `
                 <div class="checkout-item">
-                    <img src="${item.image}" class="checkout-item-img">
-                    <div>
-                        <p><strong>${item.name}</strong></p>
-                        <p style="font-size: 12px; color: #666;">${item.size} x${item.qty || 1}</p>
-                        <p style="font-weight: bold;">$${(item.price * (item.qty || 1)).toFixed(2)}</p>
+                    <div class="checkout-item-img-container">
+                        <img src="${item.image}" class="checkout-item-img">
+                    </div>
+                    <div class="checkout-item-details">
+                        <p class="checkout-item-name"><strong>${item.name}</strong></p>
+                        <p class="checkout-item-meta">${item.size} <span class="multiplier">x${item.qty || 1}</span></p>
+                        <p class="checkout-item-price">$${(item.price * (item.qty || 1)).toFixed(2)}</p>
                     </div>
                 </div>
             `).join("")}
         </div>
-        <hr>
+        <hr class="checkout-divider">
         <div id="summary-area" class="summary-totals"></div>
       </div>
     </div>

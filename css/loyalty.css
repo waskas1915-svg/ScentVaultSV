@@ -1,60 +1,153 @@
-/* --- HEADER Y PUNTOS --- */
-.profile-section-header {
-    text-align: center;
-    padding: 10px 0 20px 0;
-}
+/* ==========================================================================
+   Reedem reward pop up
+   ========================================================================== */
 
-.vault-cash-badge {
+.redeem-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px auto; /* Centrado horizontal automático */
-    width: fit-content; /* Se ajusta al texto */
-    border: 1px solid #bfa36a;
-    padding: 8px 18px;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    background-color: #fcfcfc;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.points-subtitle {
-    font-size: 13px;
-    color: #888;
-    margin-top: -5px;
+.redeem-modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-/* --- FILA DE ESTADÍSTICAS --- */
-.loyalty-stats-row {
+.redeem-modal-panel {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+    padding: 24px;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    background: #f9f9f9;
-    padding: 15px 0;
+    border-bottom: 1px solid #eae6df;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.modal-header h3 {
+    font-size: 20px;
+    color: #3d342d;
+    margin: 0;
+}
+
+.close-icon {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #8a8a8a;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.points-balance-header {
+    background: #fdfaf4;
+    border: 1px solid #e0d7c6;
+    border-radius: 8px;
+    padding: 12px 16px;
     margin-bottom: 20px;
-    border-radius: 4px;
 }
 
-.stat-item {
-    text-align: center;
+.points-balance-header p {
+    margin: 0;
+    font-size: 14px;
+    color: #3d342d;
+}
+
+/* Lista de Opciones */
+.redeem-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
     flex: 1;
 }
 
-.stat-number {
-    display: block;
-    font-size: 18px;
+.redeem-option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eae6df;
+    border-radius: 10px;
+    padding: 14px;
+    background: #ffffff;
+    gap: 12px;
+}
+
+.option-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.opt-icon {
+    font-size: 22px;
+    background: #faf9f6;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.opt-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d342d;
+    margin: 0;
+}
+
+.opt-pts {
+    font-size: 12px;
+    color: #bfa36a;
+    font-weight: 500;
+    margin: 2px 0 0 0;
+}
+
+.pts-needed {
+    font-size: 11px;
+    color: #d32f2f;
+    margin: 2px 0 0 0;
+}
+
+/* Botón de Canje de la Lista */
+.redeem-action-btn {
+    padding: 8px 14px;
+    font-size: 11px;
     font-weight: 700;
-    color: #1a1a1a;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
 }
 
-.stat-label {
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: #999;
-    text-transform: uppercase;
+.redeem-action-btn.disabled {
+    background: #f5f5f5;
+    color: #b5b5b5;
+    cursor: not-allowed;
 }
 
-.stat-divider {
-    width: 1px;
-    height: 30px;
-    background-color: #ddd;
+.loading-circle {
+    display: inline-block;
+    animation: spin 1s linear infinite;
 }

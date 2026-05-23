@@ -385,7 +385,161 @@
         width: 100% !important;
         margin: 0 !important;
     }
+
+    /* ==========================================================================
+   Purchase history
+   ========================================================================== */
+    .order-row-card {
+        padding: 16px;
+    }
+    
+    .o-head {
+        align-items: flex-start;
+    }
+    
+    .status-badge {
+        padding: 4px 10px;
+        font-size: 10px;
+    }
+
+    /* ==========================================================================
+   Vault rewards
+   ========================================================================== */
+    .loyalty-main-title {
+        font-size: 22px;
+    }
+    
+    .loyalty-tiers-grid {
+        grid-template-columns: 1fr; /* Colapsa limpiamente a lista en móviles */
+        gap: 12px;
+    }
+    
+    .tier-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    .tier-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0;
+    }
+    
+    .tier-item.active::after {
+        top: 12px;
+        right: 16px;
+    }
+    
+    .progress-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .balance-display {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .balance-display button {
+        width: 100%;
+    }
+    
+    .referral-action {
+        flex-direction: column;
+    }
+    
+    .referral-action button {
+        width: 100%;
+    }
+
+    /* ==========================================================================
+   Profile settings
+   ========================================================================== */
+
+    .form-container-box {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; /* Una sola columna fluida en móvil */
+        gap: 16px;
+    }
+    
+    .form-container-box button.gold-btn {
+        align-self: stretch; /* Se estira a todo el ancho solo en pantallas pequeñas */
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    /* ==========================================================================
+   Address page
+   ========================================================================== */
+
+    .address-view-header {
+        flex-direction: row;
+    }
+
+    .address-grid {
+        grid-template-columns: 1fr; /* Una sola columna fluida en móvil */
+        gap: 14px;
+    }
+
+    /* ==========================================================================
+   wishlist
+   ========================================================================== */
+    
+    .wishlist-page .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .wishlist-page .product-card {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .wishlist-page .product-card img {
+        height: 120px;
+        margin-bottom: 12px;
+    }
+
+    .wishlist-page .product-card h3 {
+        font-size: 12px;
+        min-height: 34px;
+        margin-bottom: 12px;
+    }
+
+    .wishlist-page .product-card button.gold-btn {
+        padding: 8px 0;
+        font-size: 11px;
+    };
+
+     /* ==========================================================================
+    Checkout
+   ========================================================================== */
+
+    .checkout-wrapper {
+        grid-template-columns: 1fr; /* Cambia a una sola columna */
+        gap: 24px;
+        margin: 20px auto;
+    }
+
+    /* Mandamos el resumen de compra arriba en pantallas móviles para mejor UX */
+    .checkout-right {
+        grid-row: 1; 
+    }
+    
+    .checkout-left {
+        grid-row: 2;
+        padding: 20px;
+    }
 }
+
 
 @media (max-width: 1024px) {
     .profile-sidebar-spacer {
@@ -411,4 +565,20 @@
     .header-logo img {
         max-height: 30px;           
     }
+
+     /* ==========================================================================
+    Checkout
+   ========================================================================== */
+
+
+    .coupon-input-field {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .coupon-input-field button.gold-btn {
+        width: 100%;
+        padding: 12px 0;
+    }
+    
 }

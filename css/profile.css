@@ -1054,3 +1054,892 @@
     margin: 8px 0 0 0;
     font-style: italic;
 }
+
+/* ==========================================================================
+   HISTORIAL DE COMPRAS (Mis Pedidos)
+   ========================================================================== */
+
+.history-view {
+    width: 100%;
+    max-width: 100%;
+}
+
+.orders-table-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.order-row-card {
+    background-color: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(61, 52, 45, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-row-card:hover {
+    box-shadow: 0 6px 16px rgba(191, 163, 106, 0.06);
+}
+
+/* Cabecera de la Tarjeta */
+.o-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fdfaf4;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+}
+
+.o-meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.o-code {
+    font-weight: 700;
+    font-size: 15px;
+    color: #3d342d;
+    letter-spacing: 0.5px;
+}
+
+.o-date {
+    font-size: 13px;
+    color: #8a8a8a;
+}
+
+/* Badges de Estado Premium */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.status-pendiente, .status-pending {
+    background-color: #fdfaf4;
+    color: #bfa36a;
+    border: 1px solid #e0d7c6;
+}
+
+.status-completado, .status-completed {
+    background-color: #f4faf6;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+/* Cuerpo de Productos */
+.o-body {
+    margin-bottom: 16px;
+}
+
+.o-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.o-product-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+/* SOLUCIÓN AL DESBORDE: Restricción absoluta del tamaño de imagen */
+.o-thumb-wrapper {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    border-radius: 8px;
+    border: 1px solid #f2edd3;
+    overflow: hidden;
+    background-color: #fdfaf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.o-product-thumb {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+.o-product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.o-product-name {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d342d;
+}
+
+.o-product-qty {
+    margin: 0;
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+/* Pie de la Tarjeta */
+.o-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eae6df;
+    padding-top: 14px;
+}
+
+.o-total-label {
+    font-size: 13px;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.order-row-card .total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #bfa36a; /* El dorado icónico de ScentVault */
+}
+
+/* ==========================================================================
+   VAULT REWARDS (Loyalty System)
+   ========================================================================== */
+
+.loyalty-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Encabezado */
+.loyalty-welcome-section {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.loyalty-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #3d342d;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.loyalty-subtitle {
+    font-size: 14px;
+    color: #7a7571;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+/* Grilla de Tiers */
+.loyalty-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+.tier-item {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Control estricto de los SVGs personalizados */
+.tier-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.tier-icon-wrapper svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tier-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #3d342d;
+    margin: 0 0 4px 0;
+}
+
+.tier-item .range {
+    font-size: 12px;
+    color: #8a8a8a;
+    margin: 0;
+}
+
+/* Estados de los Tiers */
+.tier-item.active {
+    border-color: #bfa36a;
+    background-color: #fdfaf4;
+    box-shadow: 0 4px 16px rgba(191, 163, 106, 0.08);
+}
+
+.tier-item.active::after {
+    content: "TU NIVEL";
+    position: absolute;
+    top: -10px;
+    background: #bfa36a;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+
+.tier-item.locked {
+    opacity: 0.55;
+    background-color: #faf9f6;
+}
+
+/* Tarjeta de Progreso Principal */
+.loyalty-progress-card {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(61, 52, 45, 0.02);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.progress-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #3d342d;
+}
+
+/* Barra de Progreso Personalizada */
+.custom-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #f4edd9;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #bfa36a);
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Despliegue del Balance */
+.balance-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.points-badge {
+    font-size: 28px;
+    font-weight: 700;
+    color: #bfa36a;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: 'Playfair Display', serif;
+}
+
+.points-badge span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a7571;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Cupones Activos Disponibles */
+.active-coupons-section {
+    margin-top: 8px;
+}
+
+.active-coupons-section h3 {
+    font-size: 18px;
+    color: #3d342d;
+    margin-bottom: 16px;
+}
+
+.coupons-flex {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.coupon-ticket {
+    background: linear-gradient(135deg, #fdfaf4 0%, #ffffff 100%);
+    border: 1px dashed #bfa36a;
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(191, 163, 106, 0.04);
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.t-code {
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: #3d342d;
+    letter-spacing: 0.5px;
+}
+
+.t-desc {
+    font-size: 12px;
+    color: #bfa36a;
+    font-weight: 600;
+}
+
+/* Título de Secciones Intermedias */
+.section-title-premium {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #3d342d;
+    margin: 12px 0 0 0;
+}
+
+/* Grilla para Acumular Puntos */
+.earn-grid-premium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+.earn-card {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+
+.earn-card[onclick] {
+    cursor: pointer;
+}
+
+.earn-card[onclick]:hover {
+    transform: translateY(-2px);
+    border-color: #bfa36a;
+}
+
+.pts-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #fdfaf4;
+    border: 1px solid #e0d7c6;
+    color: #bfa36a;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.earn-card .icon {
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.earn-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d342d;
+    margin: 4px 0 0 0;
+}
+
+.earn-card p {
+    font-size: 12px;
+    color: #8a8a8a;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.earn-card.claimed {
+    background-color: #faf9f6;
+    border-color: #e3dec3;
+}
+
+.earn-card.claimed .pts-badge {
+    background: #f4faf6;
+    color: #2e7d32;
+    border-color: #c8e6c9;
+}
+
+.locked-card {
+    background: #fafafa;
+    border: 1px dashed #d1cfcb;
+    opacity: 0.7;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Caja del Sistema de Referidos */
+.referral-box-premium {
+    background: #fdfaf4;
+    border: 1px solid #e0d7c6;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 8px;
+}
+
+.referral-content h2 {
+    font-size: 20px;
+    color: #3d342d;
+    margin-bottom: 8px;
+}
+
+.referral-content p {
+    font-size: 13px;
+    color: #7a7571;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    max-width: 650px;
+}
+
+.referral-action {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.referral-action input {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #555555;
+    outline: none;
+}
+
+/* ==========================================================================
+   CONFIGURACIÓN DE CUENTA (Profile Settings)
+   ========================================================================== */
+
+.profile-settings-view {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profile-settings-view h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3d342d;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Caja contenedora limpia */
+.form-container-box {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(61, 52, 45, 0.02);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grilla balanceada para los campos principales */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+    width: 100%;
+}
+
+/* Campos de entrada individuales */
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.input-field label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #7a7571;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Estilización premium de los Inputs */
+.input-field input {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #3d342d;
+    outline: none;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Estado Focus */
+.input-field input:focus {
+    border-color: #bfa36a;
+    box-shadow: 0 0 0 3px rgba(191, 163, 106, 0.1);
+}
+
+/* Inputs Deshabilitados (como el email o fecha ya guardada) */
+.input-field input:disabled,
+.input-field .disabled-input {
+    background-color: #faf9f6;
+    border-color: #eae6df;
+    color: #a39e99;
+    cursor: not-allowed;
+}
+
+/* Nota pequeña debajo del campo de Fecha de Nacimiento */
+.input-field small {
+    font-size: 12px;
+    color: #8a8a8a;
+    margin-top: 2px;
+    display: block;
+}
+
+/* Ajuste del botón de guardado para que no ocupe todo el ancho en Desktop */
+.form-container-box button.gold-btn {
+    align-self: flex-start;
+    margin-top: 32px;
+    padding: 12px 36px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    min-width: 200px;
+}
+
+/* ==========================================================================
+   VISTA: MIS DIRECCIONES (profile.css)
+   ========================================================================== */
+
+.address-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.address-view * {
+    box-sizing: border-box;
+}
+
+/* Cabecera alineada: Título a la izquierda, Botón a la derecha */
+.address-view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.address-view h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3d342d;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Botón de agregar controlado (evita que se estire al 100%) */
+.address-view button.gold-btn {
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+    width: auto;
+    height: fit-content;
+}
+
+/* Grilla fluida y responsiva para tarjetas de dirección */
+.address-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* Tarjetas de Dirección Minimalistas */
+.address-card {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
+    box-shadow: 0 4px 12px rgba(61, 52, 45, 0.01);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto hover suave de elevación */
+.address-card:hover {
+    border-color: #bfa36a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(191, 163, 106, 0.08);
+}
+
+.address-card strong {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3d342d;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.address-card p {
+    font-size: 13px;
+    color: #7a7571;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Contenedor de acciones dentro de la tarjeta */
+.address-card .actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+    border-top: 1px solid #faf9f6;
+    padding-top: 12px;
+}
+
+/* Botones planos estilizados de acción (reemplazan los botones nativos feos) */
+.address-card .actions button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+}
+
+/* Dorado pulido para Editar */
+.address-card .actions button:first-child {
+    color: #bfa36a;
+}
+
+.address-card .actions button:first-child:hover {
+    color: #a48752;
+}
+
+/* Rojo balanceado para Borrar */
+.address-card .actions button:last-child {
+    color: #c95b5b;
+}
+
+.address-card .actions button:last-child:hover {
+    color: #a74343;
+}
+
+/* ==========================================================================
+   VISTA: MIS FAVORITOS (profile.css)
+   ========================================================================== */
+
+.wishlist-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.wishlist-page * {
+    box-sizing: border-box;
+}
+
+.wishlist-page h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3d342d;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Grilla inteligente adaptativa para perfumes */
+.wishlist-page .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+/* Tarjeta de Producto Premium */
+.wishlist-page .product-card {
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(61, 52, 45, 0.01);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wishlist-page .product-card:hover {
+    border-color: #bfa36a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(191, 163, 106, 0.08);
+}
+
+/* Contenedor e imagen del perfume */
+.wishlist-page .product-card img {
+    width: 100%;
+    max-width: 160px;
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    transition: transform 0.3s ease;
+}
+
+.wishlist-page .product-card:hover img {
+    transform: scale(1.03); /* Leve zoom elegante al perfume al hacer hover */
+}
+
+/* Tipografía del Nombre del Perfume */
+.wishlist-page .product-card h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d342d;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+    min-height: 40px; /* Asegura alineación si un nombre es más largo que otro */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Botón VER acoplado al estilo de la tienda */
+.wishlist-page .product-card button.gold-btn {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: auto; /* Empuja el botón siempre al fondo de la tarjeta */
+}
+
+
+/* ==========================================================================
+   ESTADO VACÍO (Wishlist / Cart)
+   ========================================================================== */
+
+.cart-empty-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border: 1px solid #eae6df;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* Imagen del estado vacío controlada */
+.cart-empty-img {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 24px;
+    opacity: 0.85;
+}
+
+.cart-empty-container h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3d342d;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.cart-empty-container p {
+    font-size: 14px;
+    color: #7a7571;
+    margin: 0 0 24px 0;
+}
+
+/* Botón de explorar tienda */
+.cart-empty-container button.gold-btn {
+    padding: 12px 36px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: auto;
+}
