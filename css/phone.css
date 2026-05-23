@@ -580,5 +580,96 @@
         width: 100%;
         padding: 12px 0;
     }
+
+     /* ==========================================================================
+    cart/drawer
+   ========================================================================== */
+
+    .cart-item {
+        grid-template-columns: 75px 1fr; /* 2 columnas en lugar de 3 */
+        gap: 14px;
+        padding: 16px 0;
+    }
+
+    /* 2. Escalamos levemente la imagen del decant para optimizar espacio */
+    .cart-item-img {
+        width: 75px;
+        height: 75px;
+        object-fit: contain; /* Evita que se recorten los tapones o frascos */
+    }
+
+    /* 3. Reorganizamos la info en un flujo vertical limpio y simétrico */
+    .cart-item-info {
+        position: relative; /* Permite posicionar el botón de remover de forma exacta */
+        gap: 2px;
+    }
+
+    .cart-name {
+        font-size: 13px;
+        padding-right: 24px; /* Espacio de cortesía para que el texto no choque con la X */
+    }
+
+    /* Ajuste de espaciados caóticos en los textos */
+    .cart-size {
+        font-size: 11px;
+        font-weight: 600;
+        color: #bfa36a; /* Dorado característico */
+        margin-top: 0 !important; /* Eliminamos el margin de 20px que rompía el interlineado */
+    }
+
+    .cart-price {
+        font-size: 13px;
+        margin-top: 2px !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* 4. Controles de cantidad más limpios y fáciles de pulsar con el pulgar */
+    .qty-controls {
+        gap: 16px;
+        margin-top: 4px;
+    }
+
+    .qty-btn {
+        font-size: 16px;
+        padding: 4px 8px;
+        background: #faf9f6;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+
+    /* 5. Transformamos el texto plano "Remove" en una discreta y elegante 'X' de boutique */
+    .remove-btn {
+        position: absolute;
+        top: -2px;
+        right: 0;
+        padding: 4px;
+        margin: 0;
+        font-size: 0; /* Oculta la palabra "Remove" */
+        color: #a8a29e;
+        line-height: 1;
+    }
+
+    /* Inyectamos la X minimalista visualmente */
+    .remove-btn::before {
+        content: "✕";
+        font-size: 14px;
+        font-weight: 400;
+        display: block;
+    }
+
+    .remove-btn:hover {
+        color: #c95b5b;
+        text-decoration: none;
+    }
+
+    /* 6. Optimización del botón de Checkout inferior */
+    .cart-footer {
+        padding: 16px 20px 24px 20px; /* Margen de seguridad inferior para gestos de navegación de Android/iOS */
+    }
+
+    #checkoutBtn {
+        padding: 12px;
+        font-size: 13px;
+    }
     
 }
