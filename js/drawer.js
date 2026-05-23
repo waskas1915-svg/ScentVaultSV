@@ -8,8 +8,6 @@ import {
     getWishlistFromFirebase 
 } from "./wishlist.js";
 import { checkout } from "./checkout.js";
-
-// IMPORTANTE: Importamos las funciones de navegación del perfil para los accesos directos
 import { renderProfilePage } from "./profile.js";
 
 const drawer = document.getElementById('unifiedDrawer');
@@ -23,7 +21,7 @@ export function openDrawer(tabName = 'account') {
     
     drawer.classList.add('show');
     overlay.classList.add('show');
-    document.body.style.overflow = 'hidden'; // Bloquea scroll del fondo
+    document.body.style.overflow = 'hidden'; 
     
     switchTab(tabName);
 }
@@ -35,7 +33,7 @@ export function closeDrawer() {
     if (!drawer || !overlay) return;
     drawer.classList.remove('show');
     overlay.classList.remove('show');
-    document.body.style.overflow = ''; // Libera scroll
+    document.body.style.overflow = ''; 
 }
 
 /**
@@ -45,31 +43,32 @@ export async function switchTab(tabName) {
     const contentContainer = document.getElementById('drawerContent');
     if (!contentContainer) return;
 
-    // Gestión visual de botones superiores
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(btn => {
         const isActive = btn.dataset.tab === tabName;
         btn.classList.toggle('active-tab', isActive);
     });
 
-    contentContainer.innerHTML = ""; // Limpiar contenido previo
+    contentContainer.innerHTML = ""; 
 
     switch (tabName) {
         case 'cart':
+            // --- CAMBIO AQUÍ: onBack simplemente reabre la pestaña del carrito de forma fluida ---
             renderCart({ 
                 closeCart: closeDrawer, 
                 refreshCart: () => switchTab('cart'),
                 onCheckout: () => {
                     checkout({ 
                         closeCart: closeDrawer, 
-                        onBack: () => switchTab('cart') 
+                        onBack: () => {
+                            closeDrawer();
+                        } 
                     });
                 }
             });
             break;
 
         case 'account':
-            // renderAccountView() dibujará el menú de perfil si hay sesión
             renderAccountView(); 
             break;
 
@@ -99,13 +98,10 @@ export async function switchTab(tabName) {
 }
 
 /**
- * FUNCIÓN CLAVE: Navegación desde el Drawer hacia el Perfil de Usuario
- * Esta función es la que llaman los botones "Vista General", "Pedidos", etc.
+ * Navegación desde el Drawer hacia el Perfil de Usuario
  */
 window.goToProfileTab = (tabName) => {
-    closeDrawer(); // 1. Cerramos el panel lateral
-    
-    // 2. Ejecutamos el renderizado de la pestaña específica en la página principal
+    closeDrawer(); 
     if (typeof renderProfilePage === 'function') {
         renderProfilePage(tabName);
     } else {
@@ -120,16 +116,13 @@ export function initDrawer() {
     const closeBtn = document.getElementById('closeDrawerBtn');
     if (closeBtn) closeBtn.onclick = closeDrawer;
     
-    // Cerrar al hacer clic en el fondo oscuro
     if (overlay) overlay.onclick = closeDrawer;
 
-    // Vincular botones de pestañas del drawer
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.onclick = () => switchTab(btn.dataset.tab);
     });
 }
 
-// Exposición global para botones generados dinámicamente en otros archivos (como auth_status.js)
 window.closeDrawer = closeDrawer;
 window.switchTab = switchTab;
 window.openDrawer = openDrawer;

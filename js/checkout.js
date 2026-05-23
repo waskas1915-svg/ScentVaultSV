@@ -9,6 +9,9 @@ import { showToast } from "./toast.js";
 
 let appliedCoupon = null;
 
+// Variable global interna para respaldar el catálogo original de la tienda
+let originalStoreHtml = "";
+
 /**
  * Genera un código de orden corto y legible
  */
@@ -96,7 +99,6 @@ export async function createOrder(items, total, shippingAddress, discount = 0, c
 export async function sendOrderWhatsApp({ subtotal, shipping, discount, total, name, phone, address, orderCode }) {
     const cart = getCart();
     
-    // Construcción del mensaje para WhatsApp
     let message = `*SCENTVAULT SV - NUEVA ORDEN*\n`;
     message += `*REFERENCIA: ${orderCode}*\n`;
     message += `--------------------------\n`;
@@ -118,7 +120,6 @@ export async function sendOrderWhatsApp({ subtotal, shipping, discount, total, n
 
     const whatsappLink = `https://wa.me/50373042594?text=${encodeURIComponent(message)}`;
 
-    // Objeto consolidado para el Recibo/PDF en success.js
     const fullOrderDetails = {
         orderCode,
         customer: { name, phone, address },
@@ -129,11 +130,9 @@ export async function sendOrderWhatsApp({ subtotal, shipping, discount, total, n
 
     clearCart();
 
-    // Mostramos la pantalla de éxito pasando la data y la función de redirección
     showSuccessScreen({
         orderData: fullOrderDetails,
         onContinue: () => {
-            // Abrir WhatsApp en una nueva pestaña
             window.open(whatsappLink, '_blank');
         }
     });
@@ -151,6 +150,12 @@ export async function checkout({ closeCart, onBack }) {
     if (typeof closeCart === 'function') closeCart();
     window.scrollTo(0, 0);
 
+    // --- CAMBIO AQUÍ: Capturamos el HTML del catálogo antes de sobreescribirlo ---
+    const container = document.getElementById("products");
+    if (container && !container.querySelector('.checkout-wrapper')) {
+        originalStoreHtml = container.innerHTML; 
+    }
+
     let savedAddresses = [];
     let savedCustomer = JSON.parse(localStorage.getItem("customer")) || {};
 
@@ -161,7 +166,6 @@ export async function checkout({ closeCart, onBack }) {
         } catch (err) { console.error(err); }
     }
 
-    const container = document.getElementById("products");
     const subtotal = cart.reduce((sum, item) => sum + item.price * (item.qty || 1), 0);
     const shipping = subtotal >= 50 ? 0 : 3.99;
     
@@ -253,7 +257,6 @@ export async function checkout({ closeCart, onBack }) {
 
     updateSummaryUI(0);
 
-    // Eventos
     const selector = document.getElementById("addressSelector");
     if (selector) {
         selector.onchange = (e) => {
@@ -287,7 +290,15 @@ export async function checkout({ closeCart, onBack }) {
         } catch (e) { console.error(e); }
     };
 
-    document.getElementById("backBtn").onclick = onBack;
+    // --- CAMBIO AQUÍ: Evento de regreso con restauración de HTML ---
+    document.getElementById("backBtn").onclick = () => {
+        if (originalStoreHtml && container) {
+            container.innerHTML = originalStoreHtml;
+        }
+        if (typeof onBack === "function") {
+            onBack();
+        }
+    };
 
     const continueBtn = document.getElementById("continueBtn");
     continueBtn.onclick = async () => {

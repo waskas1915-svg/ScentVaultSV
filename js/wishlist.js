@@ -83,7 +83,7 @@ export function renderWishlistItems(items) {
                     <div class="cart-item-info">
                         <p class="cart-name">${product.name}</p>
                         <button class="primary-btn gold-btn small-btn" 
-                                onclick="viewProduct('${product.id}', window.allProducts)">
+                                onclick="viewProduct('${product.id}', window.allProducts); window.closeDrawer();">
                             VER OPCIONES
                         </button>
                     </div>
