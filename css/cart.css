@@ -80,10 +80,13 @@
    ========================================== */
 
 .cart-items {
-    flex: 1; /* Absorbe todo el espacio intermedio */
-    overflow-y: auto !important; /* Activa el scroll exclusivamente aquí */
-    -webkit-overflow-scrolling: touch; /* Scroll fluido en dispositivos móviles */
+    flex: 1;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch; /* Mantiene el scroll rápido nativo */
     padding: 10px 25px;
+
+    /* Evita que el "efecto rebote" mueva los contenedores adyacentes */
+    overscroll-behavior-y: contain; 
 }
 
 .cart-item {

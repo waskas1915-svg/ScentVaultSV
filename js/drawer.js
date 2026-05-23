@@ -21,7 +21,10 @@ export function openDrawer(tabName = 'account') {
     
     drawer.classList.add('show');
     overlay.classList.add('show');
+    
+    // Bloqueo estricto de scroll de fondo
     document.body.style.overflow = 'hidden'; 
+    document.documentElement.style.overflow = 'hidden'; // Fuerza el bloqueo en Safari/Chrome
     
     switchTab(tabName);
 }
@@ -33,7 +36,10 @@ export function closeDrawer() {
     if (!drawer || !overlay) return;
     drawer.classList.remove('show');
     overlay.classList.remove('show');
+    
+    // Restauración del scroll
     document.body.style.overflow = ''; 
+    document.documentElement.style.overflow = ''; 
 }
 
 /**
