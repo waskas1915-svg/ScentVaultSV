@@ -1,6 +1,7 @@
 // app.js
 import { auth, db } from "./firebase.js";
-import { showProducts } from "./ui.js";
+// CHANGED: Added showLandingPage to handle the view orchestration
+import { showProducts, showLandingPage } from "./ui.js"; 
 import { updateCartUI, addToCart } from "./cart.js";
 import { initHeader } from "./header.js";
 import { initDrawer, openDrawer } from "./drawer.js";
@@ -36,8 +37,8 @@ onAuthStateChanged(auth, async (user) => {
             window.allProducts = allProducts; 
         }
         
-        // Renderizamos la vitrina principal de ScentVaultSV
-        await showProducts(allProducts, handleAddToCart);
+        // CHANGED: Now rendering the educational landing page view first instead of the grid directly
+        showLandingPage(allProducts, handleAddToCart);
         
     } catch (err) {
         console.error("Error crítico en el inicio de la App:", err);
@@ -67,10 +68,11 @@ document.addEventListener("DOMContentLoaded", init);
 
 /**
  * Función global para regresar al inicio (Home) y limpiar filtros
+ * CHANGED: Pointing this to showLandingPage to keep routing UX fluid
  */
 export function resetToHome() {
     if (window.allProducts) {
-        showProducts(window.allProducts, handleAddToCart);
+        showLandingPage(window.allProducts, handleAddToCart);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
@@ -85,4 +87,24 @@ if (logo) {
         e.preventDefault();
         resetToHome();
     };
+}
+
+window.addEventListener('popstate', (event) => {
+    // Si el estado es nulo o no registra la vista del catálogo, significa que volvió al inicio
+    if (!event.state || event.state.view !== 'catalog') {
+        
+        // Ejecuta aquí la función nativa que vuelve a pintar tu Landing Page por defecto
+        // Por ejemplo, si tu función se llama renderLandingPage, la invocas:
+        if (typeof renderLandingPage === 'function') {
+            renderLandingPage();
+        } else {
+            // Si recargas el index.html por defecto para volver a la landing:
+            window.location.reload(); 
+        }
+    }
+});
+
+// Al cargar la página por primera vez, aseguramos el estado inicial de la Landing
+if (!history.state) {
+    history.replaceState({ view: 'landing' }, 'Inicio', ' ');
 }

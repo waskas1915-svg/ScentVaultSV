@@ -2,10 +2,10 @@
     background-color: #3d342d;
     color: #fcfaf7;
     padding: 60px 20px;
-    margin-top: 80px;
+    margin-top: 0;
     text-align: center;
-    border-top: 3px solid #bfa36a;
-    box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+    border-top: none;
+    box-shadow: none;
 }
 
 .footer-logo {

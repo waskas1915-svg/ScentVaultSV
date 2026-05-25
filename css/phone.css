@@ -538,6 +538,25 @@
         grid-row: 2;
         padding: 20px;
     }
+
+         /* ==========================================================================
+    landing page
+   ========================================================================== */
+
+    .final-cta-btn {
+        padding: 1rem 1.5rem !important;
+        font-size: 0.9rem !important;
+        width: 100%; /* Se adapta elegantemente al ancho de la pantalla del celular */
+        max-width: 320px;
+    }
+
+    .feature-card {
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    .hero-content h1 { font-size: 2.2rem; }
+    .features-grid { gap: 1.5rem; }
 }
 
 
@@ -670,6 +689,17 @@
     #checkoutBtn {
         padding: 12px;
         font-size: 13px;
+    }
+
+     /* ==========================================================================
+    landing page
+   ========================================================================== */
+
+    .final-cta-btn {
+        padding: 1rem 1.5rem !important;
+        font-size: 0.9rem !important;
+        width: 100%; /* Se adapta elegantemente al ancho de la pantalla del celular */
+        max-width: 320px;
     }
     
 }

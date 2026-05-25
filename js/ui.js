@@ -3,6 +3,17 @@ import { auth, db } from './firebase.js';
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { updateWishlistCounter, toggleWishlist } from "./wishlist.js";
 import { initReviews } from "./reviews.js";
+import { renderLandingPage } from './landingPage.js';
+/**
+ * Renderiza la grilla principal de productos
+ */
+export function showLandingPage(products, addToCart) {
+    // We pass a callback function to renderLandingPage telling it what to do
+    // when the user decides to click "Explorar Catálogo"
+    renderLandingPage(() => {
+        showProducts(products, addToCart);
+    });
+}
 
 /**
  * Renderiza la grilla principal de productos
@@ -10,7 +21,10 @@ import { initReviews } from "./reviews.js";
 export async function showProducts(products, addToCart) {
     const container = document.getElementById('products');
     if (!container) return;
-
+    if (!history.state || history.state.view !== 'catalog') {
+        history.pushState({ view: 'catalog' }, 'Catálogo', '#catalogo');
+    }
+    // Reset container view to clear out the landing page sections gracefully
     container.innerHTML = `<div id="productGrid" class="product-grid"></div>`;
     const grid = document.getElementById('productGrid');
     
@@ -100,7 +114,6 @@ export function viewProduct(productId, products, addToCart) {
         </section>
     ` : '';
 
-    // Soporte para imágenes secundarias en formato de carrusel/galería abajo de la principal
     const secondaryImagesHtml = (product.images && product.images.length > 1) ? `
         <div class="thumbnail-row">
             ${product.images.map(imgUrl => `
@@ -154,7 +167,6 @@ export function viewProduct(productId, products, addToCart) {
         </div>
     `;
 
-    // Renderizado de Variantes con soporte para imágenes
     const vGrid = document.getElementById('variantGrid');
     const pBox = document.getElementById('purchaseBox');
 
@@ -167,7 +179,6 @@ export function viewProduct(productId, products, addToCart) {
         
         if (!isAvail) card.classList.add('out');
 
-        // Volvemos a inyectar la etiqueta IMG usando la imagen específica de la variante o la genérica del producto
         const variantImgSrc = variant.image || product.image;
 
         card.innerHTML = `
@@ -182,9 +193,7 @@ export function viewProduct(productId, products, addToCart) {
         card.onclick = () => {
             if (!isAvail) return;
             
-            // Cambiar imagen principal dinámicamente al seleccionar el tamaño
             document.getElementById('variant-image').src = variantImgSrc;
-
             document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
             card.classList.add('selected');
             
@@ -201,7 +210,9 @@ export function viewProduct(productId, products, addToCart) {
     const backBtn = document.createElement('button');
     backBtn.className = 'back-to-shop-link';
     backBtn.innerHTML = "← Volver a la colección";
-    backBtn.onclick = () => showProducts(products, addToCart);
+    
+    // CHANGED: Redirect directly to the catalog view instead of running global triggers
+    backBtn.onclick = () => showProducts(products, addToCart); 
     document.getElementById('backContainer').appendChild(backBtn);
 }
 

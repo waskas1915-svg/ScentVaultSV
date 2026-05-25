@@ -16,9 +16,9 @@
     z-index: 10000 !important; 
     
     min-height: 130px;
-    border-bottom: 2px solid #bfa36a;
+    border-bottom: none;
     box-sizing: border-box;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: none;
 }
 
 .header-content {
